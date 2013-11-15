@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      
+      xmlns:f="http://java.sun.com/jsf/core">
+  <h:body>
+    <ui:composition template="/template/common/commonLayout.xhtml">
+      <ui:define name="content">
+        
+        <h1>Hello in Offers!</h1>
+        <f:view>
+        <h:form>
+          <h:outputLabel value="Offer id"></h:outputLabel>
+                            <h:inputText value="#{offersConnect.id_offer}">
+                            </h:inputText><br/>
+          <h:outputLabel value="Price"></h:outputLabel>
+                            <h:inputText value="#{offersConnect.price}">
+                            </h:inputText><br/>
+          <h:outputLabel value="Area"></h:outputLabel>
+                            <h:inputText value="#{offersConnect.area}">
+                            </h:inputText><br/>
+          <h:outputLabel value="House type"></h:outputLabel>
+                            <h:inputText value="#{offersConnect.houseType}">
+                            </h:inputText><br/>
+                    <h:outputLabel value="Town"></h:outputLabel>
+                            <h:inputText value="#{offersConnect.town}">
+                            </h:inputText><br/>
+          <h:outputLabel value="Street"></h:outputLabel>
+                            <h:inputText value="#{offersConnect.street}">
+                            </h:inputText><br/>
+          <h:outputLabel value="House number"></h:outputLabel>
+                      <h:inputText value="#{offersConnect.house_number}">
+                            </h:inputText><br/>
+           <h:outputLabel value="Longitude"></h:outputLabel>
+           <h:inputText value="#{offersConnect.longitude}">
+                            </h:inputText><br/>
+           <h:outputLabel value="Latitude"></h:outputLabel>
+           <h:inputText value="#{offersConnect.latitude}">
+                            </h:inputText><br/>
+          <h:outputLabel value="Description"></h:outputLabel>
+                            <h:inputText value="#{offersConnect.description}">
+                            </h:inputText><br/>
+          <h:outputLabel value="Owner"></h:outputLabel>
+                            <h:inputText value="#{offersConnect.owner}">
+                            </h:inputText><br/>
+          
+                            <h:commandButton action="#{offersConnect.createOrUpdateOffer}" value="Add/update offer"></h:commandButton>
+                            <h:messages layout="table"></h:messages>
+        </h:form>
+          
+          </f:view>
+        
+        
+        <h:form>
+          <h:dataTable value="#{offersConnect.offerList}" var="offer" bgcolor="" columnClasses="first, rest" style="width: 100%">
+           
+            <h:column>
+            <f:facet name="header">
+            <h:column>
+              <h:outputText value="Offer id"></h:outputText>
+            </h:column>
+            </f:facet>
+            <h:outputText value="#{offer.id_offer}"></h:outputText>
+          </h:column>
+            
+          <h:column>
+            <f:facet name="header">
+            <h:column>
+              <h:outputText value="Price"></h:outputText>
+            </h:column>
+            </f:facet>
+            <h:outputText value="#{offer.price}"></h:outputText>
+          </h:column>
+            
+            <h:column>
+            <f:facet name="header">
+            <h:column>
+              <h:outputText value="Area"></h:outputText>
+            </h:column>
+            </f:facet>
+            <h:outputText value="#{offer.area}"></h:outputText>
+          </h:column>
+            
+            <h:column>
+            <f:facet name="header">
+            <h:column>
+              <h:outputText value="Date"></h:outputText>
+            </h:column>
+            </f:facet>
+            <h:outputText value="#{offer.dateAdded}"></h:outputText>
+          </h:column>
+            
+            <h:column>
+            <f:facet name="header">
+            <h:column>
+              <h:outputText value="House type"></h:outputText>
+            </h:column>
+            </f:facet>
+            <h:outputText value="#{offer.houseType}"></h:outputText>
+          </h:column>
+            
+            <h:column>
+            <f:facet name="header">
+            <h:column>
+              <h:outputText value="Town"></h:outputText>
+            </h:column>
+            </f:facet>
+            <h:outputText value="#{offer.town}"></h:outputText>
+          </h:column>
+            
+            <h:column>
+            <f:facet name="header">
+            <h:column>
+              <h:outputText value="Street"></h:outputText>
+            </h:column>
+            </f:facet>
+            <h:outputText value="#{offer.street}"></h:outputText>
+          </h:column>
+            
+            
+            
+            <h:column>
+                            <f:facet name="header">
+                            <h:column>
+                                <h:outputText value="Actions"></h:outputText>
+                            </h:column>
+                            </f:facet>
+                            <h:panelGrid columns="2">
+                                <h:commandLink value="Delete" action="#{offersConnect.deleteOfferAdmin}">
+                                <f:setPropertyActionListener target="#{offersConnect.offer}" value="#{offer}" />
+                                </h:commandLink>
+                            </h:panelGrid>
+                        </h:column>
+            
+            
+            
+            
+          </h:dataTable>
+        </h:form>
+                        
+        
+      </ui:define>
+    </ui:composition>
+  </h:body>
+</html>
