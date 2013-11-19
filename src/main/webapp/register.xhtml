@@ -5,9 +5,40 @@
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/template/common/commonLayout.xhtml">
 	<ui:define name="content">
-		<h1>Rejestracja</h1>
 		<h:form>
-		<p:commandButton value="Test redirect" action="#{testBean.testRedirect}"/>
+			<ui:include src="menu.xhtml"></ui:include>
+		</h:form>
+
+		<h:form>
+			<p:commandButton value="Test redirect"
+				action="#{testBean.testRedirect}" />
+		</h:form>
+
+		<h2>
+			<h:outputLabel value="Załóż konto" />
+		</h2>
+
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Login" />
+				<p:inputText />
+				<h:outputLabel value="Hasło" />
+				<p:password />
+				<h:outputLabel value="Powtórz hasło" />
+				<p:password />
+				<h:outputLabel value="Nazwa" />
+				<p:inputText id="nazwaInput"
+					title="Nazwą może być imię i nazwisko bądź nazwa organizacji" />
+				<p:tooltip for="nazwaInput" showEvent="focus" hideEvent="blur" />
+				<p:outputLabel value="  " />
+
+				<h:outputLabel value="Telefon" />
+				<p:inputText />
+				<h:outputLabel value="E-mail" />
+				<p:inputText />
+				<h:outputLabel value="Adres" />
+			</h:panelGrid>
+			<p:commandButton value="Załóż konto"/>
 		</h:form>
 	</ui:define>
 </ui:composition>

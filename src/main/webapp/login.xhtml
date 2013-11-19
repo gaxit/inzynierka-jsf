@@ -8,19 +8,20 @@
 		<h:form>
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
+		
 		<h2>
 			<h:outputLabel value="Podaj swój login oraz hasło" />
 		</h2>
-		
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Login" />
-			<h:inputText />
-			<h:outputLabel value="Hasło" />
-			<h:inputSecret />
-		</h:panelGrid>
-		
-		<p:commandButton value="Zaloguj" />
 
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Login" />
+				<p:inputText />
+				<h:outputLabel value="Hasło" />
+				<p:password/>
+			</h:panelGrid>
+			<p:commandButton value="Zaloguj" />
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>
