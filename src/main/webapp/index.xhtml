@@ -9,9 +9,12 @@
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
 
-		<p:dataTable>
-
-		</p:dataTable>
+		<h1>Strona główna</h1>
+		
+		<h:form>
+			<p:commandButton value="Test redirect"
+				action="#{testBean.testRedirect}" />
+		</h:form>
 
 	</ui:define>
 </ui:composition>
