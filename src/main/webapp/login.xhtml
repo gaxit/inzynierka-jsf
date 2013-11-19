@@ -5,7 +5,21 @@
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/template/common/commonLayout.xhtml">
 	<ui:define name="content">
-		<h1>Logowanie</h1>
+		<h:form>
+			<ui:include src="menu.xhtml"></ui:include>
+		</h:form>
+		<h2>
+			<h:outputLabel value="Podaj swój login oraz hasło" />
+		</h2>
+		
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Login" />
+			<h:inputText />
+			<h:outputLabel value="Hasło" />
+			<h:inputSecret />
+		</h:panelGrid>
+		
+		<p:commandButton value="Zaloguj" />
 
 	</ui:define>
 </ui:composition>
