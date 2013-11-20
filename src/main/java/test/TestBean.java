@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 public class TestBean {
 	public void testRedirect(){
 		try {
+			System.out.println("Wykonano metode");
 			FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 		} catch (IOException e) {
 			System.err.println("Błąd podczas przekierowywania");

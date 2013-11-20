@@ -8,7 +8,11 @@
 		<h:form>
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
-		
+
+		<h:form>
+			<p:remoteCommand name="testRedirect" autoRun="true" action="#{testBean.testRedirect}"/>
+		</h:form>
+
 		<h2>
 			<h:outputLabel value="Rejestracja" />
 		</h2>
@@ -33,7 +37,7 @@
 				<p:inputText />
 				<h:outputLabel value="Adres" />
 			</h:panelGrid>
-			<p:commandButton value="Załóż konto"/>
+			<p:commandButton value="Załóż konto" />
 		</h:form>
 	</ui:define>
 </ui:composition>
