@@ -1,11 +1,17 @@
 #page{
 	width: 1000px;
 	margin: 0 auto;
+	background-color:#5E758D;
+	font-family:"Trebuchet MS";
+}
+
+#menubar{
+	background-color:#E6E68A;
 }
 
 #header{
 	height:100px;
-	margin-bottom:16px;
+	margin-bottom:8px;
 }
 
 #content{
@@ -13,6 +19,7 @@
 	min-height:320px;
 	margin-right:16px;
 	margin-bottom:16px;
+	background-color:#CBE5FF;
 }
 
 #footer{
