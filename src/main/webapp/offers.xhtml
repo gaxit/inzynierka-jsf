@@ -12,8 +12,50 @@
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
 
-		<h1>Oferty</h1>
+		<h1>Wyszukiwanie ofert</h1>
 
+		<h:panelGrid columns="1">
+			<h:outputLabel value="Wypełnij te parametry które Cię interesują i naciśnij Szukaj aby zobaczyć dostępne oferty spełniające Twoje wymagania." />
+			<p/>
+		</h:panelGrid>
+
+	<h:form>
+			<h:panelGrid columns="2">
+				
+				<h:outputLabel value="Miejscowość" />
+				<p:password />
+				<h:outputLabel value="Powierzchnia" />
+				<p:password />
+				<h:outputLabel value="Cena całości (zł)" />
+				<p:password />
+				
+				<h:outputLabel value="Wybierz rodzaj nieruchomości"/>
+				<p:selectOneRadio id="buttons1" layout="spread" value="#{bean.button1}">
+        			<f:selectItem itemLabel="Dom" itemValue="Dom" />
+        			<f:selectItem itemLabel="Mieszkanie" itemValue="Mieszkanie" />
+      			</p:selectOneRadio>
+      			
+      			<h:outputLabel value="Wybierz rodzaj transakcji"/>
+				<p:selectOneRadio id="buttons2" layout="spread" value="#{bean.button2}">
+        			<f:selectItem itemLabel="Wynajem" itemValue="Wynajem" />
+        			<f:selectItem itemLabel="Sprzedaż" itemValue="Sprzedaż" />
+      			</p:selectOneRadio>
+      			
+      			<h:outputLabel value="Wyszukiwanie nieruchomości..."/>
+				<p:selectOneRadio id="buttons3" layout="spread" value="#{bean.button3}">
+        			<f:selectItem itemLabel="Z garażem" itemValue="Z garażem" />
+        			<f:selectItem itemLabel="Bez garażu" itemValue="Bez garażu" />
+      			</p:selectOneRadio>
+      			
+      			<h:outputLabel value="Wybierz piętro (tylko dla mieszkań)" />
+				<p:password />
+
+			</h:panelGrid>
+			<p:commandButton value="Szukaj" />
+			<p/>
+		</h:form>
+
+		<h1>Oferty</h1>
 		<p:dataTable>
 
 		</p:dataTable>
