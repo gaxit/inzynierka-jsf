@@ -10,10 +10,31 @@
 		</h:form>
 		
 		<h1>Zarządzanie użytkownikami</h1>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Usuwanie użytkownika po id" />
+				<p:password />
+			</h:panelGrid>
+			<p:commandButton value="Wyszukaj i usuń" />
+		</h:form>
+		
+		<p/>
+		
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Usuwanie użytkownika po loginie" />
+				<p:password />
+			</h:panelGrid>
+			<p:commandButton value="Wyszukaj i usuń" />
+		</h:form>
+		
+		<h1>Lista użytkowników</h1>
 		
 		<p:dataTable>
 
 		</p:dataTable>
+		<p/>
 	</ui:define>
+	
 </ui:composition>
 </html>

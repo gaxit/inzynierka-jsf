@@ -8,9 +8,57 @@
 		<h:form>
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
+				<p/>
+		Witaj w panelu użytkownika.
+		<p/>
 		
-		<h1>Moje konto</h1>
-
+		<h1>Dane użytkownika</h1>
+		<h:form>
+			<p/>
+			Tu możesz edytować swoje dane.
+			<p/>
+			<h:panelGrid columns="2">
+				
+				<h:outputLabel value="Imię i nazwiski" />
+				<p:password />
+				<h:outputLabel value="Login" />
+				<p:password />
+				<h:outputLabel value="Hasło" />
+				<p:password />
+				<h:outputLabel value="Telefon" />
+				<p:password />
+				<h:outputLabel value="Adres email" />
+				<p:password />
+				
+			</h:panelGrid>
+			<p:commandButton value="Zapisz dane" />
+			<p/>
+		</h:form>
+		<p/>
+		
+				<h1>Adres</h1>
+		<h:form>
+			<p/>
+			Tu możesz edytować swój adres.
+			<p/>
+			<h:panelGrid columns="2">
+				
+				<h:outputLabel value="Miejscowość" />
+				<p:password />
+				<h:outputLabel value="Ulica" />
+				<p:password />
+				<h:outputLabel value="Dom" />
+				<p:password />
+				<h:outputLabel value="Mieszkanie" />
+				<p:password />
+				<h:outputLabel value="Kod pocztowy" />
+				<p:password />
+				
+			</h:panelGrid>
+			<p:commandButton value="Zapisz adres" />
+			
+		</h:form>
+<p/>
 	</ui:define>
 </ui:composition>
 </html>

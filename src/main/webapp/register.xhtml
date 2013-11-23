@@ -16,7 +16,8 @@
 		<h2>
 			<h:outputLabel value="Rejestracja" />
 		</h2>
-
+		Aby móc się zarejestrować proszę wypełnić wszystkie pola.
+		<p/>
 		<h:form>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Login" />
@@ -35,10 +36,21 @@
 				<p:inputText />
 				<h:outputLabel value="E-mail" />
 				<p:inputText />
-				<h:outputLabel value="Adres" />
+				<h:outputLabel value="Miejscowość" />
+				<p:password />
+				<h:outputLabel value="Ulica" />
+				<p:password />
+				<h:outputLabel value="Dom" />
+				<p:password />
+				<h:outputLabel value="Mieszkanie" />
+				<p:password />
+				<h:outputLabel value="Kod pocztowy" />
+				<p:password />
+				
 			</h:panelGrid>
 			<p:commandButton value="Załóż konto" />
 		</h:form>
+		<p/>
 	</ui:define>
 </ui:composition>
 </html>

@@ -2,19 +2,22 @@
 	width: 1000px;
 	margin: 0 auto;
 	background-color:#5E758D;
+
+}
+
+#mainmenu{
 	font-family:"Trebuchet MS";
 }
 
-#p:menubar{
-	background-color:#E6E68A;
-}
-
 #header{
+	font-family:"verdana";
 	height:100px;
 	margin-bottom:8px;
+	background-color: #336699;
 }
 
 #content{
+	font-family:"Trebuchet MS";
 	width: 100%;
 	min-height:320px;
 	margin-right:16px;
@@ -23,6 +26,7 @@
 }
 
 #footer{
+	font-family:"Trebuchet MS";
 	width: 100%;
 	height:50px;
 }
