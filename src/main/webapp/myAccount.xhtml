@@ -13,52 +13,33 @@
 		<p/>
 		
 		<h1>Dane użytkownika</h1>
-		<h:form>
-			<p/>
+				<p/>
 			Tu możesz edytować swoje dane.
-			<p/>
-			<h:panelGrid columns="2">
-				
-				<h:outputLabel value="Imię i nazwiski" />
-				<p:password />
-				<h:outputLabel value="Login" />
-				<p:password />
-				<h:outputLabel value="Hasło" />
-				<p:password />
-				<h:outputLabel value="Telefon" />
-				<p:password />
-				<h:outputLabel value="Adres email" />
-				<p:password />
-				
-			</h:panelGrid>
-			<p:commandButton value="Zapisz dane" />
-			<p/>
-		</h:form>
-		<p/>
-		
-				<h1>Adres</h1>
+
+		<br/>
 		<h:form>
-			<p/>
-			Tu możesz edytować swój adres.
-			<p/>
-			<h:panelGrid columns="2">
-				
-				<h:outputLabel value="Miejscowość" />
-				<p:password />
-				<h:outputLabel value="Ulica" />
-				<p:password />
-				<h:outputLabel value="Dom" />
-				<p:password />
-				<h:outputLabel value="Mieszkanie" />
-				<p:password />
-				<h:outputLabel value="Kod pocztowy" />
-				<p:password />
-				
-			</h:panelGrid>
-			<p:commandButton value="Zapisz adres" />
-			
-		</h:form>
-<p/>
+                            <h:panelGrid columns="2">
+					<h:outputLabel value="Login"></h:outputLabel>
+					<h:outputLabel value="#{usersMgr.staticLogin}">
+					</h:outputLabel>
+					<h:outputLabel value="Imię"></h:outputLabel>
+					<h:inputText value="#{usersMgr.firstName}">
+					</h:inputText>
+					<h:outputLabel value="Nazwisko"></h:outputLabel>
+					<h:inputText value="#{usersMgr.lastName}">
+					</h:inputText>
+					<h:outputLabel value="Email"></h:outputLabel>
+					<h:inputText value="#{usersMgr.mail}">
+					</h:inputText>
+					<h:outputLabel value="Telefon"></h:outputLabel>
+					<h:inputText value="#{usersMgr.phoneNumber}">
+					</h:inputText>
+				</h:panelGrid>
+				<h:commandButton action="#{usersMgr.updateUser}" value="Aktualizuj dane"></h:commandButton>
+				<h:messages layout="table"></h:messages>
+			</h:form>
+
+<br/>
 	</ui:define>
 </ui:composition>
 </html>

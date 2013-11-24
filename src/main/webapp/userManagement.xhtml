@@ -10,6 +10,8 @@
 		</h:form>
 		
 		<h1>Zarządzanie użytkownikami</h1>
+		
+		<!--  
 		<h:form>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Usuwanie użytkownika po id" />
@@ -17,15 +19,16 @@
 			</h:panelGrid>
 			<p:commandButton value="Wyszukaj i usuń" />
 		</h:form>
+		-->
 		
-		<p/>
+		<br/>
 		
 		<h:form>
 			<h:panelGrid columns="2">
-				<h:outputLabel value="Usuwanie użytkownika po loginie" />
+				<h:outputLabel value="Usuwanie użytkownika o następującym loginie: " />
 				<p:password />
 			</h:panelGrid>
-			<p:commandButton value="Wyszukaj i usuń" />
+			<p:commandButton value="Usuń" />
 		</h:form>
 		
 		<h1>Lista użytkowników</h1>
@@ -33,7 +36,7 @@
 		<p:dataTable>
 
 		</p:dataTable>
-		<p/>
+		<br/>
 	</ui:define>
 	
 </ui:composition>
