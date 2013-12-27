@@ -31,14 +31,26 @@ public class LoginBean {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 			} catch (IOException e) {
-				System.out.println("LoginBean logIn exception. Error while redirecting to page index.html");
+				System.out.println("LoginBean logIn exception: " + e.getMessage());
 			}
 		}
 	}
 	
 	public void logout(){
 		UserServices service = new UserServices();
-//		if (service.)
+		if (service.logOut(login, sessionId)){
+			login = null;
+			password = null;
+			sessionId = null;
+			logged = false;
+			userLogged = false;
+			adminLogged = false;
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			} catch (IOException e) {
+				System.out.println("LoginBean logIn exception: " + e.getMessage());
+			}
+		}
 	}
 	
 	//----- settery i gettery -----------

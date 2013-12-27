@@ -12,7 +12,7 @@
 	<p:menuitem value="Ulubione" url="favourites.xhtml" rendered="#{loginBean.logged}"/>
 	<p:menuitem value="Moje konto" url="myAccount.xhtml" rendered="#{loginBean.logged}"/>
 	<p:menuitem value="Zarządzanie użytkownikami" url="userManagement.xhtml" rendered="#{loginBean.adminLogged}"/>
-	<p:menuitem value="Wyloguj" rendered="#{loginBean.logged}" url="index.xhtml"/>
+	<p:menuitem value="Wyloguj" rendered="#{loginBean.logged}" action="#{loginBean.logout}" update="@parent"/>
 </p:menubar>
 
 
