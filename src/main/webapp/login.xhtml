@@ -12,15 +12,17 @@
 		<h2>
 			<h:outputLabel value="Logowanie" />
 		</h2>
+		
 
-		<h:form>
+		<h:form id="loginForm">
+			<p:messages for="login"/>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Login" />
 				<p:inputText value="#{loginBean.login}"/>
 				<h:outputLabel value="Hasło" />
 				<p:password value="#{loginBean.password}"/>
 			</h:panelGrid>
-			<p:commandButton value="Zaloguj" action="#{loginBean.logIn}"/>
+			<p:commandButton value="Zaloguj" action="#{loginBean.logIn}" update=":loginForm"/>
 		</h:form>
 	</ui:define>
 </ui:composition>

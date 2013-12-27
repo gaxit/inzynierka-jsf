@@ -2,6 +2,7 @@ package pl.rea.client.bean;
 
 import java.io.IOException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -33,6 +34,11 @@ public class LoginBean {
 			} catch (IOException e) {
 				System.out.println("LoginBean logIn exception: " + e.getMessage());
 			}
+		}
+		else{
+			FacesMessage facesMessage = new FacesMessage("Błędny login lub hasło");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+	        FacesContext.getCurrentInstance().addMessage("login", facesMessage);
 		}
 	}
 	

@@ -9,46 +9,52 @@
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
 
-		<h:form>
-			<p:remoteCommand name="testRedirect" autoRun="true" action="#{testBean.testRedirect}"/>
-		</h:form>
-
 		<h2>
 			<h:outputLabel value="Rejestracja" />
 		</h2>
 		Aby móc się zarejestrować proszę wypełnić wszystkie pola.
 		<p/>
 		<h:form>
+			<p:messages for="registration"/>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Login" />
-				<p:inputText />
+				<p:inputText value="#{registrationBean.login}"/>
+				
 				<h:outputLabel value="Hasło" />
-				<p:password />
+				<p:password value="#{registrationBean.password}"/>
+				
 				<h:outputLabel value="Powtórz hasło" />
-				<p:password />
+				<p:password value="#{registrationBean.passwordRepeat}"/>
+				
 				<h:outputLabel value="Nazwa" />
-				<p:inputText id="nazwaInput"
+				<p:inputText id="nazwaInput" value="#{registrationBean.name}"
 					title="Nazwą może być imię i nazwisko bądź nazwa organizacji" />
 				<p:tooltip for="nazwaInput" showEvent="focus" hideEvent="blur" />
 				<p:outputLabel value="  " />
 
 				<h:outputLabel value="Telefon" />
-				<p:inputText />
+				<p:inputText value="#{registrationBean.phone}"/>
+				
 				<h:outputLabel value="E-mail" />
-				<p:inputText />
+				<p:inputText value="#{registrationBean.email}"/>
+				
 				<h:outputLabel value="Miejscowość" />
-				<p:password />
+				<p:inputText value="#{registrationBean.town}"/>
+				
 				<h:outputLabel value="Ulica" />
-				<p:password />
-				<h:outputLabel value="Dom" />
-				<p:password />
-				<h:outputLabel value="Mieszkanie" />
-				<p:password />
+				<p:inputText value="#{registrationBean.street}"/>
+				
+				<h:outputLabel value="Numer domu" />
+				<p:inputText value="#{registrationBean.houseNo}"/>
+				
+				<h:outputLabel value="Numer mieszkania" />
+				<p:inputText value="#{registrationBean.apartmentNo}"/>
+				
 				<h:outputLabel value="Kod pocztowy" />
-				<p:password />
+				<p:inputText value="#{registrationBean.postalCode}"/>
 				
 			</h:panelGrid>
-			<p:commandButton value="Załóż konto" />
+			<p:commandButton value="Załóż konto" action="#{registrationBean.register}" ajax="false"/>
 		</h:form>
 		<p/>
 	</ui:define>
