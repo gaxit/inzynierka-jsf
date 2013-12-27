@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "createUser", propOrder = {
     "arg0"
-})
+}, namespace="createUserClient")
 public class CreateUser {
 
     protected UserCanonical arg0;

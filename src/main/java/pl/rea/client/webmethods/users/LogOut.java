@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "logOut", propOrder = {
     "arg0",
     "arg1"
-})
+}, namespace="logOutClient")
 public class LogOut {
 
     protected String arg0;

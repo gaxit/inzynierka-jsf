@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "isAdminLogged", propOrder = {
     "arg0",
     "arg1"
-})
+}, namespace="isAdminLoggedClient")
 public class IsAdminLogged {
 
     protected String arg0;

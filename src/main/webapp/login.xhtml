@@ -16,11 +16,11 @@
 		<h:form>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Login" />
-				<p:inputText />
+				<p:inputText value="#{loginBean.login}"/>
 				<h:outputLabel value="Hasło" />
-				<p:password />
+				<p:password value="#{loginBean.password}"/>
 			</h:panelGrid>
-			<p:commandButton value="Zaloguj" />
+			<p:commandButton value="Zaloguj" action="#{loginBean.logIn}"/>
 		</h:form>
 	</ui:define>
 </ui:composition>

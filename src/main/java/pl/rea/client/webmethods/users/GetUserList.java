@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "getUserList", propOrder = {
     "arg0",
     "arg1"
-})
+}, namespace="getUserListClient")
 public class GetUserList {
 
     protected String arg0;

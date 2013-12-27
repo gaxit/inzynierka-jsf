@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
     "arg0",
     "arg1",
     "arg2"
-})
+}, namespace="editUserResponse")
 public class EditUser {
 
     protected String arg0;

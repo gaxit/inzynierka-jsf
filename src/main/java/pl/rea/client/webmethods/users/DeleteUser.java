@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
     "arg0",
     "arg1",
     "arg2"
-})
+}, namespace="deleteUserClient")
 public class DeleteUser {
 
     protected String arg0;
