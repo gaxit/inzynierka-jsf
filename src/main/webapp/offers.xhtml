@@ -15,56 +15,60 @@
 			<p:remoteCommand name="loadOffers" autoRun="true" action="#{allOffersBean.loadOffers}" update=":offerTable"/>
 		</h:form>
 
-		<h1>Wyszukiwanie ofert</h1>
-
-		<h:panelGrid columns="1">
-			<h:outputLabel value="Wypełnij te parametry które Cię interesują i naciśnij Szukaj aby zobaczyć dostępne oferty spełniające Twoje wymagania." />
-			<p/>
-		</h:panelGrid>
-
 		<h:form>
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="3">
 					
 				<h:outputLabel value="Miejscowość" />
-				<p:password />
-				<h:outputLabel value="Powierzchnia" />
-				<p:password />
-				<h:outputLabel value="Cena całości (zł)" />
-				<p:password />
+				<p:inputText value="#{allOffersBean.town}"/>
+				<h:outputLabel value=" " />
+				
+				<h:outputLabel value="Powierzchnia od-do" />
+				<p:inputText value="#{allOffersBean.areaMin}"/>
+				<p:inputText value="#{allOffersBean.areaMax}"/>
+				
+				<h:outputLabel value="Cena całości (zł) od-do" />
+				<p:inputText value="#{allOffersBean.priceMin}"/>
+				<p:inputText value="#{allOffersBean.priceMax}"/>
 				
 				<h:outputLabel value="Wybierz rodzaj nieruchomości"/>
-				<p:selectOneRadio id="buttons1" layout="spread" value="#{bean.button1}">
+				<p:selectOneRadio layout="spread" value="#{allOffersBean.estateType}">
         			<f:selectItem itemLabel="Dom       " itemValue="Dom" />
         			<f:selectItem itemLabel="Mieszkanie" itemValue="Mieszkanie" />
+        			<f:selectItem itemLabel="Działka" itemValue="Dzialka" />
       			</p:selectOneRadio>
+      			<h:outputLabel value=" " />
       			
       			<h:outputLabel value="Wybierz rodzaj transakcji"/>
-				<p:selectOneRadio id="buttons2" layout="spread" value="#{bean.button2}">
+				<p:selectOneRadio layout="spread" value="#{allOffersBean.transactionType}">
         			<f:selectItem itemLabel="Wynajem   " itemValue="Wynajem" />
-        			<f:selectItem itemLabel="Sprzedaż  " itemValue="Sprzedaż" />
+        			<f:selectItem itemLabel="Sprzedaż  " itemValue="Sprzedaz" />
       			</p:selectOneRadio>
+      			<h:outputLabel value=" " />
       			
-      			<h:outputLabel value="Wyszukiwanie nieruchomości..."/>
-				<p:selectOneRadio id="buttons3" layout="spread" value="#{bean.button3}">
-        			<f:selectItem itemLabel="Z garażem " itemValue="Z garażem" />
-        			<f:selectItem itemLabel="Bez garażu" itemValue="Bez garażu" />
+      			<h:outputLabel value="Obecność garażu"/>
+				<p:selectOneRadio id="buttons3" layout="spread" value="#{allOffersBean.isGarage}">
+        			<f:selectItem itemLabel="Tak" itemValue="true" />
+        			<f:selectItem itemLabel="Nie" itemValue="false" />
       			</p:selectOneRadio>
+      			<h:outputLabel value=" " />
       			
       			<h:outputLabel value="Wybierz piętro (tylko dla mieszkań)" />
-				<p:password />
+				<p:inputText value="#{allOffersBean.minFloor}"/>
+				<p:inputText value="#{allOffersBean.maxFloor}"/>
 			
 			</h:panelGrid>
-			<p:commandButton value="Szukaj" />
-			<p/>
+			<p:commandButton value="Szukaj" action="#{allOffersBean.searchOffers}" update=":offerTable"/>
 		</h:form>
 
 		<h1>Oferty</h1>
 			<p:dataTable id="offerTable" value="#{allOffersBean.offerList}" var="offer">
-				<p:column headerText="Typ transakcji" width="16%">#{offer.estateType}</p:column>
+				
 				<p:column headerText="Lokalizacja" width="16%">#{offer.postalCode}  #{offer.town}</p:column>
-				<p:column headerText="Typ transakcji" width="16%">#{offer.transactionType}</p:column>
+				
 				<p:column headerText="Cena" width="16%">#{offer.price} zł</p:column>
 				<p:column headerText="Powierzchnia" width="16%">#{offer.area} m^2</p:column>
+				<p:column headerText="Typ nieruchomości" width="16%">#{offer.estateType}</p:column>
+				<p:column headerText="Typ transakcji" width="16%">#{offer.transactionType}</p:column>
 				<p:column headerText="Akcje" width="16%">
 					<p:commandButton value="Podgląd"/>
 				</p:column>

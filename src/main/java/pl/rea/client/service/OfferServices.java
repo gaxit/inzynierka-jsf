@@ -37,6 +37,15 @@ public class OfferServices {
 			String town, String estateType, String transactionType){
 		OfferService_Service offerService = new OfferService_Service();
 		OfferService service = offerService.getOfferServicePort();
+		if (town==null){
+			town="";
+		}
+		if (estateType==null){
+			estateType="";
+		}
+		if (transactionType==null){
+			transactionType="";
+		}
 		return service.findOffersByCriteria(minPrice, maxPrice, minArea, maxArea, minFloor, maxFloor, isGarage, town, estateType, transactionType);
 	}
 	
