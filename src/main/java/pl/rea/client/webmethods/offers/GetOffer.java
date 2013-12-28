@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getOffer", propOrder = {
     "arg0"
-})
+}, namespace="getOfferClient")
 public class GetOffer {
 
     protected Long arg0;

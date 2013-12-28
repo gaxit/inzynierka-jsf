@@ -11,6 +11,9 @@
 		<h:form>
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
+		<h:form>
+			<p:remoteCommand name="loadOffers" autoRun="true" action="#{allOffersBean.loadOffers}" update=":offerTable"/>
+		</h:form>
 
 		<h1>Wyszukiwanie ofert</h1>
 
@@ -56,7 +59,8 @@
 		</h:form>
 
 		<h1>Oferty</h1>
-		<p:dataTable>
+		<p:dataTable id="offerTable" value="#{allOffersBean.offerList}" var="offer">
+			<p:column>#{offer.area}</p:column>
 
 		</p:dataTable>
 		<p/>

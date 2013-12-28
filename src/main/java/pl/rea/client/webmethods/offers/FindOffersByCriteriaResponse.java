@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "findOffersByCriteriaResponse", propOrder = {
     "_return"
-})
+}, namespace="findOffersByCriteriaResponse")
 public class FindOffersByCriteriaResponse {
 
     @XmlElement(name = "return")

@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
     "arg7",
     "arg8",
     "arg9"
-})
+}, namespace="findOffersByCriteriaClient")
 public class FindOffersByCriteria {
 
     protected Integer arg0;

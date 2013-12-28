@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "isOfferInUserFavouritesResponse", propOrder = {
     "_return"
-})
+}, namespace="isOfferInUserFavouritesResponseClient")
 public class IsOfferInUserFavouritesResponse {
 
     @XmlElement(name = "return")

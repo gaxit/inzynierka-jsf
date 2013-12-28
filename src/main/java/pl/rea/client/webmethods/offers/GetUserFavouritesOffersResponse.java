@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getUserFavouritesOffersResponse", propOrder = {
     "_return"
-})
+}, namespace="getUserFavouritesOffersResponseClient")
 public class GetUserFavouritesOffersResponse {
 
     @XmlElement(name = "return")

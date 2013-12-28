@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
     "arg1",
     "arg2",
     "arg3"
-})
+}, namespace="deleteOfferFromUserFavouritesClient")
 public class DeleteOfferFromUserFavourites {
 
     protected String arg0;

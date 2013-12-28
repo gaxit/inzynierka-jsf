@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
     "arg1",
     "arg2",
     "arg3"
-})
+}, namespace="addOfferToUserFavouritesClient")
 public class AddOfferToUserFavourites {
 
     protected String arg0;

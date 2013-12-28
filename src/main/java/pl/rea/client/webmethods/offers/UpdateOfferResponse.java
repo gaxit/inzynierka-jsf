@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "updateOfferResponse", propOrder = {
     "_return"
-})
+}, namespace="updateOfferResponseClient")
 public class UpdateOfferResponse {
 
     @XmlElement(name = "return")
