@@ -22,9 +22,9 @@
 			<p/>
 		</h:panelGrid>
 
-	<h:form>
+		<h:form>
 			<h:panelGrid columns="2">
-				
+					
 				<h:outputLabel value="Miejscowość" />
 				<p:password />
 				<h:outputLabel value="Powierzchnia" />
@@ -52,18 +52,23 @@
       			
       			<h:outputLabel value="Wybierz piętro (tylko dla mieszkań)" />
 				<p:password />
-
+			
 			</h:panelGrid>
 			<p:commandButton value="Szukaj" />
 			<p/>
 		</h:form>
 
 		<h1>Oferty</h1>
-		<p:dataTable id="offerTable" value="#{allOffersBean.offerList}" var="offer">
-			<p:column>#{offer.area}</p:column>
-
-		</p:dataTable>
-		<p/>
+			<p:dataTable id="offerTable" value="#{allOffersBean.offerList}" var="offer">
+				<p:column headerText="Typ transakcji" width="16%">#{offer.estateType}</p:column>
+				<p:column headerText="Lokalizacja" width="16%">#{offer.postalCode}  #{offer.town}</p:column>
+				<p:column headerText="Typ transakcji" width="16%">#{offer.transactionType}</p:column>
+				<p:column headerText="Cena" width="16%">#{offer.price} zł</p:column>
+				<p:column headerText="Powierzchnia" width="16%">#{offer.area} m^2</p:column>
+				<p:column headerText="Akcje" width="16%">
+					<p:commandButton value="Podgląd"/>
+				</p:column>
+			</p:dataTable>
 	</ui:define>
 </ui:composition>
 </html>
