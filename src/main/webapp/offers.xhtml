@@ -61,18 +61,19 @@
 		</h:form>
 
 		<h1>Oferty</h1>
-			<p:dataTable id="offerTable" value="#{allOffersBean.offerList}" var="offer">
-				
-				<p:column headerText="Lokalizacja" width="16%">#{offer.postalCode}  #{offer.town}</p:column>
-				
-				<p:column headerText="Cena" width="16%">#{offer.price} zł</p:column>
-				<p:column headerText="Powierzchnia" width="16%">#{offer.area} m^2</p:column>
-				<p:column headerText="Typ nieruchomości" width="16%">#{offer.estateType}</p:column>
-				<p:column headerText="Typ transakcji" width="16%">#{offer.transactionType}</p:column>
-				<p:column headerText="Akcje" width="16%">
-					<p:commandButton value="Podgląd"/>
-				</p:column>
-			</p:dataTable>
+		
+		<p:dataTable id="offerTable" value="#{allOffersBean.offerList}" var="offer">
+			<p:column headerText="Lokalizacja" width="16%">#{offer.postalCode}  #{offer.town}</p:column>
+			<p:column headerText="Cena" width="16%">#{offer.price} zł</p:column>
+			<p:column headerText="Powierzchnia" width="16%">#{offer.area} m^2</p:column>
+			<p:column headerText="Typ nieruchomości" width="16%">#{offer.estateType}</p:column>
+			<p:column headerText="Typ transakcji" width="16%">#{offer.transactionType}</p:column>
+			<p:column headerText="Akcje" width="16%">
+				<p:commandButton value="Podgląd" action="offer.xhtml">
+					<f:setPropertyActionListener target="#{offerBean.offer}" value="#{offer}"/>
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
 	</ui:define>
 </ui:composition>
 </html>

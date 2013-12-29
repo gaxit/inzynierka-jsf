@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/common/commonLayout.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<ui:include src="menu.xhtml"></ui:include>
+		</h:form>
+
+<!--     "description", -->
+<!--     "floor", -->
+<!--     "garage", -->
+<!--     "owner", -->
+
+<!--     "images", -->
+
+		<h3>Dane oferty</h3>
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Powierzchnia"/>
+			<p:outputLabel value="#{offerBean.offer.area} m^2"/>
+			
+			<p:outputLabel value="Cena"/>
+			<p:outputLabel value="#{offerBean.offer.price} zł"/>
+			
+			<p:outputLabel value="Typ nieruchomości"/>
+			<p:outputLabel value="#{offerBean.offer.estateType}"/>
+			
+			<p:outputLabel value="Typ traksakcji"/>
+			<p:outputLabel value="#{offerBean.offer.transactionType}"/>
+			
+			<p:outputLabel value="Opis"/>
+			<p:outputLabel value="#{offerBean.offer.description}"/>
+			
+			<p:outputLabel value="Piętro"/>
+			<p:outputLabel value="#{offerBean.offer.floor}"/>
+			
+			<p:outputLabel value="Garaż"/>
+			<p:outputLabel rendered="#{!offerBean.offer.garage}" value="Brak"/>
+			<p:outputLabel rendered="#{offerBean.offer.garage}" value="Obecny"/>
+			
+			<p:outputLabel value="Właściciel"/>
+			<p:outputLabel value="#{offerBean.offer.owner}"/>
+		</h:panelGrid>
+		
+		<h3>Adres</h3>
+		<p:outputLabel value="#{offerBean.offer.postalCode} #{offerBean.offer.town}"/><br/>
+		<p:outputLabel value="ul. #{offerBean.offer.street}   #{offerBean.offer.houseNo}"/>
+		<p:outputLabel rendered="#{not empty offerBean.offer.apartmentNo}" value="/#{offerBean.offer.apartmentNo}"/>
+		
+	</ui:define>
+</ui:composition>
+</html>
