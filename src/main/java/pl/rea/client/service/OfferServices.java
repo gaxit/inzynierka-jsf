@@ -33,10 +33,29 @@ public class OfferServices {
 	}
 	
 	public List<OfferCanonical> findOffersByCriteria(Integer minPrice, Integer maxPrice,
-			Integer minArea, Integer maxArea, Integer minFloor, Integer maxFloor,  Boolean isGarage,
+			Integer minArea, Integer maxArea, Integer minFloor, Integer maxFloor,  Integer isGarage,
 			String town, String estateType, String transactionType){
 		OfferService_Service offerService = new OfferService_Service();
 		OfferService service = offerService.getOfferServicePort();
+		Boolean garage = null;
+		if (minPrice==null){
+			minPrice = 0;
+		}
+		if (maxPrice==null){
+			maxPrice = 0;
+		}
+		if (minArea == null){
+			minArea = 0;
+		}
+		if (maxArea == null){
+			maxArea = 0;
+		}
+		if (minFloor == null){
+			minFloor = 0;
+		}
+		if (maxFloor == null){
+			maxFloor = 0;
+		}
 		if (town==null){
 			town="";
 		}
@@ -46,7 +65,18 @@ public class OfferServices {
 		if (transactionType==null){
 			transactionType="";
 		}
-		return service.findOffersByCriteria(minPrice, maxPrice, minArea, maxArea, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+		if (isGarage==null || isGarage==0){
+			garage = null;
+		}
+		else{
+			if (isGarage==1){
+				garage=true;
+			}
+			if (isGarage==2){
+				garage=false;
+			}
+		}
+		return service.findOffersByCriteria(minPrice, maxPrice, minArea, maxArea, minFloor, maxFloor, garage, town, estateType, transactionType);
 	}
 	
 	public List<OfferCanonical> getAllOffers(){

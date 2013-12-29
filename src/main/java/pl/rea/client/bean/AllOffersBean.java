@@ -12,6 +12,8 @@ import pl.rea.client.webmethods.offers.OfferCanonical;
 @ManagedBean(name="allOffersBean")
 public class AllOffersBean {
 	
+	private boolean find = false;
+	
 	private List<OfferCanonical> offerList;
 	
 	private String town;
@@ -21,15 +23,18 @@ public class AllOffersBean {
 	private Integer priceMax;
 	private String estateType;
 	private String transactionType;
-	private Boolean isGarage;
+	private Integer isGarage;
 	private Integer minFloor;
 	private Integer maxFloor;
 	
 	
 	//----- metody wykonujace akcje -----
 	public void loadOffers(){
-		OfferServices service = new OfferServices();
-		offerList = service.getAllOffers();
+		if (!find){
+			OfferServices service = new OfferServices();
+			offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+			find = true;
+		}
 		
 		town = null;
 		areaMin = null;
@@ -49,14 +54,14 @@ public class AllOffersBean {
 //		System.out.println("Max powierzchnia: " + areaMax);
 //		System.out.println("Min cena: " + priceMin);
 //		System.out.println("Max cena: " + priceMax);
-		System.out.println("Typ nieruchomosci: " + estateType);
-		System.out.println("Typ transakcji: " + transactionType);
+//		System.out.println("Typ nieruchomosci: " + estateType);
+//		System.out.println("Typ transakcji: " + transactionType);
 		System.out.println("Garaz: " + isGarage);
 //		System.out.println("Pietro min: " + minFloor);
 //		System.out.println("Pietro max: " + maxFloor);
 		
-//		OfferServices service = new OfferServices();
-//		offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+		OfferServices service = new OfferServices();
+		offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
 	}
 	
 	//----- settery i gettery -----
@@ -125,11 +130,11 @@ public class AllOffersBean {
 		this.transactionType = transactionType;
 	}
 
-	public Boolean getIsGarage() {
+	public Integer getIsGarage() {
 		return isGarage;
 	}
 
-	public void setIsGarage(Boolean isGarage) {
+	public void setIsGarage(Integer isGarage) {
 		this.isGarage = isGarage;
 	}
 
