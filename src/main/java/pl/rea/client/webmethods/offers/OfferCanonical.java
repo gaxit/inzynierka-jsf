@@ -5,9 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -23,15 +21,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="addressId" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="apartmentNo" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="area" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="creationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="estateType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="finishDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="floor" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="garage" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="houseNo" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="images" type="{offers}imageCanonical" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="offerName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="owner" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="postalCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}int"/>
@@ -51,39 +48,35 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "addressId",
     "apartmentNo",
     "area",
-    "creationDate",
     "description",
     "estateType",
-    "finishDate",
     "floor",
     "garage",
     "houseNo",
     "id",
     "images",
+    "offerName",
     "owner",
     "postalCode",
     "price",
     "street",
     "town",
     "transactionType"
-})
+}, namespace="offerCanonicalClient")
 public class OfferCanonical {
 
     protected long addressId;
     protected int apartmentNo;
     protected int area;
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar creationDate;
     protected String description;
     protected String estateType;
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar finishDate;
     protected int floor;
     protected boolean garage;
     protected int houseNo;
     protected long id;
     @XmlElement(nillable = true)
     protected List<ImageCanonical> images;
+    protected String offerName;
     protected String owner;
     protected String postalCode;
     protected int price;
@@ -140,30 +133,6 @@ public class OfferCanonical {
     }
 
     /**
-     * Gets the value of the creationDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * Sets the value of the creationDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setCreationDate(XMLGregorianCalendar value) {
-        this.creationDate = value;
-    }
-
-    /**
      * Gets the value of the description property.
      * 
      * @return
@@ -209,30 +178,6 @@ public class OfferCanonical {
      */
     public void setEstateType(String value) {
         this.estateType = value;
-    }
-
-    /**
-     * Gets the value of the finishDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getFinishDate() {
-        return finishDate;
-    }
-
-    /**
-     * Sets the value of the finishDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setFinishDate(XMLGregorianCalendar value) {
-        this.finishDate = value;
     }
 
     /**
@@ -326,6 +271,30 @@ public class OfferCanonical {
             images = new ArrayList<ImageCanonical>();
         }
         return this.images;
+    }
+
+    /**
+     * Gets the value of the offerName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getOfferName() {
+        return offerName;
+    }
+
+    /**
+     * Sets the value of the offerName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOfferName(String value) {
+        this.offerName = value;
     }
 
     /**
