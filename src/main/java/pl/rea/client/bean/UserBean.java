@@ -41,12 +41,10 @@ public class UserBean {
 		login = loginBean.getLogin();
 		UserServices service = new UserServices();
 		user = service.getUser(loginBean.getLogin(), loginBean.getSessionId(), login);
-		System.out.println("User's name: " + user.getName());
 	}
 	
 	public void edit(){
 		editingMode = true;
-		System.out.println("Edit user");
 		
 		copyUser = new UserCanonical();
 		copyUser.setAddressId(user.getAddressId());
@@ -76,7 +74,6 @@ public class UserBean {
 	
 	public void save(){
 		editingMode = false;
-		System.out.println("Save user");
 		
 		user.setEmail(email);
 		user.setName(name);
@@ -115,113 +112,82 @@ public class UserBean {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
-
 	public LoginBean getLoginBean() {
 		return loginBean;
 	}
-
-
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
 	}
-
-
 	public boolean getEditingMode() {
 		return editingMode;
 	}
-
-
 	public void setEditingMode(boolean editingMode) {
 		this.editingMode = editingMode;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getPhone() {
 		return phone;
 	}
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
 	public String getOldPassword() {
 		return oldPassword;
 	}
-
 	public void setOldPassword(String oldPassword) {
 		this.oldPassword = oldPassword;
 	}
-
 	public String getNewPassword() {
 		return newPassword;
 	}
-
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
-
 	public String getRepeatPassword() {
 		return repeatPassword;
 	}
-
 	public void setRepeatPassword(String repeatPassword) {
 		this.repeatPassword = repeatPassword;
 	}
-
 	public String getTown() {
 		return town;
 	}
-
 	public void setTown(String town) {
 		this.town = town;
 	}
-
 	public String getPostalCode() {
 		return postalCode;
 	}
-
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-
 	public String getStreet() {
 		return street;
 	}
-
 	public void setStreet(String street) {
 		this.street = street;
 	}
-
 	public Integer getHouseNo() {
 		return houseNo;
 	}
-
 	public void setHouseNo(Integer houseNo) {
 		this.houseNo = houseNo;
 	}
-
 	public Integer getApartmentNo() {
 		return apartmentNo;
 	}
-
 	public void setApartmentNo(Integer apartmentNo) {
 		this.apartmentNo = apartmentNo;
 	}
-
 }
