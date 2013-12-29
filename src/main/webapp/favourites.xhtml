@@ -8,12 +8,28 @@
 		<h:form>
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
+		<h:form>
+			<p:remoteCommand name="loadFavourites" autoRun="true" action="#{favouritesBean.loadFavourites}" update=":offerTable"/>
+		</h:form>
+		
 		<h1>Ulubione</h1>
-		<p/>
-		Tutaj możesz przechowywać interesujące Cię oferty. Aby dodać ofertę do listy wciśnij przycisk 'Dodaj do ulubionych' w podglądzie oferty.
-		<p/>
-		<p:dataTable>
-
+		
+		<p:dataTable id="offerTable" value="#{favouritesBean.offerList}" var="offer">
+			<p:column headerText="Nazwa" width="14%">
+				<p:commandLink value="#{offer.offerName}" action="offer.xhtml">
+					<f:setPropertyActionListener target="#{offerBean.offer}" value="#{offer}"/>
+				</p:commandLink>
+			</p:column>
+			<p:column headerText="Lokalizacja" width="14%">#{offer.town}</p:column>
+			<p:column headerText="Cena" width="14%">#{offer.price} zł</p:column>
+			<p:column headerText="Powierzchnia" width="14%">#{offer.area} m^2</p:column>
+			<p:column headerText="Typ nieruchomości" width="14%">#{offer.estateType}</p:column>
+			<p:column headerText="Typ transakcji" width="14%">#{offer.transactionType}</p:column>
+			<p:column headerText="Akcje" width="14%">
+				<p:commandButton value="Usuń z listy" action="#{favouritesBean.deleteOffer}" update=":offerTable">
+					<f:setPropertyActionListener target="#{favouritesBean.offerId}" value="#{offer.id}"/>
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
 	<p/>
 	</ui:define>
