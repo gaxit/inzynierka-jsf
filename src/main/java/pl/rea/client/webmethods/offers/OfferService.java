@@ -206,6 +206,26 @@ public interface OfferService {
 
     /**
      * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.util.List<offers.OfferCanonical>
+     */
+    @WebMethod(action = "getUserOffers")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getUserOffers", targetNamespace = "offers", className = "offers.GetUserOffers")
+    @ResponseWrapper(localName = "getUserOffersResponse", targetNamespace = "offers", className = "offers.GetUserOffersResponse")
+    public List<OfferCanonical> getUserOffers(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2);
+
+    /**
+     * 
      * @param arg3
      * @param arg2
      * @param arg1

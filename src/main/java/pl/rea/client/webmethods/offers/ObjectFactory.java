@@ -23,6 +23,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _GetUserOffersResponse_QNAME = new QName("offers", "getUserOffersResponse");
     private final static QName _DeleteOfferFromUserFavouritesResponse_QNAME = new QName("offers", "deleteOfferFromUserFavouritesResponse");
     private final static QName _FindOffersByCriteriaResponse_QNAME = new QName("offers", "findOffersByCriteriaResponse");
     private final static QName _UpdateOfferResponse_QNAME = new QName("offers", "updateOfferResponse");
@@ -35,14 +36,15 @@ public class ObjectFactory {
     private final static QName _DeleteOfferFromUserFavourites_QNAME = new QName("offers", "deleteOfferFromUserFavourites");
     private final static QName _GetUserFavouritesOffersResponse_QNAME = new QName("offers", "getUserFavouritesOffersResponse");
     private final static QName _GetOfferResponse_QNAME = new QName("offers", "getOfferResponse");
-    private final static QName _UpdateOffer_QNAME = new QName("offers", "updateOffer");
     private final static QName _GetUserFavouritesOffers_QNAME = new QName("offers", "getUserFavouritesOffers");
+    private final static QName _UpdateOffer_QNAME = new QName("offers", "updateOffer");
     private final static QName _GetOffer_QNAME = new QName("offers", "getOffer");
     private final static QName _DeleteOfferResponse_QNAME = new QName("offers", "deleteOfferResponse");
     private final static QName _AddOfferResponse_QNAME = new QName("offers", "addOfferResponse");
     private final static QName _AddOffer_QNAME = new QName("offers", "addOffer");
     private final static QName _AddOfferToUserFavourites_QNAME = new QName("offers", "addOfferToUserFavourites");
     private final static QName _DeleteOffer_QNAME = new QName("offers", "deleteOffer");
+    private final static QName _GetUserOffers_QNAME = new QName("offers", "getUserOffers");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: offers
@@ -89,6 +91,14 @@ public class ObjectFactory {
      */
     public UpdateOfferResponse createUpdateOfferResponse() {
         return new UpdateOfferResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetUserOffersResponse }
+     * 
+     */
+    public GetUserOffersResponse createGetUserOffersResponse() {
+        return new GetUserOffersResponse();
     }
 
     /**
@@ -172,6 +182,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetUserOffers }
+     * 
+     */
+    public GetUserOffers createGetUserOffers() {
+        return new GetUserOffers();
+    }
+
+    /**
      * Create an instance of {@link DeleteOffer }
      * 
      */
@@ -225,6 +243,15 @@ public class ObjectFactory {
      */
     public ImageCanonical createImageCanonical() {
         return new ImageCanonical();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserOffersResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "offers", name = "getUserOffersResponse")
+    public JAXBElement<GetUserOffersResponse> createGetUserOffersResponse(GetUserOffersResponse value) {
+        return new JAXBElement<GetUserOffersResponse>(_GetUserOffersResponse_QNAME, GetUserOffersResponse.class, null, value);
     }
 
     /**
@@ -336,21 +363,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateOffer }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "offers", name = "updateOffer")
-    public JAXBElement<UpdateOffer> createUpdateOffer(UpdateOffer value) {
-        return new JAXBElement<UpdateOffer>(_UpdateOffer_QNAME, UpdateOffer.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetUserFavouritesOffers }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "offers", name = "getUserFavouritesOffers")
     public JAXBElement<GetUserFavouritesOffers> createGetUserFavouritesOffers(GetUserFavouritesOffers value) {
         return new JAXBElement<GetUserFavouritesOffers>(_GetUserFavouritesOffers_QNAME, GetUserFavouritesOffers.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateOffer }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "offers", name = "updateOffer")
+    public JAXBElement<UpdateOffer> createUpdateOffer(UpdateOffer value) {
+        return new JAXBElement<UpdateOffer>(_UpdateOffer_QNAME, UpdateOffer.class, null, value);
     }
 
     /**
@@ -405,6 +432,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "offers", name = "deleteOffer")
     public JAXBElement<DeleteOffer> createDeleteOffer(DeleteOffer value) {
         return new JAXBElement<DeleteOffer>(_DeleteOffer_QNAME, DeleteOffer.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserOffers }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "offers", name = "getUserOffers")
+    public JAXBElement<GetUserOffers> createGetUserOffers(GetUserOffers value) {
+        return new JAXBElement<GetUserOffers>(_GetUserOffers_QNAME, GetUserOffers.class, null, value);
     }
 
 }
