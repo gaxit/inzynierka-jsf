@@ -12,6 +12,10 @@
 		
 		<h1>Moje oferty</h1>
 		
+		<h:form>
+			<p:commandButton value="Dodaj ofertę" action="newOffer.xhtml"/>
+		</h:form>
+		
 		<p:dataTable id="offerTable" value="#{myOffersBean.myOfferList}" var="offer">
 			<p:column headerText="Nazwa" width="14%">
 				<p:commandLink value="#{offer.offerName}" action="offer.xhtml">

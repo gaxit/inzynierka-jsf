@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/common/commonLayout.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<ui:include src="menu.xhtml"></ui:include>
+		</h:form>
+		
+		<h1>Nowa oferta</h1>
+<h:form>
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Nazwa"/>
+			<p:inputText value="#{newOfferBean.offerName}"/>
+				
+			<p:outputLabel value="Powierzchnia"/>
+			<p:inputText value="#{newOfferBean.area}"/>
+			
+			<p:outputLabel value="Cena"/>
+			<p:inputText value="#{newOfferBean.price}"/>
+			
+			<p:outputLabel value="Typ nieruchomości"/>
+			<p:selectOneRadio id="buttons1" layout="spread" value="#{newOfferBean.estateType}">
+        		<f:selectItem itemLabel="Dom       " itemValue="Dom" />
+        		<f:selectItem itemLabel="Mieszkanie" itemValue="Mieszkanie" />
+        		<f:selectItem itemLabel="Działka" itemValue="Dzialka" />
+      		</p:selectOneRadio>
+			
+			<p:outputLabel value="Typ traksakcji"/>
+			<p:selectOneRadio id="buttons2" layout="spread" value="#{newOfferBean.transactionType}">
+        		<f:selectItem itemLabel="Wynajem   " itemValue="Wynajem" />
+        		<f:selectItem itemLabel="Sprzedaż  " itemValue="Sprzedaz" />
+      		</p:selectOneRadio>
+			
+			<p:outputLabel value="Opis"/>
+			<p:inputText value="#{newOfferBean.description}"/>
+			
+			<p:outputLabel value="Piętro"/>
+			<p:inputText value="#{newOfferBean.floor}"/>
+			
+			<p:outputLabel value="Garaż"/>
+			<p:inputText value="#{newOfferBean.garage}"/>
+			
+			<p:outputLabel value="Miasto"/>
+			<p:inputText value="#{newOfferBean.town}"/>
+			
+			<p:outputLabel value="Kod"/>
+			<p:inputText value="#{newOfferBean.postalCode}"/>
+						
+			<p:outputLabel value="Ulica"/>
+			<p:inputText value="#{newOfferBean.street}"/>
+			
+			<p:outputLabel value="Nr domu"/>
+			<p:inputText value="#{newOfferBean.houseNo}"/>
+			
+			<p:outputLabel value="Nr mieszania"/>
+			<p:inputText value="#{newOfferBean.apartmentNo}"/>
+			
+		</h:panelGrid>
+		
+		<h:panelGrid columns="2">
+			<p:commandButton value="Dodaj" action="#{newOfferBean.addOffer}" ajax="false"/>
+			<p:commandButton value="Anuluj" action="#{newOfferBean.cancel}"/>
+		</h:panelGrid>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>
+</html>
