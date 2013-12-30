@@ -9,69 +9,22 @@
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
 		
-		<h1>Twoje oferty</h1>
-		<p/>
-		Oto oferty które proponujesz. W każdej chwili możesz je edytować lub usunąć.
-		<p/>
-		<p:dataTable>
-
+		
+		<h1>Moje oferty</h1>
+		
+		<p:dataTable id="offerTable" value="#{myOffersBean.myOfferList}" var="offer">
+			<p:column headerText="Nazwa" width="14%">
+				<p:commandLink value="#{offer.offerName}" action="offer.xhtml">
+					<f:setPropertyActionListener target="#{offerBean.offer}" value="#{offer}"/>
+				</p:commandLink>
+			</p:column>
+			<p:column headerText="Lokalizacja" width="14%">#{offer.town}</p:column>
+			<p:column headerText="Cena" width="14%">#{offer.price} zł</p:column>
+			<p:column headerText="Powierzchnia" width="14%">#{offer.area} m^2</p:column>
+			<p:column headerText="Typ nieruchomości" width="14%">#{offer.estateType}</p:column>
+			<p:column headerText="Typ transakcji" width="14%">#{offer.transactionType}</p:column>
 		</p:dataTable>
-		<p/>
-		<h1>Dodawanie ofert</h1>
 		
-				<h:panelGrid columns="1">
-			<h:outputLabel value="Musisz wypełnić wszystkie pola aby móc wprowadzić ofertę do bazy danych." />
-			<p/>
-		</h:panelGrid>
-		
-			<h:form>
-			<h:panelGrid columns="2">
-				
-				<h:outputLabel value="Podaj Miejscowość" />
-				<p:password />
-				<h:outputLabel value="Podaj Powierzchnię" />
-				<p:password />
-				<h:outputLabel value="Podaj Cenę całości (zł)" />
-				<p:password />
-				
-				<h:outputLabel value="Wybierz rodzaj nieruchomości"/>
-				<p:selectOneRadio id="buttons1" layout="spread" value="#{bean.button1}">
-        			<f:selectItem itemLabel="Dom       " itemValue="Dom" />
-        			<f:selectItem itemLabel="Mieszkanie" itemValue="Mieszkanie" />
-      			</p:selectOneRadio>
-      			
-      			<h:outputLabel value="Wybierz rodzaj transakcji"/>
-				<p:selectOneRadio id="buttons2" layout="spread" value="#{bean.button2}">
-        			<f:selectItem itemLabel="Wynajem   " itemValue="Wynajem" />
-        			<f:selectItem itemLabel="Sprzedaż  " itemValue="Sprzedaż" />
-      			</p:selectOneRadio>
-      			
-      			<h:outputLabel value="Czy jest garaż?"/>
-				<p:selectOneRadio id="buttons3" layout="spread" value="#{bean.button3}">
-        			<f:selectItem itemLabel="Z garażem " itemValue="Z garażem" />
-        			<f:selectItem itemLabel="Bez garażu" itemValue="Bez garażu" />
-      			</p:selectOneRadio>
-      			
-      			<h:outputLabel value="Podaj piętro (tylko dla mieszkań)" />
-				<p:password />
-				
-				<h:outputLabel value="Miejscowość" />
-				<p:password />
-				<h:outputLabel value="Ulica" />
-				<p:password />
-				<h:outputLabel value="Dom" />
-				<p:password />
-				<h:outputLabel value="Mieszkanie" />
-				<p:password />
-				<h:outputLabel value="Kod pocztowy" />
-				<p:password />
-
-			</h:panelGrid>
-			<p/>
-			<p:commandButton value="Dodaj własną ofertę" />
-			<p/>
-		</h:form>
-		<p/>
 	</ui:define>
 </ui:composition>
 </html>

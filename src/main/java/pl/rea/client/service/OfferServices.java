@@ -108,5 +108,11 @@ public class OfferServices {
 		OfferService service = offerService.getOfferServicePort();
 		return service.updateOffer(login, sessionId, offer, userLoginToUpdateOffer);
 	}
+	
+	public List<OfferCanonical> getUserOffers(String login, String sessionId, String userLoginToGetOffers){
+		OfferService_Service offerService = new OfferService_Service();
+		OfferService service = offerService.getOfferServicePort();
+		return service.getUserOffers(login, sessionId, userLoginToGetOffers);
+	}
 
 }
