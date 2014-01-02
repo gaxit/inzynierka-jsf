@@ -12,7 +12,7 @@
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
 		
-		<p:commandButton value="Dodaj do ulubionych" rendered="#{!offerBean.favouriteRender}" action="#{offerBean.addToFavourites}" ajax="true"/>
+		<p:commandButton value="Dodaj do ulubionych" rendered="#{!offerBean.favouriteRender}" action="#{offerBean.addToFavourites}" update="@this"/>
 		<p:outputLabel value="Jest w ulubionych" rendered="#{offerBean.favouriteRender}"/>
 		
 		<h3>#{offerBean.offer.offerName}</h3>
@@ -55,6 +55,8 @@
 				<f:param name="name" value="#{image.fileName}"/>
 			</p:graphicImage>
 		</p:galleria>
+		
+		<p:commandButton value="Edytuj" rendered="#{offerBean.renderEdit}"/>
 	
 	</ui:define>
 </ui:composition>

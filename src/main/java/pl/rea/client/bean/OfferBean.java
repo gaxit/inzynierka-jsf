@@ -50,6 +50,13 @@ public class OfferBean {
 		System.out.println("Dodano do ulubionych?: " + service.addOfferToUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offer.getId(), loginBean.getLogin()));
 	}
 	
+	public boolean getRenderEdit(){
+		if (loginBean.getLogin().equals(offer.getOwner()) || loginBean.getAdminLogged()){
+			return true;
+		}
+		return false;
+	}
+	
 	//----- settery i gettery -----
 
 	public OfferCanonical getOffer() {
