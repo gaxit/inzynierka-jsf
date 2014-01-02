@@ -45,6 +45,11 @@ public class OfferBean {
 		return service.isOfferInUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offer.getId(), loginBean.getLogin());
 	}
 	
+	public void addToFavourites(){
+		OfferServices service = new OfferServices();
+		System.out.println("Dodano do ulubionych?: " + service.addOfferToUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offer.getId(), loginBean.getLogin()));
+	}
+	
 	//----- settery i gettery -----
 
 	public OfferCanonical getOffer() {
