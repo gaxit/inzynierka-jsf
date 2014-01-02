@@ -61,10 +61,12 @@
 			<p:outputLabel value="Nr mieszania"/>
 			<p:inputText value="#{newOfferBean.apartmentNo}"/>
 			
+			<p:fileUpload fileUploadListener="#{newOfferBean.uploadFile}" allowTypes="/(\.|\/)(jpe?g|png)$/"/>
+			
 		</h:panelGrid>
 		
 		<h:panelGrid columns="2">
-			<p:commandButton value="Dodaj" action="#{newOfferBean.addOffer}" ajax="false"/>
+			<p:commandButton value="Dodaj ofertę" action="#{newOfferBean.addOffer}" ajax="false"/>
 			<p:commandButton value="Anuluj" action="#{newOfferBean.cancel}"/>
 		</h:panelGrid>
 		</h:form>

@@ -1,10 +1,10 @@
 package pl.rea.client.bean;
 
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+
+import org.primefaces.event.FileUploadEvent;
 
 import pl.rea.client.service.OfferServices;
 import pl.rea.client.webmethods.offers.OfferCanonical;
@@ -33,6 +33,10 @@ public class NewOfferBean {
 	private String postalCode;
 	
 	//----- metody wykonujące akcje -----
+	
+	public void uploadFile(FileUploadEvent event){
+		System.out.println("Plik: " + event.getFile().getFileName());
+	}
 	
 	public void addOffer(){		
 		OfferCanonical offer = new OfferCanonical();
@@ -175,14 +179,5 @@ public class NewOfferBean {
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
 	}
-	
-	//obraz
-	
-	
-	
-	
-	
-	
-//	private String owner;
 
 }
