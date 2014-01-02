@@ -272,6 +272,10 @@ public class OfferCanonical {
         }
         return this.images;
     }
+    
+    public void setImages(List<ImageCanonical> imagesList){
+    	this.images = imagesList;
+    }
 
     /**
      * Gets the value of the offerName property.

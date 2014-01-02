@@ -1,5 +1,8 @@
 package pl.rea.client.bean;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -7,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import org.primefaces.event.FileUploadEvent;
 
 import pl.rea.client.service.OfferServices;
+import pl.rea.client.webmethods.offers.ImageCanonical;
 import pl.rea.client.webmethods.offers.OfferCanonical;
 
 @SessionScoped
@@ -32,10 +36,17 @@ public class NewOfferBean {
 	private Integer houseNo;
 	private String postalCode;
 	
+	private List<ImageCanonical> imagesList = new LinkedList<ImageCanonical>();
+	
 	//----- metody wykonujące akcje -----
 	
 	public void uploadFile(FileUploadEvent event){
-		System.out.println("Plik: " + event.getFile().getFileName());
+		ImageCanonical img = new ImageCanonical();
+		String[] tab = event.getFile().getFileName().split("\\.");
+		String newName = tab[0] + "_" + System.currentTimeMillis() + "." + tab[1];
+		img.setFileName(newName);
+		img.setImage(event.getFile().getContents());
+		imagesList.add(img);
 	}
 	
 	public void addOffer(){		
@@ -54,9 +65,10 @@ public class NewOfferBean {
 		offer.setStreet(street);
 		offer.setTown(town);
 		offer.setTransactionType(transactionType);
+		offer.setImages(imagesList);
 		
 		OfferServices service = new OfferServices();
-		service.addOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, loginBean.getLogin());
+		System.out.println("Oferte dodano?: " + service.addOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, loginBean.getLogin()));
 		
 		offerName = null;
 		area = null;
@@ -71,6 +83,7 @@ public class NewOfferBean {
 		town = null;
 		houseNo = null;
 		postalCode = null;
+		imagesList = new LinkedList<ImageCanonical>();
 	}
 	
 	public void cancel(){
@@ -87,6 +100,7 @@ public class NewOfferBean {
 		town = null;
 		houseNo = null;
 		postalCode = null;
+		imagesList = new LinkedList<ImageCanonical>();
 	}
 	
 	
@@ -178,6 +192,14 @@ public class NewOfferBean {
 
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
+	}
+
+	public List<ImageCanonical> getImagesList() {
+		return imagesList;
+	}
+
+	public void setImagesList(List<ImageCanonical> imagesList) {
+		this.imagesList = imagesList;
 	}
 
 }

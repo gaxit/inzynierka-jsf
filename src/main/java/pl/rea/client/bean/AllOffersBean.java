@@ -30,11 +30,8 @@ public class AllOffersBean {
 	
 	//----- metody wykonujace akcje -----
 	public void loadOffers(){
-		if (!find){
-			OfferServices service = new OfferServices();
-			offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
-			find = true;
-		}
+		OfferServices service = new OfferServices();
+		offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
 		
 		town = null;
 		areaMin = null;

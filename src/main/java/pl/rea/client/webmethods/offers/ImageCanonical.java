@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="fileName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
  *       &lt;/sequence>
@@ -27,13 +28,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "imageCanonical", propOrder = {
+    "fileName",
     "id",
     "image"
 })
 public class ImageCanonical {
 
+    protected String fileName;
     protected long id;
     protected byte[] image;
+
+    /**
+     * Gets the value of the fileName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFileName() {
+        return fileName;
+    }
+
+    /**
+     * Sets the value of the fileName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFileName(String value) {
+        this.fileName = value;
+    }
 
     /**
      * Gets the value of the id property.

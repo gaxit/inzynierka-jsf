@@ -25,14 +25,14 @@
 			<p:inputText value="#{newOfferBean.price}"/>
 			
 			<p:outputLabel value="Typ nieruchomości"/>
-			<p:selectOneRadio id="buttons1" layout="spread" value="#{newOfferBean.estateType}">
+			<p:selectOneRadio value="#{newOfferBean.estateType}">
         		<f:selectItem itemLabel="Dom       " itemValue="Dom" />
         		<f:selectItem itemLabel="Mieszkanie" itemValue="Mieszkanie" />
         		<f:selectItem itemLabel="Działka" itemValue="Dzialka" />
       		</p:selectOneRadio>
 			
 			<p:outputLabel value="Typ traksakcji"/>
-			<p:selectOneRadio id="buttons2" layout="spread" value="#{newOfferBean.transactionType}">
+			<p:selectOneRadio value="#{newOfferBean.transactionType}">
         		<f:selectItem itemLabel="Wynajem   " itemValue="Wynajem" />
         		<f:selectItem itemLabel="Sprzedaż  " itemValue="Sprzedaz" />
       		</p:selectOneRadio>
@@ -61,7 +61,8 @@
 			<p:outputLabel value="Nr mieszania"/>
 			<p:inputText value="#{newOfferBean.apartmentNo}"/>
 			
-			<p:fileUpload fileUploadListener="#{newOfferBean.uploadFile}" allowTypes="/(\.|\/)(jpe?g|png)$/"/>
+			<p:fileUpload fileUploadListener="#{newOfferBean.uploadFile}" allowTypes="/(\.|\/)(jpe?g|png)$/" 
+				upload="galeria"/>
 			
 		</h:panelGrid>
 		

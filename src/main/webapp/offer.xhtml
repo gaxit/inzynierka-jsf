@@ -11,7 +11,7 @@
 		<h:form>
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
-
+		
 		<h3>#{offerBean.offer.offerName}</h3>
 		<h:panelGrid columns="2">			
 			<p:outputLabel value="Powierzchnia"/>
@@ -38,13 +38,21 @@
 			
 			<p:outputLabel value="Właściciel"/>
 			<p:outputLabel value="#{offerBean.offer.owner}"/>
+			
+			
 		</h:panelGrid>
 		
 		<h3>Adres</h3>
 		<p:outputLabel value="#{offerBean.offer.postalCode} #{offerBean.offer.town}"/><br/>
 		<p:outputLabel value="ul. #{offerBean.offer.street}   #{offerBean.offer.houseNo}"/>
 		<p:outputLabel rendered="#{not empty offerBean.offer.apartmentNo}" value="/#{offerBean.offer.apartmentNo}"/>
-		
+			
+		<p:galleria id="galeriaXSD" value="#{offerBean.offer.images}" var="image">
+			<p:graphicImage value="#{offerBean.image}" title="#{image.fileName}" alt="#{image.fileName}">
+				<f:param name="name" value="#{image.fileName}"/>
+			</p:graphicImage>
+		</p:galleria>
+	
 	</ui:define>
 </ui:composition>
 </html>
