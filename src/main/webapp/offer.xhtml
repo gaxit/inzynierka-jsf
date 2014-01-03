@@ -20,14 +20,18 @@
 		
 		<h:form id="offerForm">
 		<h3>#{offerBean.offer.offerName}</h3>
-		<h:panelGrid columns="2">			
+		
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Nazwa" rendered="#{offerBean.editingMode}"/>
+			<p:inputText  value="#{offerBean.offerName}" rendered="#{offerBean.editingMode}"/>
+						
 			<p:outputLabel value="Powierzchnia"/>
 			<p:outputLabel value="#{offerBean.offer.area} m^2" rendered="#{!offerBean.editingMode}"/>
-			<p:inputText rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.area}" rendered="#{offerBean.editingMode}"/>
 			
 			<p:outputLabel value="Cena"/>
 			<p:outputLabel value="#{offerBean.offer.price} zł" rendered="#{!offerBean.editingMode}"/>
-			<p:inputText rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.price}" rendered="#{offerBean.editingMode}"/>
 			
 			<p:outputLabel value="Typ nieruchomości"/>
 			<p:outputLabel value="#{offerBean.offer.estateType}" rendered="#{!offerBean.editingMode}"/>
@@ -46,11 +50,11 @@
 			
 			<p:outputLabel value="Opis"/>
 			<p:outputLabel value="#{offerBean.offer.description}" rendered="#{!offerBean.editingMode}"/>
-			<p:inputText rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.description}" rendered="#{offerBean.editingMode}"/>
 			
 			<p:outputLabel value="Piętro"/>
 			<p:outputLabel value="#{offerBean.offer.floor}" rendered="#{!offerBean.editingMode}"/>
-			<p:inputText rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.floor}" rendered="#{offerBean.editingMode}"/>
 			
 			<p:outputLabel value="Garaż"/>
 			<p:outputLabel rendered="#{(!offerBean.offer.garage) and (!offerBean.editingMode)}" value="Brak"/>
@@ -73,22 +77,22 @@
 		
 		<h:panelGrid columns="2">
 			<p:outputLabel value="Miejscowość" rendered="#{offerBean.editingMode}"/>
-			<p:inputText rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.town}" rendered="#{offerBean.editingMode}"/>
 		
 			<p:outputLabel value="Kod pocztowy" rendered="#{offerBean.editingMode}"/>
-			<p:inputText rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.postalCode}" rendered="#{offerBean.editingMode}"/>
 		
 			<p:outputLabel value="Ulica" rendered="#{offerBean.editingMode}"/>
-			<p:inputText rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.street}" rendered="#{offerBean.editingMode}"/>
 		
 			<p:outputLabel value="Numer domu" rendered="#{offerBean.editingMode}"/>
-			<p:inputText rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.houseNo}" rendered="#{offerBean.editingMode}"/>
 		
 			<p:outputLabel value="Numer mieszkania" rendered="#{offerBean.editingMode}"/>
-			<p:inputText rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.apartmentNo}" rendered="#{offerBean.editingMode}"/>
 		</h:panelGrid>
 			
-		<p:galleria id="galeriaXSD" value="#{offerBean.offer.images}" var="image"  rendered="#{!offerBean.editingMode}">
+		<p:galleria id="galeria" value="#{offerBean.offer.images}" var="image" rendered="#{!offerBean.editingMode}">
 			<p:graphicImage value="#{offerBean.image}" title="#{image.fileName}" alt="#{image.fileName}">
 				<f:param name="name" value="#{image.fileName}"/>
 			</p:graphicImage>

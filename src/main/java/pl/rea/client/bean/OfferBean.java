@@ -28,6 +28,7 @@ public class OfferBean {
 	
 	private boolean editingMode;
 	
+	private String offerName;
 	private Integer area;
 	private Integer price;
 	private String estateType;
@@ -35,7 +36,6 @@ public class OfferBean {
 	private String description;
 	private Integer floor;
 	private Boolean garage;
-	private String owner;
 	
 	private String postalCode;
 	private String town;
@@ -58,6 +58,81 @@ public class OfferBean {
 //			e.printStackTrace();
 //		}
 //	}
+	
+	public void edit(){
+		System.out.println("Edytowanie oferty");
+		editingMode = true;
+		
+		copyOffer = new OfferCanonical();
+		
+		copyOffer.setAddressId(offer.getAddressId());
+		copyOffer.setApartmentNo(offer.getApartmentNo());
+		copyOffer.setArea(offer.getArea());
+		copyOffer.setDescription(offer.getDescription());
+		copyOffer.setEstateType(offer.getEstateType());
+		copyOffer.setFloor(offer.getFloor());
+		copyOffer.setGarage(offer.isGarage());
+		copyOffer.setHouseNo(offer.getHouseNo());
+		copyOffer.setId(offer.getId());
+		copyOffer.setImages(offer.getImages());
+		copyOffer.setOfferName(offer.getOfferName());
+		copyOffer.setOwner(offer.getOwner());
+		copyOffer.setPostalCode(offer.getPostalCode());
+		copyOffer.setPrice(offer.getPrice());
+		copyOffer.setStreet(offer.getStreet());
+		copyOffer.setTown(offer.getTown());
+		copyOffer.setTransactionType(offer.getTransactionType());
+		
+		offerName = offer.getOfferName();
+		area = offer.getArea();
+		price = offer.getPrice();
+		estateType = offer.getEstateType();
+		transactionType = offer.getTransactionType();
+		description = offer.getDescription();
+		floor = offer.getFloor();
+		garage = offer.isGarage();
+		postalCode = offer.getPostalCode();
+		town = offer.getTown();
+		street = offer.getStreet(); 
+		houseNo = offer.getHouseNo();
+		apartmentNo = offer.getApartmentNo();
+		imageList = offer.getImages();
+	}
+	
+	public void update(){
+		System.out.println("Zmienianie oferty");
+		
+		offer.setOfferName(offerName);
+		offer.setArea(area);
+		offer.setPrice(price);
+		offer.setEstateType(estateType);
+		offer.setTransactionType(transactionType);
+		offer.setDescription(description);
+		offer.setFloor(floor);
+		offer.setGarage(garage);
+		offer.setPostalCode(postalCode);
+		offer.setTown(town);
+		offer.setStreet(street);
+		offer.setHouseNo(houseNo);
+		offer.setApartmentNo(apartmentNo);
+		offer.setImages(imageList);
+		
+		OfferServices service = new OfferServices();
+		System.out.println("Update ok?: " + service.updateOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, offer.getOwner()));
+//		if (!service.updateOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, offer.getOwner())){
+//			offer = copyOffer;
+//		}
+//		else{
+//			copyOffer = null;
+//		}
+		
+		editingMode = false;
+	}
+	
+	public void cancel(){
+		System.out.println("Anulowanie zmian w ofercie");
+		editingMode = false;
+	}
 	
 	public void loadPage(){
 		editingMode = false;
@@ -99,21 +174,6 @@ public class OfferBean {
 			return true;
 		}
 		return false;
-	}
-	
-	public void edit(){
-		System.out.println("Edytowanie oferty");
-		editingMode = true;
-	}
-	
-	public void update(){
-		System.out.println("Zmienianie oferty");
-		editingMode = false;
-	}
-	
-	public void cancel(){
-		System.out.println("Anulowanie zmian w ofercie");
-		editingMode = false;
 	}
 	
 	//----- settery i gettery -----
@@ -198,14 +258,6 @@ public class OfferBean {
 		this.garage = garage;
 	}
 
-	public String getOwner() {
-		return owner;
-	}
-
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-
 	public String getPostalCode() {
 		return postalCode;
 	}
@@ -252,6 +304,14 @@ public class OfferBean {
 
 	public void setImageList(List<ImageCanonical> imageList) {
 		this.imageList = imageList;
+	}
+
+	public String getOfferName() {
+		return offerName;
+	}
+
+	public void setOfferName(String offerName) {
+		this.offerName = offerName;
 	}
 	
 }
