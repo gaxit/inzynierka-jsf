@@ -44,7 +44,10 @@
 			<p:inputText value="#{newOfferBean.floor}"/>
 			
 			<p:outputLabel value="Garaż"/>
-			<p:inputText value="#{newOfferBean.garage}"/>
+			<p:selectOneRadio value="#{newOfferBean.garage}">
+        		<f:selectItem itemLabel="Obecny   " itemValue="true" />
+        		<f:selectItem itemLabel="Brak  " itemValue="false" />
+      		</p:selectOneRadio>
 			
 			<p:outputLabel value="Miasto"/>
 			<p:inputText value="#{newOfferBean.town}"/>

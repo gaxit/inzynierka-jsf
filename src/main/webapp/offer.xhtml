@@ -11,33 +11,54 @@
 		<h:form>
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
+		<h:form>
+			<p:remoteCommand name="loadOfferPage" autoRun="true" action="#{offerBean.loadPage}"/>
+		</h:form>
 		
 		<p:commandButton value="Dodaj do ulubionych" rendered="#{!offerBean.favouriteRender}" action="#{offerBean.addToFavourites}" update="@this"/>
 		<p:outputLabel value="Jest w ulubionych" rendered="#{offerBean.favouriteRender}"/>
 		
+		<h:form id="offerForm">
 		<h3>#{offerBean.offer.offerName}</h3>
 		<h:panelGrid columns="2">			
 			<p:outputLabel value="Powierzchnia"/>
-			<p:outputLabel value="#{offerBean.offer.area} m^2"/>
+			<p:outputLabel value="#{offerBean.offer.area} m^2" rendered="#{!offerBean.editingMode}"/>
+			<p:inputText rendered="#{offerBean.editingMode}"/>
 			
 			<p:outputLabel value="Cena"/>
-			<p:outputLabel value="#{offerBean.offer.price} zł"/>
+			<p:outputLabel value="#{offerBean.offer.price} zł" rendered="#{!offerBean.editingMode}"/>
+			<p:inputText rendered="#{offerBean.editingMode}"/>
 			
 			<p:outputLabel value="Typ nieruchomości"/>
-			<p:outputLabel value="#{offerBean.offer.estateType}"/>
+			<p:outputLabel value="#{offerBean.offer.estateType}" rendered="#{!offerBean.editingMode}"/>
+			<p:selectOneRadio value="#{offerBean.estateType}" rendered="#{offerBean.editingMode}">
+        		<f:selectItem itemLabel="Dom       " itemValue="Dom" />
+        		<f:selectItem itemLabel="Mieszkanie" itemValue="Mieszkanie" />
+        		<f:selectItem itemLabel="Działka" itemValue="Dzialka" />
+      		</p:selectOneRadio>
 			
 			<p:outputLabel value="Typ traksakcji"/>
-			<p:outputLabel value="#{offerBean.offer.transactionType}"/>
+			<p:outputLabel value="#{offerBean.offer.transactionType}" rendered="#{!offerBean.editingMode}"/>
+			<p:selectOneRadio value="#{offerBean.transactionType}" rendered="#{offerBean.editingMode}">
+        		<f:selectItem itemLabel="Wynajem   " itemValue="Wynajem" />
+        		<f:selectItem itemLabel="Sprzedaż  " itemValue="Sprzedaz" />
+      		</p:selectOneRadio>
 			
 			<p:outputLabel value="Opis"/>
-			<p:outputLabel value="#{offerBean.offer.description}"/>
+			<p:outputLabel value="#{offerBean.offer.description}" rendered="#{!offerBean.editingMode}"/>
+			<p:inputText rendered="#{offerBean.editingMode}"/>
 			
 			<p:outputLabel value="Piętro"/>
-			<p:outputLabel value="#{offerBean.offer.floor}"/>
+			<p:outputLabel value="#{offerBean.offer.floor}" rendered="#{!offerBean.editingMode}"/>
+			<p:inputText rendered="#{offerBean.editingMode}"/>
 			
 			<p:outputLabel value="Garaż"/>
-			<p:outputLabel rendered="#{!offerBean.offer.garage}" value="Brak"/>
-			<p:outputLabel rendered="#{offerBean.offer.garage}" value="Obecny"/>
+			<p:outputLabel rendered="#{(!offerBean.offer.garage) and (!offerBean.editingMode)}" value="Brak"/>
+			<p:outputLabel rendered="#{(offerBean.offer.garage) and (!offerBean.editingMode)}" value="Obecny"/>
+			<p:selectOneRadio value="#{offerBean.garage}" rendered="#{offerBean.editingMode}">
+        		<f:selectItem itemLabel="Obecny   " itemValue="true" />
+        		<f:selectItem itemLabel="Brak  " itemValue="false" />
+      		</p:selectOneRadio>
 			
 			<p:outputLabel value="Właściciel"/>
 			<p:outputLabel value="#{offerBean.offer.owner}"/>
@@ -46,18 +67,37 @@
 		</h:panelGrid>
 		
 		<h3>Adres</h3>
-		<p:outputLabel value="#{offerBean.offer.postalCode} #{offerBean.offer.town}"/><br/>
-		<p:outputLabel value="ul. #{offerBean.offer.street}   #{offerBean.offer.houseNo}"/>
-		<p:outputLabel rendered="#{not empty offerBean.offer.apartmentNo}" value="/#{offerBean.offer.apartmentNo}"/>
+		<p:outputLabel value="#{offerBean.offer.postalCode} #{offerBean.offer.town}" rendered="#{!offerBean.editingMode}"/><br/>
+		<p:outputLabel value="ul. #{offerBean.offer.street}   #{offerBean.offer.houseNo}" rendered="#{!offerBean.editingMode}"/>
+		<p:outputLabel rendered="#{(not empty offerBean.offer.apartmentNo) and (!offerBean.editingMode)}" value="/#{offerBean.offer.apartmentNo}"/>
+		
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Miejscowość" rendered="#{offerBean.editingMode}"/>
+			<p:inputText rendered="#{offerBean.editingMode}"/>
+		
+			<p:outputLabel value="Kod pocztowy" rendered="#{offerBean.editingMode}"/>
+			<p:inputText rendered="#{offerBean.editingMode}"/>
+		
+			<p:outputLabel value="Ulica" rendered="#{offerBean.editingMode}"/>
+			<p:inputText rendered="#{offerBean.editingMode}"/>
+		
+			<p:outputLabel value="Numer domu" rendered="#{offerBean.editingMode}"/>
+			<p:inputText rendered="#{offerBean.editingMode}"/>
+		
+			<p:outputLabel value="Numer mieszkania" rendered="#{offerBean.editingMode}"/>
+			<p:inputText rendered="#{offerBean.editingMode}"/>
+		</h:panelGrid>
 			
-		<p:galleria id="galeriaXSD" value="#{offerBean.offer.images}" var="image">
+		<p:galleria id="galeriaXSD" value="#{offerBean.offer.images}" var="image"  rendered="#{!offerBean.editingMode}">
 			<p:graphicImage value="#{offerBean.image}" title="#{image.fileName}" alt="#{image.fileName}">
 				<f:param name="name" value="#{image.fileName}"/>
 			</p:graphicImage>
 		</p:galleria>
 		
-		<p:commandButton value="Edytuj" rendered="#{offerBean.renderEdit}"/>
-	
+		<p:commandButton value="Edytuj" rendered="#{(offerBean.renderEdit) and (!offerBean.editingMode)}" action="#{offerBean.edit}" update=":offerForm"/>
+		<p:commandButton value="Zapisz zmiany" rendered="#{(offerBean.renderEdit) and (offerBean.editingMode)}" action="#{offerBean.update}" update=":offerForm"/>
+		<p:commandButton value="Anuluj" rendered="#{(offerBean.renderEdit) and (offerBean.editingMode)}" action="#{offerBean.cancel}" update=":offerForm"/>
+	</h:form>
 	</ui:define>
 </ui:composition>
 </html>

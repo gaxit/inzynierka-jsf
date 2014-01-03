@@ -64,7 +64,8 @@
 		
 		<br/>
 		
-		<p:dataTable id="offerTable" value="#{allOffersBean.offerList}" var="offer">
+		<h:form id="offerTable">
+		<p:dataTable id="offerTable" value="#{allOffersBean.offerList}" var="offer" ajax="false">
 			<p:column headerText="Nazwa" width="16%">
 				<p:commandLink value="#{offer.offerName}" action="offer.xhtml">
 					<f:setPropertyActionListener target="#{offerBean.offer}" value="#{offer}"/>
@@ -76,6 +77,7 @@
 			<p:column headerText="Typ nieruchomości" width="16%">#{offer.estateType}</p:column>
 			<p:column headerText="Typ transakcji" width="16%">#{offer.transactionType}</p:column>
 		</p:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

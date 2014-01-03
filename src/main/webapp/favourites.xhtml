@@ -14,10 +14,10 @@
 		</h:form>
 		
 		<h1>Ulubione</h1>
-		
+		<h:form id="offerTable">
 		<p:dataTable id="offerTable" value="#{favouritesBean.offerList}" var="offer">
 			<p:column headerText="Nazwa" width="14%">
-				<p:commandLink value="#{offer.offerName}" action="offer.xhtml">
+				<p:commandLink value="#{offer.offerName}" action="offer.xhtml" ajax="false">
 					<f:setPropertyActionListener target="#{offerBean.offer}" value="#{offer}"/>
 				</p:commandLink>
 			</p:column>
@@ -32,6 +32,7 @@
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
+		</h:form>
 	<p/>
 	</ui:define>
 </ui:composition>

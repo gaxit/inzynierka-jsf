@@ -1,6 +1,8 @@
 package pl.rea.client.bean;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -11,6 +13,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import pl.rea.client.service.OfferServices;
+import pl.rea.client.webmethods.offers.ImageCanonical;
 import pl.rea.client.webmethods.offers.OfferCanonical;
 
 @SessionScoped
@@ -21,6 +24,44 @@ public class OfferBean {
 	private LoginBean loginBean;
 	
 	private OfferCanonical offer;
+	private OfferCanonical copyOffer;
+	
+	private boolean editingMode;
+	
+	private Integer area;
+	private Integer price;
+	private String estateType;
+	private String transactionType;
+	private String description;
+	private Integer floor;
+	private Boolean garage;
+	private String owner;
+	
+	private String postalCode;
+	private String town;
+	private String street;
+	private Integer houseNo;
+	private Integer apartmentNo;
+	private List<ImageCanonical> imageList;
+	
+	
+	//----- metody wykonujace akcje -----
+	
+//	public void redirectToOffer(){
+////		Integer id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("offerId"));
+////		OfferServices service = new OfferServices();
+////		offer = service.getOffer((long)id);
+//		try {
+//			FacesContext.getCurrentInstance().getExternalContext().redirect("offer.xhtml");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
+	public void loadPage(){
+		editingMode = false;
+	}
 	
 	public StreamedContent getImage(){
         FacesContext context = FacesContext.getCurrentInstance();
@@ -51,10 +92,28 @@ public class OfferBean {
 	}
 	
 	public boolean getRenderEdit(){
+		if (loginBean.getLogin()==null){
+			return false;
+		}
 		if (loginBean.getLogin().equals(offer.getOwner()) || loginBean.getAdminLogged()){
 			return true;
 		}
 		return false;
+	}
+	
+	public void edit(){
+		System.out.println("Edytowanie oferty");
+		editingMode = true;
+	}
+	
+	public void update(){
+		System.out.println("Zmienianie oferty");
+		editingMode = false;
+	}
+	
+	public void cancel(){
+		System.out.println("Anulowanie zmian w ofercie");
+		editingMode = false;
 	}
 	
 	//----- settery i gettery -----
@@ -73,6 +132,126 @@ public class OfferBean {
 
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
+	}
+
+	public boolean getEditingMode() {
+		return editingMode;
+	}
+
+	public void setEditingMode(boolean editingMode) {
+		this.editingMode = editingMode;
+	}
+
+	public Integer getArea() {
+		return area;
+	}
+
+	public void setArea(Integer area) {
+		this.area = area;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public String getEstateType() {
+		return estateType;
+	}
+
+	public void setEstateType(String estateType) {
+		this.estateType = estateType;
+	}
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getFloor() {
+		return floor;
+	}
+
+	public void setFloor(Integer floor) {
+		this.floor = floor;
+	}
+
+	public Boolean getGarage() {
+		return garage;
+	}
+
+	public void setGarage(Boolean garage) {
+		this.garage = garage;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public Integer getHouseNo() {
+		return houseNo;
+	}
+
+	public void setHouseNo(Integer houseNo) {
+		this.houseNo = houseNo;
+	}
+
+	public Integer getApartmentNo() {
+		return apartmentNo;
+	}
+
+	public void setApartmentNo(Integer apartmentNo) {
+		this.apartmentNo = apartmentNo;
+	}
+
+	public List<ImageCanonical> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<ImageCanonical> imageList) {
+		this.imageList = imageList;
 	}
 	
 }

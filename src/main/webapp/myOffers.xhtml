@@ -16,9 +16,10 @@
 			<p:commandButton value="Dodaj ofertę" action="newOffer.xhtml" ajax="false"/>
 		</h:form>
 		
+		<h:form>
 		<p:dataTable id="offerTable" value="#{myOffersBean.myOfferList}" var="offer">
 			<p:column headerText="Nazwa" width="14%">
-				<p:commandLink value="#{offer.offerName}" action="offer.xhtml">
+				<p:commandLink value="#{offer.offerName}" action="offer.xhtml" ajax="false">
 					<f:setPropertyActionListener target="#{offerBean.offer}" value="#{offer}"/>
 				</p:commandLink>
 			</p:column>
@@ -28,7 +29,7 @@
 			<p:column headerText="Typ nieruchomości" width="14%">#{offer.estateType}</p:column>
 			<p:column headerText="Typ transakcji" width="14%">#{offer.transactionType}</p:column>
 		</p:dataTable>
-		
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>
