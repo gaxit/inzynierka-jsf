@@ -27,9 +27,11 @@ public class ObjectFactory {
     private final static QName _DeleteOfferFromUserFavouritesResponse_QNAME = new QName("offers", "deleteOfferFromUserFavouritesResponse");
     private final static QName _FindOffersByCriteriaResponse_QNAME = new QName("offers", "findOffersByCriteriaResponse");
     private final static QName _UpdateOfferResponse_QNAME = new QName("offers", "updateOfferResponse");
+    private final static QName _GetOfferImagesResponse_QNAME = new QName("offers", "getOfferImagesResponse");
     private final static QName _IsOfferInUserFavouritesResponse_QNAME = new QName("offers", "isOfferInUserFavouritesResponse");
     private final static QName _GetAllOffers_QNAME = new QName("offers", "getAllOffers");
     private final static QName _IsOfferInUserFavourites_QNAME = new QName("offers", "isOfferInUserFavourites");
+    private final static QName _GetOfferImages_QNAME = new QName("offers", "getOfferImages");
     private final static QName _AddOfferToUserFavouritesResponse_QNAME = new QName("offers", "addOfferToUserFavouritesResponse");
     private final static QName _FindOffersByCriteria_QNAME = new QName("offers", "findOffersByCriteria");
     private final static QName _GetAllOffersResponse_QNAME = new QName("offers", "getAllOffersResponse");
@@ -62,6 +64,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetOfferImages }
+     * 
+     */
+    public GetOfferImages createGetOfferImages() {
+        return new GetOfferImages();
+    }
+
+    /**
      * Create an instance of {@link AddOfferToUserFavouritesResponse }
      * 
      */
@@ -91,6 +101,14 @@ public class ObjectFactory {
      */
     public UpdateOfferResponse createUpdateOfferResponse() {
         return new UpdateOfferResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetOfferImagesResponse }
+     * 
+     */
+    public GetOfferImagesResponse createGetOfferImagesResponse() {
+        return new GetOfferImagesResponse();
     }
 
     /**
@@ -282,6 +300,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOfferImagesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "offers", name = "getOfferImagesResponse")
+    public JAXBElement<GetOfferImagesResponse> createGetOfferImagesResponse(GetOfferImagesResponse value) {
+        return new JAXBElement<GetOfferImagesResponse>(_GetOfferImagesResponse_QNAME, GetOfferImagesResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link IsOfferInUserFavouritesResponse }{@code >}}
      * 
      */
@@ -306,6 +333,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "offers", name = "isOfferInUserFavourites")
     public JAXBElement<IsOfferInUserFavourites> createIsOfferInUserFavourites(IsOfferInUserFavourites value) {
         return new JAXBElement<IsOfferInUserFavourites>(_IsOfferInUserFavourites_QNAME, IsOfferInUserFavourites.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOfferImages }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "offers", name = "getOfferImages")
+    public JAXBElement<GetOfferImages> createGetOfferImages(GetOfferImages value) {
+        return new JAXBElement<GetOfferImages>(_GetOfferImages_QNAME, GetOfferImages.class, null, value);
     }
 
     /**

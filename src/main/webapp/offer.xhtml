@@ -92,7 +92,7 @@
 			<p:inputText value="#{offerBean.apartmentNo}" rendered="#{offerBean.editingMode}"/>
 		</h:panelGrid>
 			
-		<p:galleria id="galeria" value="#{offerBean.offer.images}" var="image" rendered="#{!offerBean.editingMode}">
+		<p:galleria id="galeria" value="#{offerBean.imageList}" var="image" rendered="#{!offerBean.editingMode}">
 			<p:graphicImage value="#{offerBean.image}" title="#{image.fileName}" alt="#{image.fileName}">
 				<f:param name="name" value="#{image.fileName}"/>
 			</p:graphicImage>

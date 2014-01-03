@@ -2,6 +2,7 @@ package pl.rea.client.bean;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -68,6 +69,7 @@ public class OfferBean {
 		img.setFileName(newName);
 		img.setImage(event.getFile().getContents());
 		imageList.add(img);
+		System.out.println();
 	}
 	
 	public void edit(){
@@ -85,7 +87,6 @@ public class OfferBean {
 		copyOffer.setGarage(offer.isGarage());
 		copyOffer.setHouseNo(offer.getHouseNo());
 		copyOffer.setId(offer.getId());
-		copyOffer.setImages(offer.getImages());
 		copyOffer.setOfferName(offer.getOfferName());
 		copyOffer.setOwner(offer.getOwner());
 		copyOffer.setPostalCode(offer.getPostalCode());
@@ -107,7 +108,14 @@ public class OfferBean {
 		street = offer.getStreet(); 
 		houseNo = offer.getHouseNo();
 		apartmentNo = offer.getApartmentNo();
-		imageList = offer.getImages();
+		
+		OfferServices service = new OfferServices();
+		imageList = service.getOfferImages(offer.getId());
+		
+		if (imageList==null){
+			imageList = new LinkedList<ImageCanonical>();
+		}
+		System.out.println("ImageList size bean: " + imageList.size());
 	}
 	
 	public void update(){
@@ -126,11 +134,10 @@ public class OfferBean {
 		offer.setStreet(street);
 		offer.setHouseNo(houseNo);
 		offer.setApartmentNo(apartmentNo);
-		offer.setImages(imageList);
 		System.out.println("Imagelist size: " + imageList.size());
 		
 		OfferServices service = new OfferServices();
-		if (!service.updateOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, offer.getOwner())){
+		if (!service.updateOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, offer.getOwner(), imageList)){
 			offer = copyOffer;
 		}
 		else{
@@ -158,9 +165,9 @@ public class OfferBean {
         else {
         	byte[] byteArray = null;
         	String id = context.getExternalContext().getRequestParameterMap().get("name");
-        	for (int i=0;i<offer.getImages().size();i++){
-        		if (offer.getImages().get(i).getFileName().equals(id)){
-        			byteArray = offer.getImages().get(i).getImage();
+        	for (int i=0;i<imageList.size();i++){
+        		if (imageList.get(i).getFileName().equals(id)){
+        			byteArray = imageList.get(i).getImage();
         		}
         	}
             return new DefaultStreamedContent(new ByteArrayInputStream(byteArray));
@@ -195,6 +202,8 @@ public class OfferBean {
 
 	public void setOffer(OfferCanonical offer) {
 		this.offer = offer;
+		OfferServices service = new OfferServices();
+		imageList = service.getOfferImages(offer.getId());
 	}
 
 	public LoginBean getLoginBean() {

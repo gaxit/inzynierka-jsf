@@ -2,16 +2,17 @@ package pl.rea.client.service;
 
 import java.util.List;
 
+import pl.rea.client.webmethods.offers.ImageCanonical;
 import pl.rea.client.webmethods.offers.OfferCanonical;
 import pl.rea.client.webmethods.offers.OfferService;
 import pl.rea.client.webmethods.offers.OfferService_Service;
 
 public class OfferServices {
 	
-	public boolean addOffer(String login, String sessionId, OfferCanonical offer, String loginToAddOffer){
+	public boolean addOffer(String login, String sessionId, OfferCanonical offer, String loginToAddOffer, List<ImageCanonical> imageList){
 		OfferService_Service offerService = new OfferService_Service();
 		OfferService service = offerService.getOfferServicePort();
-		return service.addOffer(login, sessionId, offer, loginToAddOffer);
+		return service.addOffer(login, sessionId, offer, loginToAddOffer, imageList);
 	}
 	
 	public boolean addOfferToUserFavourites(String login, String sessionId, Long offerId, String loginToAddOffer){
@@ -103,16 +104,22 @@ public class OfferServices {
 		return service.isOfferInUserFavourites(login, sessionId, offerId, userFavouritesLogin);
 	}
 	
-	public boolean updateOffer(String login, String sessionId, OfferCanonical offer, String userLoginToUpdateOffer){
+	public boolean updateOffer(String login, String sessionId, OfferCanonical offer, String userLoginToUpdateOffer, List<ImageCanonical> imageList){
 		OfferService_Service offerService = new OfferService_Service();
 		OfferService service = offerService.getOfferServicePort();
-		return service.updateOffer(login, sessionId, offer, userLoginToUpdateOffer);
+		return service.updateOffer(login, sessionId, offer, userLoginToUpdateOffer, imageList);
 	}
 	
 	public List<OfferCanonical> getUserOffers(String login, String sessionId, String userLoginToGetOffers){
 		OfferService_Service offerService = new OfferService_Service();
 		OfferService service = offerService.getOfferServicePort();
 		return service.getUserOffers(login, sessionId, userLoginToGetOffers);
+	}
+	
+	public List<ImageCanonical> getOfferImages(Long offerId){
+		OfferService_Service offerService = new OfferService_Service();
+		OfferService service = offerService.getOfferServicePort();
+		return service.getOfferImages(offerId);
 	}
 
 }

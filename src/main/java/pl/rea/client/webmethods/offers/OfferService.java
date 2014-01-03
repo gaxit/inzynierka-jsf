@@ -25,6 +25,7 @@ public interface OfferService {
 
     /**
      * 
+     * @param arg4
      * @param arg3
      * @param arg2
      * @param arg1
@@ -44,7 +45,9 @@ public interface OfferService {
         @WebParam(name = "arg2", targetNamespace = "")
         OfferCanonical arg2,
         @WebParam(name = "arg3", targetNamespace = "")
-        String arg3);
+        String arg3,
+        @WebParam(name = "arg4", targetNamespace = "")
+        List<ImageCanonical> arg4);
 
     /**
      * 
@@ -71,6 +74,21 @@ public interface OfferService {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<offers.ImageCanonical>
+     */
+    @WebMethod(action = "getOfferImages")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getOfferImages", targetNamespace = "offers", className = "offers.GetOfferImages")
+    @ResponseWrapper(localName = "getOfferImagesResponse", targetNamespace = "offers", className = "offers.GetOfferImagesResponse")
+    public List<ImageCanonical> getOfferImages(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Long arg0);
+
+    /**
+     * 
+     * @param arg4
      * @param arg3
      * @param arg2
      * @param arg1
@@ -90,7 +108,9 @@ public interface OfferService {
         @WebParam(name = "arg2", targetNamespace = "")
         OfferCanonical arg2,
         @WebParam(name = "arg3", targetNamespace = "")
-        String arg3);
+        String arg3,
+        @WebParam(name = "arg4", targetNamespace = "")
+        List<ImageCanonical> arg4);
 
     /**
      * 

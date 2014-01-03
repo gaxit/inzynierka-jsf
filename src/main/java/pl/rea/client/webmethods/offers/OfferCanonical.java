@@ -1,10 +1,7 @@
 package pl.rea.client.webmethods.offers;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -27,7 +24,6 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="garage" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="houseNo" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="images" type="{offers}imageCanonical" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="offerName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="owner" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="postalCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -54,7 +50,6 @@ import javax.xml.bind.annotation.XmlType;
     "garage",
     "houseNo",
     "id",
-    "images",
     "offerName",
     "owner",
     "postalCode",
@@ -62,7 +57,7 @@ import javax.xml.bind.annotation.XmlType;
     "street",
     "town",
     "transactionType"
-}, namespace="offerCanonicalClient")
+})
 public class OfferCanonical {
 
     protected long addressId;
@@ -74,8 +69,6 @@ public class OfferCanonical {
     protected boolean garage;
     protected int houseNo;
     protected long id;
-    @XmlElement(nillable = true)
-    protected List<ImageCanonical> images;
     protected String offerName;
     protected String owner;
     protected String postalCode;
@@ -242,39 +235,6 @@ public class OfferCanonical {
      */
     public void setId(long value) {
         this.id = value;
-    }
-
-    /**
-     * Gets the value of the images property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the images property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getImages().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ImageCanonical }
-     * 
-     * 
-     */
-    public List<ImageCanonical> getImages() {
-        if (images == null) {
-            images = new ArrayList<ImageCanonical>();
-        }
-        return this.images;
-    }
-    
-    public void setImages(List<ImageCanonical> imagesList){
-    	this.images = imagesList;
     }
 
     /**

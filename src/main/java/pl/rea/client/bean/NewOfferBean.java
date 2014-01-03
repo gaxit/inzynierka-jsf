@@ -65,10 +65,9 @@ public class NewOfferBean {
 		offer.setStreet(street);
 		offer.setTown(town);
 		offer.setTransactionType(transactionType);
-		offer.setImages(imagesList);
 		
 		OfferServices service = new OfferServices();
-		System.out.println("Oferte dodano?: " + service.addOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, loginBean.getLogin()));
+		System.out.println("Oferte dodano?: " + service.addOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, loginBean.getLogin(), imagesList));
 		
 		offerName = null;
 		area = null;
