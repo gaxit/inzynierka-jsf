@@ -98,6 +98,13 @@
 			</p:graphicImage>
 		</p:galleria>
 		
+		<p:fileUpload fileUploadListener="#{offerBean.uploadFile}" rendered="#{offerBean.editingMode}"
+			allowTypes="/(\.|\/)(jpe?g|png)$/"/>
+			
+		<p:dataList value="#{offerBean.imageList}" var="image" itemType="disc">
+			#{image.fileName}
+		</p:dataList>
+		
 		<p:commandButton value="Edytuj" rendered="#{(offerBean.renderEdit) and (!offerBean.editingMode)}" action="#{offerBean.edit}" update=":offerForm"/>
 		<p:commandButton value="Zapisz zmiany" rendered="#{(offerBean.renderEdit) and (offerBean.editingMode)}" action="#{offerBean.update}" update=":offerForm"/>
 		<p:commandButton value="Anuluj" rendered="#{(offerBean.renderEdit) and (offerBean.editingMode)}" action="#{offerBean.cancel}" update=":offerForm"/>

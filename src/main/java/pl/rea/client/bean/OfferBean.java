@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -58,6 +59,16 @@ public class OfferBean {
 //			e.printStackTrace();
 //		}
 //	}
+	
+	public void uploadFile(FileUploadEvent event){
+		System.out.println("Upload");
+		ImageCanonical img = new ImageCanonical();
+		String[] tab = event.getFile().getFileName().split("\\.");
+		String newName = tab[0] + "_" + System.currentTimeMillis() + "." + tab[1];
+		img.setFileName(newName);
+		img.setImage(event.getFile().getContents());
+		imageList.add(img);
+	}
 	
 	public void edit(){
 		System.out.println("Edytowanie oferty");
@@ -116,15 +127,15 @@ public class OfferBean {
 		offer.setHouseNo(houseNo);
 		offer.setApartmentNo(apartmentNo);
 		offer.setImages(imageList);
+		System.out.println("Imagelist size: " + imageList.size());
 		
 		OfferServices service = new OfferServices();
-		System.out.println("Update ok?: " + service.updateOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, offer.getOwner()));
-//		if (!service.updateOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, offer.getOwner())){
-//			offer = copyOffer;
-//		}
-//		else{
-//			copyOffer = null;
-//		}
+		if (!service.updateOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, offer.getOwner())){
+			offer = copyOffer;
+		}
+		else{
+			copyOffer = null;
+		}
 		
 		editingMode = false;
 	}
