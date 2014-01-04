@@ -26,8 +26,8 @@
 				#{user.role}
 			</p:column>
 			<p:column headerText="Akcje" width="20%">
-				<p:commandButton value="Szczegóły">
-				
+				<p:commandButton value="Szczegóły" action="viewUser.xhtml" ajax="false">
+					<f:setPropertyActionListener target="#{viewUserBean.user}" value="#{user}"/>
 				</p:commandButton>
 				<p:commandButton value="Usuń" action="#{userManagementBean.deleteUser}" update=":userListForm">
 					<f:param value="#{user.login}" name="userLogin"/>
