@@ -71,7 +71,7 @@
 			
 			<p:commandButton action="#{userBean.edit}" value="Edytuj dane" update=":userForm" rendered="#{!userBean.editingMode}"/>
 			<p:commandButton action="#{userBean.save}" value="Zapisz" update=":userForm" rendered="#{userBean.editingMode}"/>
-			<p:commandButton action="#{userBean.save}" value="Anuluj" update=":userForm" rendered="#{userBean.editingMode}"/>
+			<p:commandButton action="#{userBean.cancel}" value="Anuluj" update=":userForm" rendered="#{userBean.editingMode}"/>
 		</h:form>
 
 <br/>

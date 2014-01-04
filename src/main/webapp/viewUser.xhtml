@@ -9,6 +9,67 @@
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
 		
+		<h1>Dane użytkownika</h1>
+    
+		<h:form id="userForm">
+        	<h:panelGrid columns="2">
+				<h:outputLabel value="Login"/>
+				<h:outputLabel value="#{viewUserBean.user.login}"/>
+				
+				<h:outputLabel value="E-mail" rendered="#{!viewUserBean.editingMode}"/>
+				<h:outputLabel value="#{viewUserBean.user.email}" rendered="#{!viewUserBean.editingMode}"/>
+				<h:outputLabel value="E-mail" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.email}" rendered="#{viewUserBean.editingMode}"/>
+				
+				<h:outputLabel value="Nazwa" rendered="#{!viewUserBean.editingMode}"/>
+				<h:outputLabel value="#{viewUserBean.user.name}" rendered="#{!viewUserBean.editingMode}"/>
+				<h:outputLabel value="Nazwa" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.name}" rendered="#{viewUserBean.editingMode}"/>
+				
+				<h:outputLabel value="Nr telefonu" rendered="#{!viewUserBean.editingMode}"/>
+				<h:outputLabel value="#{viewUserBean.user.phoneNumber}" rendered="#{!viewUserBean.editingMode}"/>
+				<h:outputLabel value="Nr telefonu" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.phone}" rendered="#{viewUserBean.editingMode}"/>
+				
+				<h:outputLabel value="Stare hasło" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.oldPassword}" rendered="#{viewUserBean.editingMode}"/>
+				
+				<h:outputLabel value="Nowe hasło" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.newPassword}" rendered="#{viewUserBean.editingMode}"/>
+				
+				<h:outputLabel value="Powtórz hasło" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.repeatPassword}" rendered="#{viewUserBean.editingMode}"/>
+			</h:panelGrid>
+			
+			<h3>Adres</h3>
+			<p:outputLabel value="#{viewUserBean.user.postalCode} #{viewUserBean.user.town}" rendered="#{!viewUserBean.editingMode}"/><br/>
+			<p:outputLabel value="ul. #{viewUserBean.user.street}   #{viewUserBean.user.houseNo}" rendered="#{!viewUserBean.editingMode}"/>
+			<p:outputLabel rendered="#{(not empty viewUserBean.user.apartmentNo) and (!(viewUserBean.editingMode))}" value="/#{viewUserBean.user.apartmentNo}"/>
+			
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Miejscowość" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.town}" rendered="#{viewUserBean.editingMode}"/>
+				
+				<h:outputLabel value="Kod pocztowy" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.postalCode}" rendered="#{viewUserBean.editingMode}"/>
+				
+				<h:outputLabel value="Ulica" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.street}" rendered="#{viewUserBean.editingMode}"/>
+				
+				<h:outputLabel value="Numer domu" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.houseNo}" rendered="#{viewUserBean.editingMode}"/>
+				
+				<h:outputLabel value="Numer mieszkania" rendered="#{viewUserBean.editingMode}"/>
+				<p:inputText value="#{viewUserBean.apartmentNo}" rendered="#{viewUserBean.editingMode}"/>
+			</h:panelGrid>
+			<br/>
+			<br/>
+			
+			<p:commandButton action="#{viewUserBean.edit}" value="Edytuj dane" update=":userForm" rendered="#{!viewUserBean.editingMode}"/>
+			<p:commandButton action="#{viewUserBean.save}" value="Zapisz" update=":userForm" rendered="#{viewUserBean.editingMode}"/>
+			<p:commandButton action="#{viewUserBean.cancel}" value="Anuluj" update=":userForm" rendered="#{viewUserBean.editingMode}"/>
+		</h:form>
+		
 		
 	</ui:define>
 </ui:composition>
