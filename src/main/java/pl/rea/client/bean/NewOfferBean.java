@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 
@@ -102,7 +103,11 @@ public class NewOfferBean {
 		imagesList = new LinkedList<ImageCanonical>();
 	}
 	
-	
+	public void deleteImage(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		int imgId = Integer.parseInt(context.getExternalContext().getRequestParameterMap().get("imgIndex"));
+		imagesList.remove(imgId);
+	}
 	
 	//----- settery i gettery -----
 	

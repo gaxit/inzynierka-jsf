@@ -13,7 +13,7 @@
 		</h:form>
 		
 		<h1>Nowa oferta</h1>
-<h:form>
+	<h:form id="newOfferForm">
 		<h:panelGrid columns="2">
 			<p:outputLabel value="Nazwa"/>
 			<p:inputText value="#{newOfferBean.offerName}"/>
@@ -65,15 +65,22 @@
 			<p:inputText value="#{newOfferBean.apartmentNo}"/>
 			
 			<p:fileUpload fileUploadListener="#{newOfferBean.uploadFile}" allowTypes="/(\.|\/)(jpe?g|png)$/" 
-				upload="galeria"/>
+				update=":newOfferForm"/>
 			
 		</h:panelGrid>
 		
+		<p:dataList value="#{newOfferBean.imagesList}" var="image" itemType="disc" rowIndexVar="ind">
+				#{image.fileName}
+				<p:commandButton value="Usuń zdjęcie" action="#{newOfferBean.deleteImage}" update=":newOfferForm">
+					<f:param name="imgIndex" value="#{ind}"/>
+				</p:commandButton>
+			</p:dataList>
+			
 		<h:panelGrid columns="2">
 			<p:commandButton value="Dodaj ofertę" action="#{newOfferBean.addOffer}" ajax="false"/>
 			<p:commandButton value="Anuluj" action="#{newOfferBean.cancel}"/>
 		</h:panelGrid>
-		</h:form>
+	</h:form>
 		
 	</ui:define>
 </ui:composition>
