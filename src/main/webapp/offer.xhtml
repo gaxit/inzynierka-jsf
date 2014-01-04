@@ -15,8 +15,10 @@
 			<p:remoteCommand name="loadOfferPage" autoRun="true" action="#{offerBean.loadPage}"/>
 		</h:form>
 		
-		<p:commandButton value="Dodaj do ulubionych" rendered="#{!offerBean.favouriteRender}" action="#{offerBean.addToFavourites}" update="@this"/>
-		<p:outputLabel value="Jest w ulubionych" rendered="#{offerBean.favouriteRender}"/>
+		<h:form id="favForm">
+			<p:commandButton value="Dodaj do ulubionych" rendered="#{!offerBean.favouriteRender}" action="#{offerBean.addToFavourites}" update="favForm"/>
+			<p:outputLabel value="Jest w ulubionych" rendered="#{offerBean.favouriteRender}"/>
+		</h:form>
 		
 		<h:form id="offerForm">
 		<h3>#{offerBean.offer.offerName}</h3>
@@ -99,10 +101,13 @@
 		</p:galleria>
 		
 		<p:fileUpload fileUploadListener="#{offerBean.uploadFile}" rendered="#{offerBean.editingMode}"
-			allowTypes="/(\.|\/)(jpe?g|png)$/"/>
+			allowTypes="/(\.|\/)(jpe?g|png)$/" update=":offerForm"/>
 			
-		<p:dataList value="#{offerBean.imageList}" var="image" itemType="disc">
+		<p:dataList value="#{offerBean.imageList}" var="image" itemType="disc" rowIndexVar="ind" rendered="#{offerBean.editingMode}">
 			#{image.fileName}
+			<p:commandButton value="Usuń zdjęcie" action="#{offerBean.deleteImage}" update=":offerForm">
+				<f:param name="imgInd" value="#{ind}"/>
+			</p:commandButton>
 		</p:dataList>
 		
 		<p:commandButton value="Edytuj" rendered="#{(offerBean.renderEdit) and (!offerBean.editingMode)}" action="#{offerBean.edit}" update=":offerForm"/>

@@ -61,8 +61,13 @@ public class OfferBean {
 //		}
 //	}
 	
+	public void deleteImage(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		int imgId = Integer.parseInt(context.getExternalContext().getRequestParameterMap().get("imgInd"));
+		imageList.remove(imgId);
+	}
+	
 	public void uploadFile(FileUploadEvent event){
-		System.out.println("Upload");
 		ImageCanonical img = new ImageCanonical();
 		String[] tab = event.getFile().getFileName().split("\\.");
 		String newName = tab[0] + "_" + System.currentTimeMillis() + "." + tab[1];
@@ -194,16 +199,17 @@ public class OfferBean {
 		return false;
 	}
 	
+	public void setOffer(OfferCanonical offer) {
+		this.offer = offer;
+		editingMode = false;
+		OfferServices service = new OfferServices();
+		imageList = service.getOfferImages(offer.getId());
+	}
+	
 	//----- settery i gettery -----
 
 	public OfferCanonical getOffer() {
 		return offer;
-	}
-
-	public void setOffer(OfferCanonical offer) {
-		this.offer = offer;
-		OfferServices service = new OfferServices();
-		imageList = service.getOfferImages(offer.getId());
 	}
 
 	public LoginBean getLoginBean() {
