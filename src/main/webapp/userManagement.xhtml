@@ -9,34 +9,32 @@
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
 		
-		<h1>Zarządzanie użytkownikami</h1>
+		<h3>Lista użytkowników</h3>
 		
-		<!--  
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Usuwanie użytkownika po id" />
-				<p:password />
-			</h:panelGrid>
-			<p:commandButton value="Wyszukaj i usuń" />
-		</h:form>
-		-->
-		
-		<br/>
-		
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Usuwanie użytkownika o następującym loginie: " />
-				<p:password />
-			</h:panelGrid>
-			<p:commandButton value="Usuń" />
-		</h:form>
-		
-		<h1>Lista użytkowników</h1>
-		
-		<p:dataTable>
-
+		<h:form id="userListForm">
+		<p:dataTable value="#{userManagementBean.userList}" var="user">
+			<p:column headerText="Login" width="20%">
+				#{user.login}
+			</p:column>
+			<p:column headerText="Nazwa" width="20%">
+				#{user.name}
+			</p:column>
+			<p:column headerText="Miejscowośc" width="20%">
+				#{user.town}
+			</p:column>
+			<p:column headerText="Rola" width="20%">
+				#{user.role}
+			</p:column>
+			<p:column headerText="Akcje" width="20%">
+				<p:commandButton value="Szczegóły">
+				
+				</p:commandButton>
+				<p:commandButton value="Usuń" action="#{userManagementBean.deleteUser}" update=":userListForm">
+					<f:param value="#{user.login}" name="userLogin"/>
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
-		<br/>
+		</h:form>
 	</ui:define>
 	
 </ui:composition>
