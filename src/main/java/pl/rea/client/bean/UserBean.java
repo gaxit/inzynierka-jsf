@@ -3,6 +3,7 @@ package pl.rea.client.bean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
 import pl.rea.client.service.UserServices;
 import pl.rea.client.webmethods.users.UserCanonical;
@@ -36,8 +37,6 @@ public class UserBean {
 	
 	//----- metody wykonujace akcje -----
 	public void loadUser(){
-		editingMode = false;
-		
 		login = loginBean.getLogin();
 		UserServices service = new UserServices();
 		user = service.getUser(loginBean.getLogin(), loginBean.getSessionId(), login);
