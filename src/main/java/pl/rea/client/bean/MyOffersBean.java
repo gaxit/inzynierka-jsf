@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 import pl.rea.client.service.OfferServices;
 import pl.rea.client.webmethods.offers.OfferCanonical;
@@ -21,6 +22,14 @@ public class MyOffersBean {
 	public void loadOffers(){
 		OfferServices service = new OfferServices();
 		myOfferList = service.getUserOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
+	}
+	
+	public void deleteOffer(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		int offerId = Integer.parseInt(context.getExternalContext().getRequestParameterMap().get("offerToDelete"));
+		String owner = context.getExternalContext().getRequestParameterMap().get("offerOwner");
+		OfferServices service = new OfferServices();
+		service.deleteOffer(loginBean.getLogin(), loginBean.getSessionId(), (long)offerId, owner);
 	}
 
 	//----- settery i gettery -----

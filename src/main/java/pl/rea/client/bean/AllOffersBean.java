@@ -3,7 +3,9 @@ package pl.rea.client.bean;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import pl.rea.client.service.OfferServices;
 import pl.rea.client.webmethods.offers.OfferCanonical;
@@ -11,6 +13,9 @@ import pl.rea.client.webmethods.offers.OfferCanonical;
 @SessionScoped
 @ManagedBean(name="allOffersBean")
 public class AllOffersBean {
+	
+	@ManagedProperty(value="#{loginBean}")
+	private LoginBean loginBean;
 	
 	private boolean find = false;
 	
@@ -61,9 +66,19 @@ public class AllOffersBean {
 		offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
 	}
 	
+	public void deleteOffer(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		int offerId = Integer.parseInt(context.getExternalContext().getRequestParameterMap().get("offerToDelete"));
+		String owner = context.getExternalContext().getRequestParameterMap().get("offerOwner");
+		OfferServices service = new OfferServices();
+		service.deleteOffer(loginBean.getLogin(), loginBean.getSessionId(), (long)offerId, owner);
+	}
+	
 	//----- settery i gettery -----
 
 	public List<OfferCanonical> getOfferList() {
+		OfferServices service = new OfferServices();
+		offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
 		return offerList;
 	}
 
@@ -149,6 +164,14 @@ public class AllOffersBean {
 
 	public void setMaxFloor(Integer maxFloor) {
 		this.maxFloor = maxFloor;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 	
 	

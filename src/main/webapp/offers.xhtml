@@ -76,6 +76,12 @@
 			<p:column headerText="Powierzchnia" width="16%">#{offer.area} m^2</p:column>
 			<p:column headerText="Typ nieruchomości" width="16%">#{offer.estateType}</p:column>
 			<p:column headerText="Typ transakcji" width="16%">#{offer.transactionType}</p:column>
+			<p:column headerText="Akcje" width="14%" rendered="#{loginBean.adminLogged}">
+				<p:commandButton value="Usuń ofertę" action="#{allOffersBean.deleteOffer}" update=":offerTable">
+					<f:param name="offerToDelete" value="#{offer.id}"/>
+					<f:param name="offerOwner" value="#{offer.owner}"/>
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
 		</h:form>
 	</ui:define>
