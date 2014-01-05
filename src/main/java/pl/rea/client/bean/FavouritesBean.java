@@ -29,7 +29,6 @@ public class FavouritesBean {
 		if (offerList==null){
 			offerList = new LinkedList<OfferCanonical>();
 		}
-		System.out.println("Offer list size: " + offerList.size());
 	}
 	
 	public void deleteOffer(){

@@ -31,6 +31,12 @@ public class MyOffersBean {
 		OfferServices service = new OfferServices();
 		service.deleteOffer(loginBean.getLogin(), loginBean.getSessionId(), (long)offerId, owner);
 	}
+	
+	public List<OfferCanonical> getMyOfferList() {
+		OfferServices service = new OfferServices();
+		myOfferList = service.getUserOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
+		return myOfferList;
+	}
 
 	//----- settery i gettery -----
 
@@ -40,12 +46,6 @@ public class MyOffersBean {
 
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
-	}
-
-	public List<OfferCanonical> getMyOfferList() {
-		OfferServices service = new OfferServices();
-		myOfferList = service.getUserOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
-		return myOfferList;
 	}
 
 	public void setMyOfferList(List<OfferCanonical> myOfferList) {
