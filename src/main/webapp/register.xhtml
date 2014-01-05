@@ -15,43 +15,57 @@
 		Aby móc się zarejestrować proszę wypełnić wszystkie pola.
 		<p/>
 		<h:form>
-			<p:messages for="registration"/>
+			<p:messages/>
 			<h:panelGrid columns="2">
-				<h:outputLabel value="Login" />
-				<p:inputText value="#{registrationBean.login}"/>
+				<p:outputLabel value="Login" for="login"/>
+				<p:inputText id="login" value="#{registrationBean.login}" required="true"
+					requiredMessage="Login jest wymagany"/>
 				
-				<h:outputLabel value="Hasło" />
-				<p:password value="#{registrationBean.password}"/>
+				<p:outputLabel value="Hasło" for="password"/>
+				<p:password id="password" value="#{registrationBean.password}" required="true"
+					requiredMessage="Hasło jest wymagane"/>
 				
-				<h:outputLabel value="Powtórz hasło" />
-				<p:password value="#{registrationBean.passwordRepeat}"/>
+				<p:outputLabel value="Powtórz hasło" for="passwordAgain"/>
+				<p:password id="passwordAgain" value="#{registrationBean.passwordRepeat}"
+					required="true" requiredMessage="Powtórzenie hasła jest wymagane"/>
 				
-				<h:outputLabel value="Nazwa" />
-				<p:inputText id="nazwaInput" value="#{registrationBean.name}"
+				<p:outputLabel value="Nazwa" for="nazwaInput"/>
+				<p:inputText id="nazwaInput" value="#{registrationBean.name}" required="true"
+					requiredMessage="Nazwa jest wymagana"
 					title="Nazwą może być imię i nazwisko bądź nazwa organizacji" />
 				<p:tooltip for="nazwaInput" showEvent="focus" hideEvent="blur" />
 				<p:outputLabel value="  " />
 
-				<h:outputLabel value="Telefon" />
-				<p:inputText value="#{registrationBean.phone}"/>
+				<p:outputLabel value="Telefon" for="phone"/>
+				<p:inputText id="phone" value="#{registrationBean.phone}" required="true"
+					requiredMessage="Numer telefonu jest wymagany"/>
 				
-				<h:outputLabel value="E-mail" />
-				<p:inputText value="#{registrationBean.email}"/>
+				<p:outputLabel value="E-mail" for="mail"/>
+				<p:inputText id="mail" value="#{registrationBean.email}" required="true"
+					requiredMessage="Adres e-mail jest wymagany"/>
 				
-				<h:outputLabel value="Miejscowość" />
-				<p:inputText value="#{registrationBean.town}"/>
+				<p:outputLabel value="Miejscowość" for="town"/>
+				<p:inputText id="town" value="#{registrationBean.town}" required="true"
+					requiredMessage="Miejscowość jest wymagana"/>
 				
-				<h:outputLabel value="Ulica" />
-				<p:inputText value="#{registrationBean.street}"/>
+				<p:outputLabel value="Kod pocztowy" for="postalCode"/>
+				<p:inputText id="postalCode" value="#{registrationBean.postalCode}" required="true"
+					requiredMessage="Kod pocztowy jest wymagany"/>
 				
-				<h:outputLabel value="Numer domu" />
-				<p:inputText value="#{registrationBean.houseNo}"/>
+				<p:outputLabel value="Ulica" for="street"/>
+				<p:inputText id="street" value="#{registrationBean.street}" required="true"
+					requiredMessage="Ulica jest wymagana"/>
 				
-				<h:outputLabel value="Numer mieszkania" />
-				<p:inputText value="#{registrationBean.apartmentNo}"/>
+				<p:outputLabel value="Numer domu" for="houseNo"/>
+				<p:inputText id="houseNo" value="#{registrationBean.houseNo}" required="true"
+					requiredMessage="Numer domu jest wymagany" validatorMessage="Błędna wartość numeru domu">
+					<f:validateLongRange minimum="0"/>
+				</p:inputText>
 				
-				<h:outputLabel value="Kod pocztowy" />
-				<p:inputText value="#{registrationBean.postalCode}"/>
+				<p:outputLabel value="Numer mieszkania" />
+				<p:inputText value="#{registrationBean.apartmentNo}" validatorMessage="Błędna wartość numeru mieszkania">
+					<f:validateLongRange minimum="0"/>
+				</p:inputText>
 				
 			</h:panelGrid>
 			<p:commandButton value="Załóż konto" action="#{registrationBean.register}" ajax="false"/>

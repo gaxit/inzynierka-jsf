@@ -66,6 +66,22 @@ public class RegistrationBean {
 					System.out.println("RegistrationBean register exception: " + e.getMessage());
 				}
 			}
+			else{
+				FacesMessage facesMessage = new FacesMessage("Rejestracja nie powiodła się");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		        FacesContext.getCurrentInstance().addMessage("registration", facesMessage);
+			}
+			login = null;
+			password = null;
+			passwordRepeat = null;
+			name = null;
+			phone = null;
+			email = null;
+			town = null;
+			street = null;
+			houseNo = null;
+			apartmentNo = null;
+			postalCode = null;
 		}
 	}
 	
