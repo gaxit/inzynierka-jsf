@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<p:menubar style="background-color: #FFCC66 !important;">
+
+<p:menubar>
 	<p:menuitem value="Strona główna" url="index.xhtml"/>
 	<p:menuitem value="Logowanie" url="login.xhtml" rendered="#{!loginBean.logged}"/>
 	<p:menuitem value="Rejestracja" url="register.xhtml" rendered="#{!loginBean.logged}"/>

@@ -6,23 +6,27 @@
 <ui:composition template="/template/common/commonLayout.xhtml">
 	<ui:define name="content">
 		<h:form id="menu">
-			<ui:include src="menu.xhtml"></ui:include>
+			<ui:include src="menu.xhtml"/>
 		</h:form>
 
-		<h2>
+		<h3>
 			<h:outputLabel value="Logowanie" />
-		</h2>
+		</h3>
 		
 
 		<h:form id="loginForm">
-			<p:messages for="login"/>
+			<p:messages/>
 			<h:panelGrid columns="2">
-				<h:outputLabel value="Login" />
-				<p:inputText value="#{loginBean.login}"/>
-				<h:outputLabel value="Hasło" />
-				<p:password value="#{loginBean.password}"/>
+				<p:outputLabel value="Login" for="login"/>
+				<p:inputText id="login" value="#{loginBean.login}" required="true" 
+					requiredMessage="Login jest wymagany"/>
+				
+				<p:outputLabel value="Hasło" for="password"/>
+				<p:password id="password" value="#{loginBean.password}" required="true" 
+					requiredMessage="Hasło jest wymagane"/>
 			</h:panelGrid>
-			<p:commandButton value="Zaloguj" action="#{loginBean.logIn}" update=":loginForm"/>
+			<p:commandButton value="Zaloguj" action="#{loginBean.logIn}" update=":loginForm" 
+				validateClient="true"/>
 		</h:form>
 	</ui:define>
 </ui:composition>
