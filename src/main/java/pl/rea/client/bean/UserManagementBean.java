@@ -30,7 +30,6 @@ public class UserManagementBean {
 		UserServices service = new UserServices();
 		FacesContext context = FacesContext.getCurrentInstance();
 		String login = context.getExternalContext().getRequestParameterMap().get("userLogin");
-		System.out.println("Usunięto?: " + service.deleteUser(loginBean.getLogin(), loginBean.getSessionId(), login));
 	}
 	
 	//----- settery i gettery -----
