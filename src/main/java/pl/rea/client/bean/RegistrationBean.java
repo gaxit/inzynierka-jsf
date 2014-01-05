@@ -29,12 +29,23 @@ public class RegistrationBean {
 	//----- metody wykonujace akcje -----
 	
 	public void register(){
+		boolean ok = true;
 		if (!password.equals(passwordRepeat)){
 			FacesMessage facesMessage = new FacesMessage("Podane hasła są różne");
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 	        FacesContext.getCurrentInstance().addMessage("registration", facesMessage);
+	        ok = false;
 		}
-		else{
+		
+		UserServices service = new UserServices();
+		if (service.userExists(login)){
+			FacesMessage facesMessage = new FacesMessage("Użytkownik o podanym loginie istnieje");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+	        FacesContext.getCurrentInstance().addMessage("registration", facesMessage);
+	        ok = false;
+		}
+		
+		if (ok){			
 			UserCanonical user = new UserCanonical();
 			user.setApartmentNo(apartmentNo);
 			user.setEmail(email);
@@ -48,7 +59,6 @@ public class RegistrationBean {
 			user.setStreet(street);
 			user.setTown(town);
 			
-			UserServices service = new UserServices();
 			if (service.createUser(user)){
 				try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -56,20 +66,7 @@ public class RegistrationBean {
 					System.out.println("RegistrationBean register exception: " + e.getMessage());
 				}
 			}
-			
-			System.out.println("Login: " + login);
-			System.out.println("Haslo: " + password);
-			System.out.println("Haslo 2: " + passwordRepeat);
-			System.out.println("Nazwa: " + name);
-			System.out.println("Telefon: " + phone);
-			System.out.println("E-mail: " + email);
-			System.out.println("Miasto: " + town);
-			System.out.println("Ulica: " + street);
-			System.out.println("Nr domu: " + houseNo);
-			System.out.println("Nr mieszkania: " + apartmentNo);
-			System.out.println("Kod pocztowy: " + postalCode);
 		}
-		
 	}
 	
 	

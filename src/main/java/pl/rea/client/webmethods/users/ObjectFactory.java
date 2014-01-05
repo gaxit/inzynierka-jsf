@@ -24,6 +24,7 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetUser_QNAME = new QName("users", "getUser");
+    private final static QName _UserExistsResponse_QNAME = new QName("users", "userExistsResponse");
     private final static QName _EditUser_QNAME = new QName("users", "editUser");
     private final static QName _IsUserLoggedResponse_QNAME = new QName("users", "isUserLoggedResponse");
     private final static QName _IsUserLogged_QNAME = new QName("users", "isUserLogged");
@@ -34,9 +35,10 @@ public class ObjectFactory {
     private final static QName _GetUserList_QNAME = new QName("users", "getUserList");
     private final static QName _IsAnybodyLogged_QNAME = new QName("users", "isAnybodyLogged");
     private final static QName _IsAdminLoggedResponse_QNAME = new QName("users", "isAdminLoggedResponse");
-    private final static QName _CreateUser_QNAME = new QName("users", "createUser");
     private final static QName _EditUserResponse_QNAME = new QName("users", "editUserResponse");
+    private final static QName _CreateUser_QNAME = new QName("users", "createUser");
     private final static QName _IsAdminLogged_QNAME = new QName("users", "isAdminLogged");
+    private final static QName _UserExists_QNAME = new QName("users", "userExists");
     private final static QName _DeleteUserResponse_QNAME = new QName("users", "deleteUserResponse");
     private final static QName _LogOut_QNAME = new QName("users", "logOut");
     private final static QName _DeleteUser_QNAME = new QName("users", "deleteUser");
@@ -49,6 +51,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link UserExistsResponse }
+     * 
+     */
+    public UserExistsResponse createUserExistsResponse() {
+        return new UserExistsResponse();
     }
 
     /**
@@ -164,6 +174,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UserExists }
+     * 
+     */
+    public UserExists createUserExists() {
+        return new UserExists();
+    }
+
+    /**
      * Create an instance of {@link IsAdminLogged }
      * 
      */
@@ -226,6 +244,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "users", name = "getUser")
     public JAXBElement<GetUser> createGetUser(GetUser value) {
         return new JAXBElement<GetUser>(_GetUser_QNAME, GetUser.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UserExistsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "users", name = "userExistsResponse")
+    public JAXBElement<UserExistsResponse> createUserExistsResponse(UserExistsResponse value) {
+        return new JAXBElement<UserExistsResponse>(_UserExistsResponse_QNAME, UserExistsResponse.class, null, value);
     }
 
     /**
@@ -319,15 +346,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CreateUser }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "users", name = "createUser")
-    public JAXBElement<CreateUser> createCreateUser(CreateUser value) {
-        return new JAXBElement<CreateUser>(_CreateUser_QNAME, CreateUser.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link EditUserResponse }{@code >}}
      * 
      */
@@ -337,12 +355,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateUser }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "users", name = "createUser")
+    public JAXBElement<CreateUser> createCreateUser(CreateUser value) {
+        return new JAXBElement<CreateUser>(_CreateUser_QNAME, CreateUser.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link IsAdminLogged }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "users", name = "isAdminLogged")
     public JAXBElement<IsAdminLogged> createIsAdminLogged(IsAdminLogged value) {
         return new JAXBElement<IsAdminLogged>(_IsAdminLogged_QNAME, IsAdminLogged.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UserExists }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "users", name = "userExists")
+    public JAXBElement<UserExists> createUserExists(UserExists value) {
+        return new JAXBElement<UserExists>(_UserExists_QNAME, UserExists.class, null, value);
     }
 
     /**

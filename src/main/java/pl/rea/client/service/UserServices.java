@@ -8,6 +8,12 @@ import pl.rea.client.webmethods.users.UserService_Service;
 
 public class UserServices {
 	
+	public boolean userExists(String login){
+		UserService_Service userService = new UserService_Service();
+		UserService service = userService.getUserServicePort();
+		return service.userExists(login);
+	}
+	
 	public String logIn(String login, String password){
 		UserService_Service userService = new UserService_Service();
 		UserService service = userService.getUserServicePort();

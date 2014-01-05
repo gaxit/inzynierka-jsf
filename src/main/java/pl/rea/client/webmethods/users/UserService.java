@@ -184,6 +184,20 @@ public interface UserService {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod(action = "userExists")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "userExists", targetNamespace = "users", className = "users.UserExists")
+    @ResponseWrapper(localName = "userExistsResponse", targetNamespace = "users", className = "users.UserExistsResponse")
+    public boolean userExists(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
      * @param arg1
      * @param arg0
      * @return
