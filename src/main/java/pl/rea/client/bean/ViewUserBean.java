@@ -1,10 +1,15 @@
 package pl.rea.client.bean;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
+import pl.rea.client.service.OfferServices;
 import pl.rea.client.service.UserServices;
+import pl.rea.client.webmethods.offers.OfferCanonical;
 import pl.rea.client.webmethods.users.UserCanonical;
 
 @SessionScoped
@@ -33,6 +38,19 @@ public class ViewUserBean {
 	private Integer apartmentNo;
 	
 	//----- metody wykonujace akcje -----
+	
+	public List<OfferCanonical> getOfferList(){
+		OfferServices service = new OfferServices();
+		return service.getUserOffers(loginBean.getLogin(), loginBean.getSessionId(), user.getLogin());
+	}
+	
+	public void deleteOffer(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		int offerId = Integer.parseInt(context.getExternalContext().getRequestParameterMap().get("offerToDelete"));
+		String owner = context.getExternalContext().getRequestParameterMap().get("offerOwner");
+		OfferServices service = new OfferServices();
+		service.deleteOffer(loginBean.getLogin(), loginBean.getSessionId(), (long)offerId, owner);
+	}
 	
 	public void edit(){
 		editingMode = true;

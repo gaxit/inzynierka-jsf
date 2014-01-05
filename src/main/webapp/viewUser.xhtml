@@ -68,6 +68,25 @@
 			<p:commandButton action="#{viewUserBean.edit}" value="Edytuj dane" update=":userForm" rendered="#{!viewUserBean.editingMode}"/>
 			<p:commandButton action="#{viewUserBean.save}" value="Zapisz" update=":userForm" rendered="#{viewUserBean.editingMode}"/>
 			<p:commandButton action="#{viewUserBean.cancel}" value="Anuluj" update=":userForm" rendered="#{viewUserBean.editingMode}"/>
+			
+		<p:dataTable id="offerTable" value="#{viewUserBean.offerList}" var="offer">
+			<p:column headerText="Nazwa" width="14%">
+				<p:commandLink value="#{offer.offerName}" action="offer.xhtml" ajax="false">
+					<f:param name="" target="#{offerBean.offer}" value="#{offer}"/>
+				</p:commandLink>
+			</p:column>
+			<p:column headerText="Lokalizacja" width="14%">#{offer.town}</p:column>
+			<p:column headerText="Cena" width="14%">#{offer.price} zł</p:column>
+			<p:column headerText="Powierzchnia" width="14%">#{offer.area} m^2</p:column>
+			<p:column headerText="Typ nieruchomości" width="14%">#{offer.estateType}</p:column>
+			<p:column headerText="Typ transakcji" width="14%">#{offer.transactionType}</p:column>
+			<p:column headerText="Akcje" width="14%">
+				<p:commandButton value="Usuń ofertę" action="#{viewUserBean.deleteOffer}" update=":userForm">
+					<f:param name="offerToDelete" value="#{offer.id}"/>
+					<f:param name="offerOwner" value="#{offer.owner}"/>
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
 		</h:form>
 		
 		
