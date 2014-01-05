@@ -49,18 +49,6 @@ public class OfferBean {
 	
 	//----- metody wykonujace akcje -----
 	
-//	public void redirectToOffer(){
-////		Integer id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("offerId"));
-////		OfferServices service = new OfferServices();
-////		offer = service.getOffer((long)id);
-//		try {
-//			FacesContext.getCurrentInstance().getExternalContext().redirect("offer.xhtml");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-	
 	public void deleteImage(){
 		FacesContext context = FacesContext.getCurrentInstance();
 		int imgId = Integer.parseInt(context.getExternalContext().getRequestParameterMap().get("imgInd"));
@@ -74,11 +62,9 @@ public class OfferBean {
 		img.setFileName(newName);
 		img.setImage(event.getFile().getContents());
 		imageList.add(img);
-		System.out.println();
 	}
 	
 	public void edit(){
-		System.out.println("Edytowanie oferty");
 		editingMode = true;
 		
 		copyOffer = new OfferCanonical();
@@ -120,12 +106,9 @@ public class OfferBean {
 		if (imageList==null){
 			imageList = new LinkedList<ImageCanonical>();
 		}
-		System.out.println("ImageList size bean: " + imageList.size());
 	}
 	
 	public void update(){
-		System.out.println("Zmienianie oferty");
-		
 		offer.setOfferName(offerName);
 		offer.setArea(area);
 		offer.setPrice(price);
@@ -153,7 +136,6 @@ public class OfferBean {
 	}
 	
 	public void cancel(){
-		System.out.println("Anulowanie zmian w ofercie");
 		editingMode = false;
 	}
 	
@@ -186,7 +168,7 @@ public class OfferBean {
 	
 	public void addToFavourites(){
 		OfferServices service = new OfferServices();
-		System.out.println("Dodano do ulubionych?: " + service.addOfferToUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offer.getId(), loginBean.getLogin()));
+		service.addOfferToUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offer.getId(), loginBean.getLogin());
 	}
 	
 	public boolean getRenderEdit(){

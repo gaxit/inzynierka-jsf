@@ -21,47 +21,76 @@
 		</h:form>
 		
 		<h:form id="offerForm">
+		<p:messages/>
 		<h3>#{offerBean.offer.offerName}</h3>
 		
 		<h:panelGrid columns="2">
-			<p:outputLabel value="Nazwa" rendered="#{offerBean.editingMode}"/>
-			<p:inputText  value="#{offerBean.offerName}" rendered="#{offerBean.editingMode}"/>
+			<p:outputLabel value="Nazwa" rendered="#{offerBean.editingMode}" for="name"/>
+			<p:inputText id="name" value="#{offerBean.offerName}" rendered="#{offerBean.editingMode}"
+				required="true" requiredMessage="Nazwa jest wymagana"/>
 						
-			<p:outputLabel value="Powierzchnia"/>
+			<p:outputLabel value="Powierzchnia" rendered="#{!offerBean.editingMode}"/>
 			<p:outputLabel value="#{offerBean.offer.area} m^2" rendered="#{!offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.area}" rendered="#{offerBean.editingMode}"/>
+			<p:outputLabel value="Powierzchnia" rendered="#{offerBean.editingMode}" for="area"/>
+			<p:inputText id="area" value="#{offerBean.area}" rendered="#{offerBean.editingMode}"
+				validatorMessage="Niepoprawna wartość powierzchni" required="true"
+				requiredMessage="Powierzchnia jest wymagana">
+				<f:validateLongRange minimum="0"/>
+			</p:inputText>
 			
-			<p:outputLabel value="Cena"/>
+			<p:outputLabel value="Cena" rendered="#{!offerBean.editingMode}"/>
 			<p:outputLabel value="#{offerBean.offer.price} zł" rendered="#{!offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.price}" rendered="#{offerBean.editingMode}"/>
+			<p:outputLabel value="Cena" rendered="#{offerBean.editingMode}" for="price"/>
+			<p:inputText id="price" value="#{offerBean.price}" rendered="#{offerBean.editingMode}"
+				validatorMessage="Niepoprawna wartość ceny" required="true"
+				requiredMessage="Cena jest wymagana">
+				<f:validateLongRange minimum="0"/>
+			</p:inputText>
 			
-			<p:outputLabel value="Typ nieruchomości"/>
+			<p:outputLabel value="Typ nieruchomości" rendered="#{!offerBean.editingMode}"/>
+			<p:outputLabel value="Typ nieruchomości" rendered="#{offerBean.editingMode}" for="estateType"/>
 			<p:outputLabel value="#{offerBean.offer.estateType}" rendered="#{!offerBean.editingMode}"/>
-			<p:selectOneRadio value="#{offerBean.estateType}" rendered="#{offerBean.editingMode}">
+			<p:selectOneRadio id="estateType" value="#{offerBean.estateType}" 
+				rendered="#{offerBean.editingMode}"	required="true"
+				requiredMessage="Typ nieruchomości jest wymagany">
         		<f:selectItem itemLabel="Dom       " itemValue="Dom" />
         		<f:selectItem itemLabel="Mieszkanie" itemValue="Mieszkanie" />
         		<f:selectItem itemLabel="Działka" itemValue="Dzialka" />
       		</p:selectOneRadio>
 			
-			<p:outputLabel value="Typ traksakcji"/>
+			<p:outputLabel value="Typ traksakcji" rendered="#{!offerBean.editingMode}"/>
+			<p:outputLabel value="Typ traksakcji" rendered="#{offerBean.editingMode}"
+				for="transactionType"/>
 			<p:outputLabel value="#{offerBean.offer.transactionType}" rendered="#{!offerBean.editingMode}"/>
-			<p:selectOneRadio value="#{offerBean.transactionType}" rendered="#{offerBean.editingMode}">
+			<p:selectOneRadio id="transactionType" value="#{offerBean.transactionType}"
+				rendered="#{offerBean.editingMode}" required="true"
+				requiredMessage="Typ transakcji jest wymagany">
         		<f:selectItem itemLabel="Wynajem   " itemValue="Wynajem" />
         		<f:selectItem itemLabel="Sprzedaż  " itemValue="Sprzedaz" />
       		</p:selectOneRadio>
 			
-			<p:outputLabel value="Opis"/>
+			<p:outputLabel value="Opis" rendered="#{!offerBean.editingMode}"/>
+			<p:outputLabel value="Opis" rendered="#{offerBean.editingMode}" for="description"/>
 			<p:outputLabel value="#{offerBean.offer.description}" rendered="#{!offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.description}" rendered="#{offerBean.editingMode}"/>
+			<p:inputText id="description" value="#{offerBean.description}" 
+				rendered="#{offerBean.editingMode}" required="true"
+				requiredMessage="Opis jest wymagany"/>
 			
-			<p:outputLabel value="Piętro"/>
+			<p:outputLabel value="Piętro" rendered="#{!offerBean.editingMode}"/>
+			<p:outputLabel value="Piętro" rendered="#{offerBean.editingMode}" for="floor"/>
 			<p:outputLabel value="#{offerBean.offer.floor}" rendered="#{!offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.floor}" rendered="#{offerBean.editingMode}"/>
+			<p:inputText id="floor" value="#{offerBean.floor}" rendered="#{offerBean.editingMode}"
+				required="true" requiredMessage="Piętro jest wymagane"
+				validatorMessage="Niepoprawna wartość piętra">
+					<f:validateLongRange minimum="0"/>
+			</p:inputText>
 			
-			<p:outputLabel value="Garaż"/>
+			<p:outputLabel value="Garaż" rendered="#{!offerBean.editingMode}"/>
 			<p:outputLabel rendered="#{(!offerBean.offer.garage) and (!offerBean.editingMode)}" value="Brak"/>
 			<p:outputLabel rendered="#{(offerBean.offer.garage) and (!offerBean.editingMode)}" value="Obecny"/>
-			<p:selectOneRadio value="#{offerBean.garage}" rendered="#{offerBean.editingMode}">
+			<p:outputLabel value="Garaż" rendered="#{offerBean.editingMode}" for="garage"/>
+			<p:selectOneRadio id="garage" value="#{offerBean.garage}" rendered="#{offerBean.editingMode}"
+				required="true" requiredMessage="Obecność garażu jest wymagana">
         		<f:selectItem itemLabel="Obecny   " itemValue="true" />
         		<f:selectItem itemLabel="Brak  " itemValue="false" />
       		</p:selectOneRadio>
@@ -78,20 +107,30 @@
 		<p:outputLabel rendered="#{(not empty offerBean.offer.apartmentNo) and (!offerBean.editingMode)}" value="/#{offerBean.offer.apartmentNo}"/>
 		
 		<h:panelGrid columns="2">
-			<p:outputLabel value="Miejscowość" rendered="#{offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.town}" rendered="#{offerBean.editingMode}"/>
+			<p:outputLabel for="town" value="Miejscowość" rendered="#{offerBean.editingMode}"/>
+			<p:inputText id="town" value="#{offerBean.town}" rendered="#{offerBean.editingMode}"
+				required="true" requiredMessage="Miejscowość jest wymagana"/>
 		
-			<p:outputLabel value="Kod pocztowy" rendered="#{offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.postalCode}" rendered="#{offerBean.editingMode}"/>
+			<p:outputLabel value="Kod pocztowy" rendered="#{offerBean.editingMode}" for="postalCode"/>
+			<p:inputText id="postalCode" value="#{offerBean.postalCode}" rendered="#{offerBean.editingMode}"
+				required="true" requiredMessage="Kod pocztowy jest wymagany"/>
 		
-			<p:outputLabel value="Ulica" rendered="#{offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.street}" rendered="#{offerBean.editingMode}"/>
+			<p:outputLabel for="street" value="Ulica" rendered="#{offerBean.editingMode}"/>
+			<p:inputText id="street" value="#{offerBean.street}" rendered="#{offerBean.editingMode}"
+				required="true" requiredMessage="Ulica jest wymagana"/>
 		
-			<p:outputLabel value="Numer domu" rendered="#{offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.houseNo}" rendered="#{offerBean.editingMode}"/>
+			<p:outputLabel value="Numer domu" rendered="#{offerBean.editingMode}" for="houseNo"/>
+			<p:inputText id="houseNo" value="#{offerBean.houseNo}" rendered="#{offerBean.editingMode}"
+				required="true" requiredMessage="Numer domu jest wymagany"
+				validatorMessage="Niepoprawna wartość numeru domu">
+				<f:validateLongRange minimum="0"/>
+			</p:inputText>
 		
 			<p:outputLabel value="Numer mieszkania" rendered="#{offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.apartmentNo}" rendered="#{offerBean.editingMode}"/>
+			<p:inputText value="#{offerBean.apartmentNo}" rendered="#{offerBean.editingMode}"
+				validatorMessage="Niepoprawna wartość numeru mieszkania">
+				<f:validateLongRange minimum="0"/>
+			</p:inputText>
 		</h:panelGrid>
 			
 		<p:galleria id="galeria" value="#{offerBean.imageList}" var="image" rendered="#{!offerBean.editingMode}">
