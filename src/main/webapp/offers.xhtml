@@ -15,7 +15,7 @@
 			<p:remoteCommand name="loadOffers" autoRun="true" action="#{allOffersBean.loadOffers}" update=":offerTable"/>
 		</h:form>
 
-		<h:form>
+		<h:form id="paramsForm">
 			<p:messages/>
 			<h:panelGrid columns="3">					
 				<p:outputLabel value="Miejscowość" />
@@ -23,18 +23,18 @@
 				<h:outputLabel value=" " />
 				
 				<p:outputLabel value="Powierzchnia od-do" />
-				<p:inputText value="#{allOffersBean.areaMin}">
+				<p:inputText value="#{allOffersBean.areaMin}" validatorMessage="Niepoprawna wartość minimalnej powierzchni">
 					<f:validateLongRange minimum="0"/>
 				</p:inputText>
-				<p:inputText value="#{allOffersBean.areaMax}">
+				<p:inputText value="#{allOffersBean.areaMax}" validatorMessage="Niepoprawna wartość maksymalnej powierzchni">
 					<f:validateLongRange minimum="0"/>
 				</p:inputText>
 				
 				<p:outputLabel value="Cena całości (zł) od-do" />
-				<p:inputText value="#{allOffersBean.priceMin}">
+				<p:inputText value="#{allOffersBean.priceMin}" validatorMessage="Niepoprawna wartość minimalnej ceny">
 					<f:validateLongRange minimum="0"/>
 				</p:inputText>
-				<p:inputText value="#{allOffersBean.priceMax}">
+				<p:inputText value="#{allOffersBean.priceMax}" validatorMessage="Niepoprawna wartość maksymalnej ceny">
 					<f:validateLongRange minimum="0"/>
 				</p:inputText>
 				
@@ -64,15 +64,16 @@
       			<h:outputLabel value=" " />
       			
       			<p:outputLabel value="Wybierz piętro"/>
-				<p:inputText value="#{allOffersBean.minFloor}">
+				<p:inputText value="#{allOffersBean.minFloor}" validatorMessage="Niepoprawna wartość najniższego piętra">
 					<f:validateLongRange minimum="0"/>
 				</p:inputText>
-				<p:inputText value="#{allOffersBean.maxFloor}">
+				<p:inputText value="#{allOffersBean.maxFloor}" validatorMessage="Niepoprawna wartość najwyższego piętra">
 					<f:validateLongRange minimum="0"/>
 				</p:inputText>
 			
 			</h:panelGrid>
-			<p:commandButton value="Szukaj" action="#{allOffersBean.searchOffers}" update=":offerTable"/>
+			<p:commandButton value="Szukaj" action="#{allOffersBean.searchOffers}" update=":offerTable, :paramsForm"
+				validateClient="true"/>
 		</h:form>
 		
 		<br/>

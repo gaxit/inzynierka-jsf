@@ -40,6 +40,7 @@ public class UserBean {
 		login = loginBean.getLogin();
 		UserServices service = new UserServices();
 		user = service.getUser(loginBean.getLogin(), loginBean.getSessionId(), login);
+		editingMode = false;
 	}
 	
 	public void edit(){

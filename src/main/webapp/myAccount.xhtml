@@ -16,32 +16,36 @@
 		<h1>Dane użytkownika</h1>
     
 		<h:form id="userForm">
+			<p:messages/>
         	<h:panelGrid columns="2">
-				<h:outputLabel value="Login"/>
-				<h:outputLabel value="#{userBean.user.login}"/>
+				<p:outputLabel value="Login"/>
+				<p:outputLabel value="#{userBean.user.login}"/>
 				
-				<h:outputLabel value="E-mail" rendered="#{!userBean.editingMode}"/>
-				<h:outputLabel value="#{userBean.user.email}" rendered="#{!userBean.editingMode}"/>
-				<h:outputLabel value="E-mail" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.email}" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="E-mail" rendered="#{!userBean.editingMode}"/>
+				<p:outputLabel value="#{userBean.user.email}" rendered="#{!userBean.editingMode}"/>
+				<p:outputLabel value="E-mail" rendered="#{userBean.editingMode}"  for="email"/>
+				<p:inputText id="email" value="#{userBean.email}" rendered="#{userBean.editingMode}"
+					required="true" requiredMessage="Adres e-mail jest wymagany"/>
 				
-				<h:outputLabel value="Nazwa" rendered="#{!userBean.editingMode}"/>
-				<h:outputLabel value="#{userBean.user.name}" rendered="#{!userBean.editingMode}"/>
-				<h:outputLabel value="Nazwa" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.name}" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Nazwa" rendered="#{!userBean.editingMode}"/>
+				<p:outputLabel value="#{userBean.user.name}" rendered="#{!userBean.editingMode}"/>
+				<p:outputLabel value="Nazwa" rendered="#{userBean.editingMode}" for="name"/>
+				<p:inputText id="name" value="#{userBean.name}" rendered="#{userBean.editingMode}"
+					required="true" requiredMessage="Nazwa jest wymagana"/>
 				
-				<h:outputLabel value="Nr telefonu" rendered="#{!userBean.editingMode}"/>
-				<h:outputLabel value="#{userBean.user.phoneNumber}" rendered="#{!userBean.editingMode}"/>
-				<h:outputLabel value="Nr telefonu" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.phone}" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Nr telefonu" rendered="#{!userBean.editingMode}"/>
+				<p:outputLabel value="#{userBean.user.phoneNumber}" rendered="#{!userBean.editingMode}"/>
+				<p:outputLabel value="Nr telefonu" rendered="#{userBean.editingMode}" for="phone"/>
+				<p:inputText id="phone" value="#{userBean.phone}" rendered="#{userBean.editingMode}"
+					required="true" requiredMessage="Numer telefonu jest wymagany"/>
 				
-				<h:outputLabel value="Stare hasło" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Stare hasło" rendered="#{userBean.editingMode}"/>
 				<p:inputText value="#{userBean.oldPassword}" rendered="#{userBean.editingMode}"/>
 				
-				<h:outputLabel value="Nowe hasło" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Nowe hasło" rendered="#{userBean.editingMode}"/>
 				<p:inputText value="#{userBean.newPassword}" rendered="#{userBean.editingMode}"/>
 				
-				<h:outputLabel value="Powtórz hasło" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Powtórz hasło" rendered="#{userBean.editingMode}"/>
 				<p:inputText value="#{userBean.repeatPassword}" rendered="#{userBean.editingMode}"/>
 			</h:panelGrid>
 			
@@ -51,20 +55,30 @@
 			<p:outputLabel rendered="#{(not empty userBean.user.apartmentNo) and (!(userBean.editingMode))}" value="/#{userBean.user.apartmentNo}"/>
 			
 			<h:panelGrid columns="2">
-				<h:outputLabel value="Miejscowość" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.town}" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Miejscowość" rendered="#{userBean.editingMode}" for="town"/>
+				<p:inputText id="town" value="#{userBean.town}" rendered="#{userBean.editingMode}"
+					required="true" requiredMessage="Miejscowość jest wymagana"/>
 				
-				<h:outputLabel value="Kod pocztowy" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.postalCode}" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Kod pocztowy" rendered="#{userBean.editingMode}" for="postalCode"/>
+				<p:inputText id="postalCode" value="#{userBean.postalCode}" rendered="#{userBean.editingMode}"
+					required="true" requiredMessage="Kod pocztowy jest wymagany"/>
 				
-				<h:outputLabel value="Ulica" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.street}" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Ulica" rendered="#{userBean.editingMode}" for="street"/>
+				<p:inputText id="street" value="#{userBean.street}" rendered="#{userBean.editingMode}"
+					required="true" requiredMessage="Ulica jest wymagana"/>
 				
-				<h:outputLabel value="Numer domu" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.houseNo}" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Numer domu" rendered="#{userBean.editingMode}" for="houseNo"/>
+				<p:inputText id="houseNo" value="#{userBean.houseNo}" rendered="#{userBean.editingMode}"
+					required="true" requiredMessage="Numer domu jest wymagany"
+						validatorMessage="Niepoprawna wartość numeru domu">
+					<f:validateLongRange minimum="0"/>
+				</p:inputText>
 				
-				<h:outputLabel value="Numer mieszkania" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.apartmentNo}" rendered="#{userBean.editingMode}"/>
+				<p:outputLabel value="Numer mieszkania" rendered="#{userBean.editingMode}"/>
+				<p:inputText value="#{userBean.apartmentNo}" rendered="#{userBean.editingMode}"
+					validatorMessage="Niepoprawna wartość numeru mieszkania">
+					<f:validateLongRange minimum="0"/>
+				</p:inputText>
 			</h:panelGrid>
 			<br/>
 			<br/>
