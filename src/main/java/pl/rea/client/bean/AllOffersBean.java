@@ -50,18 +50,7 @@ public class AllOffersBean {
 		maxFloor = null;
 	}
 	
-	public void searchOffers(){
-//		System.out.println("Miasto: " + town);
-//		System.out.println("Min powierzchnia: " + areaMin);
-//		System.out.println("Max powierzchnia: " + areaMax);
-//		System.out.println("Min cena: " + priceMin);
-//		System.out.println("Max cena: " + priceMax);
-//		System.out.println("Typ nieruchomosci: " + estateType);
-//		System.out.println("Typ transakcji: " + transactionType);
-		System.out.println("Garaz: " + isGarage);
-//		System.out.println("Pietro min: " + minFloor);
-//		System.out.println("Pietro max: " + maxFloor);
-		
+	public void searchOffers(){		
 		OfferServices service = new OfferServices();
 		offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
 	}
