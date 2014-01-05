@@ -1,7 +1,6 @@
 package pl.rea.client.bean;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
