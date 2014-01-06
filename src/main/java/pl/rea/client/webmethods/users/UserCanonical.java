@@ -57,9 +57,9 @@ import javax.xml.bind.annotation.XmlType;
 public class UserCanonical {
 
     protected long addressId;
-    protected int apartmentNo;
+    protected Integer apartmentNo;
     protected String email;
-    protected int houseNo;
+    protected Integer houseNo;
     protected Long id;
     protected String login;
     protected String name;
@@ -91,7 +91,7 @@ public class UserCanonical {
      * Gets the value of the apartmentNo property.
      * 
      */
-    public int getApartmentNo() {
+    public Integer getApartmentNo() {
         return apartmentNo;
     }
 
@@ -99,7 +99,7 @@ public class UserCanonical {
      * Sets the value of the apartmentNo property.
      * 
      */
-    public void setApartmentNo(int value) {
+    public void setApartmentNo(Integer value) {
         this.apartmentNo = value;
     }
 
@@ -131,7 +131,7 @@ public class UserCanonical {
      * Gets the value of the houseNo property.
      * 
      */
-    public int getHouseNo() {
+    public Integer getHouseNo() {
         return houseNo;
     }
 
@@ -139,7 +139,7 @@ public class UserCanonical {
      * Sets the value of the houseNo property.
      * 
      */
-    public void setHouseNo(int value) {
+    public void setHouseNo(Integer value) {
         this.houseNo = value;
     }
 
