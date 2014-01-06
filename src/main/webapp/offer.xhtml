@@ -133,8 +133,11 @@
 			</p:inputText>
 		</h:panelGrid>
 			
-		<p:galleria id="galeria" value="#{offerBean.imageList}" var="image" rendered="#{!offerBean.editingMode}">
-			<p:graphicImage value="#{offerBean.image}" title="#{image.fileName}" alt="#{image.fileName}">
+		<p:galleria id="galeria" value="#{offerBean.imageList}" var="image"
+			rendered="#{!offerBean.editingMode}" panelHeight="300" panelWidth="400"
+			frameHeight="50" frameWidth="50" autoPlay="false">
+			<p:graphicImage value="#{offerBean.image}" title="#{image.fileName}" alt="#{image.fileName}"
+				width="100%" height="100%">
 				<f:param name="name" value="#{image.fileName}"/>
 			</p:graphicImage>
 		</p:galleria>
