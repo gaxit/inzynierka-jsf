@@ -16,7 +16,9 @@
 		<h1>Ulubione</h1>
 		<h:form id="offerTable">
 		<p:dataTable id="offerTable" value="#{favouritesBean.offerList}" var="offer"
-			emptyMessage="Nie znaleziono ofert">
+			emptyMessage="Nie znaleziono ofert" paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,20,50" paginatorPosition="bottom">
 			<p:column headerText="Nazwa" width="14%">
 				<p:commandLink value="#{offer.offerName}" action="offer.xhtml" ajax="false">
 					<f:setPropertyActionListener target="#{offerBean.offer}" value="#{offer}"/>

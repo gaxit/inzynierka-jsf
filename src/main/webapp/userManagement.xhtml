@@ -13,7 +13,10 @@
 		
 		<h:form id="userListForm">
 			<p:messages/>
-		<p:dataTable value="#{userManagementBean.userList}" var="user" emptyMessage="Nie znaleziono użytkowników">>
+		<p:dataTable value="#{userManagementBean.userList}" var="user" 
+			emptyMessage="Nie znaleziono użytkowników" paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,20,50" paginatorPosition="bottom">
 			<p:column headerText="Login" width="20%">
 				#{user.login}
 			</p:column>
