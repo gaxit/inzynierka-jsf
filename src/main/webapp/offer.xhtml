@@ -35,7 +35,7 @@
 			<p:inputText id="area" value="#{offerBean.area}" rendered="#{offerBean.editingMode}"
 				validatorMessage="Niepoprawna wartość powierzchni" required="true"
 				requiredMessage="Powierzchnia jest wymagana">
-				<f:validateLongRange minimum="0"/>
+				<f:validateLongRange minimum="1"/>
 			</p:inputText>
 			
 			<p:outputLabel value="Cena" rendered="#{!offerBean.editingMode}"/>
@@ -44,7 +44,7 @@
 			<p:inputText id="price" value="#{offerBean.price}" rendered="#{offerBean.editingMode}"
 				validatorMessage="Niepoprawna wartość ceny" required="true"
 				requiredMessage="Cena jest wymagana">
-				<f:validateLongRange minimum="0"/>
+				<f:validateLongRange minimum="1"/>
 			</p:inputText>
 			
 			<p:outputLabel value="Typ nieruchomości" rendered="#{!offerBean.editingMode}"/>
@@ -82,7 +82,7 @@
 			<p:inputText id="floor" value="#{offerBean.floor}" rendered="#{offerBean.editingMode}"
 				required="true" requiredMessage="Piętro jest wymagane"
 				validatorMessage="Niepoprawna wartość piętra">
-					<f:validateLongRange minimum="0"/>
+					<f:validateLongRange minimum="1"/>
 			</p:inputText>
 			
 			<p:outputLabel value="Garaż" rendered="#{!offerBean.editingMode}"/>
@@ -123,13 +123,13 @@
 			<p:inputText id="houseNo" value="#{offerBean.houseNo}" rendered="#{offerBean.editingMode}"
 				required="true" requiredMessage="Numer domu jest wymagany"
 				validatorMessage="Niepoprawna wartość numeru domu">
-				<f:validateLongRange minimum="0"/>
+				<f:validateLongRange minimum="1"/>
 			</p:inputText>
 		
 			<p:outputLabel value="Numer mieszkania" rendered="#{offerBean.editingMode}" for="apartmentNo"/>
 			<p:inputText id="apartmentNo" value="#{offerBean.apartmentNo}" rendered="#{offerBean.editingMode}"
 				validatorMessage="Niepoprawna wartość numeru mieszkania">
-				<f:validateLongRange minimum="0"/>
+				<f:validateLongRange minimum="1"/>
 			</p:inputText>
 		</h:panelGrid>
 			

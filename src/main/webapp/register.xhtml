@@ -63,13 +63,13 @@
 				<p:outputLabel value="Numer domu" for="houseNo"/>
 				<p:inputText id="houseNo" value="#{registrationBean.houseNo}" required="true"
 					requiredMessage="Numer domu jest wymagany" validatorMessage="Błędna wartość numeru domu">
-					<f:validateLongRange minimum="0"/>
+					<f:validateLongRange minimum="1"/>
 				</p:inputText>
 				
 				<p:outputLabel value="Numer mieszkania" for="apartmentNo"/>
 				<p:inputText id="apartmentNo" value="#{registrationBean.apartmentNo}"
 					validatorMessage="Błędna wartość numeru mieszkania">
-					<f:validateLongRange minimum="0"/>
+					<f:validateLongRange minimum="1"/>
 				</p:inputText>
 				
 			</h:panelGrid>
