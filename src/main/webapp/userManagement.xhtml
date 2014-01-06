@@ -12,6 +12,7 @@
 		<h3>Lista użytkowników</h3>
 		
 		<h:form id="userListForm">
+			<p:messages/>
 		<p:dataTable value="#{userManagementBean.userList}" var="user" emptyMessage="Nie znaleziono użytkowników">>
 			<p:column headerText="Login" width="20%">
 				#{user.login}

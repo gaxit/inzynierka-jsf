@@ -2,6 +2,7 @@ package pl.rea.client.bean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -27,10 +28,17 @@ public class UserManagementBean {
 	}
 	
 	public void deleteUser(){
-		UserServices service = new UserServices();
 		FacesContext context = FacesContext.getCurrentInstance();
 		String login = context.getExternalContext().getRequestParameterMap().get("userLogin");
-		service.deleteUser(loginBean.getLogin(), loginBean.getSessionId(), login);
+		if (loginBean.getLogin().equals(login)){
+			FacesMessage facesMessage = new FacesMessage("Nie można usunąć własnego konta");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+	        FacesContext.getCurrentInstance().addMessage("registration", facesMessage);
+		}
+		else{
+			UserServices service = new UserServices();
+			service.deleteUser(loginBean.getLogin(), loginBean.getSessionId(), login);
+		}
 	}
 	
 	//----- settery i gettery -----
