@@ -126,8 +126,8 @@
 				<f:validateLongRange minimum="0"/>
 			</p:inputText>
 		
-			<p:outputLabel value="Numer mieszkania" rendered="#{offerBean.editingMode}"/>
-			<p:inputText value="#{offerBean.apartmentNo}" rendered="#{offerBean.editingMode}"
+			<p:outputLabel value="Numer mieszkania" rendered="#{offerBean.editingMode}" for="apartmentNo"/>
+			<p:inputText id="apartmentNo" value="#{offerBean.apartmentNo}" rendered="#{offerBean.editingMode}"
 				validatorMessage="Niepoprawna wartość numeru mieszkania">
 				<f:validateLongRange minimum="0"/>
 			</p:inputText>

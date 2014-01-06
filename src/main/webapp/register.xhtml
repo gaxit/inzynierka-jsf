@@ -62,8 +62,9 @@
 					<f:validateLongRange minimum="0"/>
 				</p:inputText>
 				
-				<p:outputLabel value="Numer mieszkania" />
-				<p:inputText value="#{registrationBean.apartmentNo}" validatorMessage="Błędna wartość numeru mieszkania">
+				<p:outputLabel value="Numer mieszkania" for="apartmentNo"/>
+				<p:inputText id="apartmentNo" value="#{registrationBean.apartmentNo}"
+					validatorMessage="Błędna wartość numeru mieszkania">
 					<f:validateLongRange minimum="0"/>
 				</p:inputText>
 				
