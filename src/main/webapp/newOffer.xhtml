@@ -90,15 +90,18 @@
 			
 		</h:panelGrid>
 		
+		<h:panelGrid columns="1">
 		<p:fileUpload fileUploadListener="#{newOfferBean.uploadFile}" allowTypes="/(\.|\/)(jpe?g|png)$/" 
 				update=":newOfferForm"/>
 		
-		<p:dataList value="#{newOfferBean.imagesList}" var="image" itemType="disc" rowIndexVar="ind">
+		<p:dataList value="#{newOfferBean.imagesList}" var="image" itemType="disc" rowIndexVar="ind"
+			emptyMessage="Nie znaleziono zdjęć">
 				#{image.fileName}
 				<p:commandButton value="Usuń zdjęcie" action="#{newOfferBean.deleteImage}" update=":newOfferForm">
 					<f:param name="imgIndex" value="#{ind}"/>
 				</p:commandButton>
 			</p:dataList>
+		</h:panelGrid>
 			
 		<h:panelGrid columns="2">
 			<p:commandButton value="Dodaj ofertę" action="#{newOfferBean.addOffer}" ajax="false"/>

@@ -139,15 +139,18 @@
 			</p:graphicImage>
 		</p:galleria>
 		
+		<h:panelGrid columns="1">
 		<p:fileUpload fileUploadListener="#{offerBean.uploadFile}" rendered="#{offerBean.editingMode}"
 			allowTypes="/(\.|\/)(jpe?g|png)$/" update=":offerForm"/>
 			
-		<p:dataList value="#{offerBean.imageList}" var="image" itemType="disc" rowIndexVar="ind" rendered="#{offerBean.editingMode}">
+		<p:dataList value="#{offerBean.imageList}" var="image" itemType="disc" rowIndexVar="ind"
+			rendered="#{offerBean.editingMode}" emptyMessage="Nie znaleziono zdjęć">
 			#{image.fileName}
 			<p:commandButton value="Usuń zdjęcie" action="#{offerBean.deleteImage}" update=":offerForm">
 				<f:param name="imgInd" value="#{ind}"/>
 			</p:commandButton>
 		</p:dataList>
+		</h:panelGrid>
 		
 		<p:commandButton value="Edytuj" rendered="#{(offerBean.renderEdit) and (!offerBean.editingMode)}" action="#{offerBean.edit}" update=":offerForm"/>
 		<p:commandButton value="Zapisz zmiany" rendered="#{(offerBean.renderEdit) and (offerBean.editingMode)}" action="#{offerBean.update}" update=":offerForm"/>
