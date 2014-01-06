@@ -2,6 +2,7 @@ package pl.rea.client.bean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -82,23 +83,46 @@ public class ViewUserBean {
 	}
 	
 	public void save(){
-		editingMode = false;
+		boolean ok = true;
 		
-		user.setEmail(email);
-		user.setName(name);
-		user.setPhoneNumber(phone);
-		user.setTown(town);
-		user.setPostalCode(postalCode);
-		user.setStreet(street);
-		user.setHouseNo(houseNo);
-		user.setApartmentNo(apartmentNo);
-		
-		UserServices service = new UserServices();
-		if (!service.editUser(loginBean.getLogin(), loginBean.getSessionId(), user)){
-			user = copyUser;
+		if (oldPassword != null && newPassword != null && repeatPassword != null){
+			if (oldPassword.equals(user.getPassword())){
+				if (newPassword.equals(repeatPassword)){
+					user.setPassword(newPassword);
+				}
+				else{
+					ok = false;
+					FacesMessage facesMessage = new FacesMessage("Podane hasła są różne");
+					facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+			        FacesContext.getCurrentInstance().addMessage("registration", facesMessage);
+				}
+			}
+			else{
+				ok = false;
+				FacesMessage facesMessage = new FacesMessage("Niepoprawne hasło");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		        FacesContext.getCurrentInstance().addMessage("registration", facesMessage);
+			}
 		}
-		else{
-			copyUser = null;
+		
+
+		UserServices service = new UserServices();
+		if (ok){
+			user.setEmail(email);
+			user.setName(name);
+			user.setPhoneNumber(phone);
+			user.setTown(town);
+			user.setPostalCode(postalCode);
+			user.setStreet(street);
+			user.setHouseNo(houseNo);
+			user.setApartmentNo(apartmentNo);
+			if (!service.editUser(loginBean.getLogin(), loginBean.getSessionId(), user)){
+				user = copyUser;
+			}
+			else{
+				copyUser = null;
+			}
+			editingMode = false;
 		}
 	}
 	

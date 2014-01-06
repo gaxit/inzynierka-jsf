@@ -40,13 +40,13 @@
 					required="true" requiredMessage="Numer telefonu jest wymagany"/>
 				
 				<p:outputLabel value="Stare hasło" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.oldPassword}" rendered="#{userBean.editingMode}"/>
+				<p:password value="#{userBean.oldPassword}" rendered="#{userBean.editingMode}"/>
 				
 				<p:outputLabel value="Nowe hasło" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.newPassword}" rendered="#{userBean.editingMode}"/>
+				<p:password value="#{userBean.newPassword}" rendered="#{userBean.editingMode}"/>
 				
 				<p:outputLabel value="Powtórz hasło" rendered="#{userBean.editingMode}"/>
-				<p:inputText value="#{userBean.repeatPassword}" rendered="#{userBean.editingMode}"/>
+				<p:password value="#{userBean.repeatPassword}" rendered="#{userBean.editingMode}"/>
 			</h:panelGrid>
 			
 			<h3>Adres</h3>
