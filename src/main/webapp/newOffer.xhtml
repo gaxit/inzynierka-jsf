@@ -14,60 +14,83 @@
 		
 		<h1>Nowa oferta</h1>
 	<h:form id="newOfferForm">
+		<p:messages/>
 		<h:panelGrid columns="2">
-			<p:outputLabel value="Nazwa"/>
-			<p:inputText value="#{newOfferBean.offerName}"/>
+			<p:outputLabel value="Nazwa" for="name"/>
+			<p:inputText id="name" value="#{newOfferBean.offerName}" required="true"
+				requiredMessage="Nazwa jest wymagana"/>
 				
-			<p:outputLabel value="Powierzchnia"/>
-			<p:inputText value="#{newOfferBean.area}"/>
+			<p:outputLabel value="Powierzchnia" for="area"/>
+			<p:inputText id="area" value="#{newOfferBean.area}" required="true"
+				requiredMessage="Powierzchnia jest wymagana" validatorMessage="Błędna wartość powierzchni">
+				<f:validateLongRange minimum="0"/>
+			</p:inputText>
 			
-			<p:outputLabel value="Cena"/>
-			<p:inputText value="#{newOfferBean.price}"/>
+			<p:outputLabel value="Cena" for="price"/>
+			<p:inputText id="price" value="#{newOfferBean.price}" required="true"
+				requiredMessage="Cena jest wymagana" validatorMessage="Błędna wartość ceny">
+				<f:validateLongRange minimum="0"/>
+			</p:inputText>
 			
-			<p:outputLabel value="Typ nieruchomości"/>
-			<p:selectOneRadio value="#{newOfferBean.estateType}">
+			<p:outputLabel value="Typ nieruchomości" for="estateType"/>
+			<p:selectOneRadio id="estateType" value="#{newOfferBean.estateType}" required="true"
+				requiredMessage="Typ nieruchomości jest wymagany">
         		<f:selectItem itemLabel="Dom       " itemValue="Dom" />
         		<f:selectItem itemLabel="Mieszkanie" itemValue="Mieszkanie" />
         		<f:selectItem itemLabel="Działka" itemValue="Dzialka" />
       		</p:selectOneRadio>
 			
-			<p:outputLabel value="Typ traksakcji"/>
-			<p:selectOneRadio value="#{newOfferBean.transactionType}">
+			<p:outputLabel value="Typ traksakcji" for="transactionType"/>
+			<p:selectOneRadio id="transactionType" value="#{newOfferBean.transactionType}" required="true"
+				requiredMessage="Typ transakcji jest wymagany">
         		<f:selectItem itemLabel="Wynajem   " itemValue="Wynajem" />
         		<f:selectItem itemLabel="Sprzedaż  " itemValue="Sprzedaz" />
       		</p:selectOneRadio>
 			
-			<p:outputLabel value="Opis"/>
-			<p:inputText value="#{newOfferBean.description}"/>
+			<p:outputLabel value="Opis" for="description"/>
+			<p:inputText id="description" value="#{newOfferBean.description}" required="true"
+				 requiredMessage="Opis jest wymagany"/>
 			
-			<p:outputLabel value="Piętro"/>
-			<p:inputText value="#{newOfferBean.floor}"/>
+			<p:outputLabel value="Piętro" for="floor"/>
+			<p:inputText id="floor" value="#{newOfferBean.floor}" required="true"
+				requiredMessage="Piętro jest wymagane" validatorMessage="Wartość piętra jest wymagana">
+				<f:validateLongRange minimum="0"/>
+			</p:inputText>
 			
-			<p:outputLabel value="Garaż"/>
-			<p:selectOneRadio value="#{newOfferBean.garage}">
+			<p:outputLabel value="Garaż" for="garage"/>
+			<p:selectOneRadio id="garage" value="#{newOfferBean.garage}" required="true"
+				requiredMessage="Garaż jest wymagany">
         		<f:selectItem itemLabel="Obecny   " itemValue="true" />
         		<f:selectItem itemLabel="Brak  " itemValue="false" />
       		</p:selectOneRadio>
 			
-			<p:outputLabel value="Miasto"/>
-			<p:inputText value="#{newOfferBean.town}"/>
+			<p:outputLabel value="Miasto" for="town"/>
+			<p:inputText id="town" value="#{newOfferBean.town}" required="true"
+				requiredMessage="Miejscowość jest wymagana"/>
 			
-			<p:outputLabel value="Kod"/>
-			<p:inputText value="#{newOfferBean.postalCode}"/>
+			<p:outputLabel value="Kod pocztowy" for="postalCode"/>
+			<p:inputText id="postalCode" value="#{newOfferBean.postalCode}" required="true"
+				requiredMessage="Kod pocztowy jest wymagany"/>
 						
-			<p:outputLabel value="Ulica"/>
-			<p:inputText value="#{newOfferBean.street}"/>
+			<p:outputLabel value="Ulica" for="street"/>
+			<p:inputText id="street" value="#{newOfferBean.street}" required="true"
+				requiredMessage="Ulica jest wymagana"/>
 			
-			<p:outputLabel value="Nr domu"/>
-			<p:inputText value="#{newOfferBean.houseNo}"/>
+			<p:outputLabel value="Nr domu" for="houseNo"/>
+			<p:inputText id="houseNo" value="#{newOfferBean.houseNo}" required="true"
+				requiredMessage="Numer domu jest wymagany" validatorMessage="Błędna wartość numeru domu">
+				<f:validateLongRange minimum="0"/>
+			</p:inputText>
 			
 			<p:outputLabel value="Nr mieszania"/>
-			<p:inputText value="#{newOfferBean.apartmentNo}"/>
-			
-			<p:fileUpload fileUploadListener="#{newOfferBean.uploadFile}" allowTypes="/(\.|\/)(jpe?g|png)$/" 
-				update=":newOfferForm"/>
+			<p:inputText value="#{newOfferBean.apartmentNo}" validatorMessage="Błędna wartość numeru mieszkania">
+				<f:validateLongRange minimum="0"/>
+			</p:inputText>
 			
 		</h:panelGrid>
+		
+		<p:fileUpload fileUploadListener="#{newOfferBean.uploadFile}" allowTypes="/(\.|\/)(jpe?g|png)$/" 
+				update=":newOfferForm"/>
 		
 		<p:dataList value="#{newOfferBean.imagesList}" var="image" itemType="disc" rowIndexVar="ind">
 				#{image.fileName}
