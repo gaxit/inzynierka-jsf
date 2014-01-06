@@ -8,13 +8,17 @@
 		<h:form>
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
+		<h:form>
+			<p:remoteCommand name="loadRegister" autoRun="true" action="#{registrationBean.loadPage}"
+				update=":registrationForm"/>
+		</h:form>
 
 		<h2>
 			<h:outputLabel value="Rejestracja" />
 		</h2>
 		Aby móc się zarejestrować proszę wypełnić wszystkie pola.
 		<p/>
-		<h:form>
+		<h:form id="registrationForm">
 			<p:messages/>
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Login" for="login"/>
@@ -69,7 +73,7 @@
 				</p:inputText>
 				
 			</h:panelGrid>
-			<p:commandButton value="Załóż konto" action="#{registrationBean.register}" ajax="false"/>
+			<p:commandButton value="Załóż konto" action="#{registrationBean.register}" update=":registrationForm"/>
 		</h:form>
 		<p/>
 	</ui:define>

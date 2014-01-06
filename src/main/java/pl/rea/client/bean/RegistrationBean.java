@@ -28,6 +28,20 @@ public class RegistrationBean {
 	
 	//----- metody wykonujace akcje -----
 	
+	public void loadPage(){
+		login = null;
+		password = null;
+		passwordRepeat = null;
+		name = null;
+		phone = null;
+		email = null;
+		town = null;
+		street = null;
+		houseNo = null;
+		apartmentNo = null;
+		postalCode = null;
+	}
+	
 	public void register(){
 		boolean ok = true;
 		if (!password.equals(passwordRepeat)){

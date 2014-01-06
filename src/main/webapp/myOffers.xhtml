@@ -16,7 +16,8 @@
 		</h:form>
 		
 		<h:form id="offerForm">
-		<p:dataTable id="offerTable" value="#{myOffersBean.myOfferList}" var="offer">
+		<p:dataTable id="offerTable" value="#{myOffersBean.myOfferList}" var="offer"
+			emptyMessage="Nie znaleziono ofert">>
 			<p:column headerText="Nazwa" width="14%">
 				<p:commandLink value="#{offer.offerName}" action="offer.xhtml" ajax="false">
 					<f:setPropertyActionListener target="#{offerBean.offer}" value="#{offer}"/>
