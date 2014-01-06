@@ -73,14 +73,12 @@
 			<p:outputLabel value="Opis" rendered="#{offerBean.editingMode}" for="description"/>
 			<p:outputLabel value="#{offerBean.offer.description}" rendered="#{!offerBean.editingMode}"/>
 			<p:inputText id="description" value="#{offerBean.description}" 
-				rendered="#{offerBean.editingMode}" required="true"
-				requiredMessage="Opis jest wymagany"/>
+				rendered="#{offerBean.editingMode}"/>
 			
 			<p:outputLabel value="Piętro" rendered="#{!offerBean.editingMode}"/>
 			<p:outputLabel value="Piętro" rendered="#{offerBean.editingMode}" for="floor"/>
 			<p:outputLabel value="#{offerBean.offer.floor}" rendered="#{!offerBean.editingMode}"/>
 			<p:inputText id="floor" value="#{offerBean.floor}" rendered="#{offerBean.editingMode}"
-				required="true" requiredMessage="Piętro jest wymagane"
 				validatorMessage="Niepoprawna wartość piętra">
 					<f:validateLongRange minimum="1"/>
 			</p:inputText>

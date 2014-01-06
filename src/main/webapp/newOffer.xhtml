@@ -48,12 +48,11 @@
       		</p:selectOneRadio>
 			
 			<p:outputLabel value="Opis" for="description"/>
-			<p:inputText id="description" value="#{newOfferBean.description}" required="true"
-				 requiredMessage="Opis jest wymagany"/>
+			<p:inputText id="description" value="#{newOfferBean.description}"/>
 			
 			<p:outputLabel value="Piętro" for="floor"/>
-			<p:inputText id="floor" value="#{newOfferBean.floor}" required="true"
-				requiredMessage="Piętro jest wymagane" validatorMessage="Wartość piętra jest wymagana">
+			<p:inputText id="floor" value="#{newOfferBean.floor}"
+				validatorMessage="Wartość piętra jest wymagana">
 				<f:validateLongRange minimum="1"/>
 			</p:inputText>
 			
