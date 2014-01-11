@@ -42,9 +42,24 @@ public class UserBean {
 	//----- metody wykonujace akcje -----
 	public void loadUser(){
 		UserServices userService = new UserServices();
-		if (userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId())){
+		boolean logged = false;
+		logged = userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId());
+		if (logged){
 			login = loginBean.getLogin();
-			user = userService.getUser(loginBean.getLogin(), loginBean.getSessionId(), login);
+			try{
+				user = userService.getUser(loginBean.getLogin(), loginBean.getSessionId(), login);
+			}
+			catch(Exception e){
+				FacesMessage facesMessage = new FacesMessage("Błąd");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				System.out.println("UserBean loadUser: Błąd podczas pobierania użytkownika " + e.getMessage());
+			}
+			if (user == null){
+				FacesMessage facesMessage = new FacesMessage("Nie udało się pobrać użytkownika");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			}
 			editingMode = false;
 		}
 		else{
@@ -89,7 +104,7 @@ public class UserBean {
 	public void save(){
 		boolean ok = true;
 		
-		if (oldPassword != null && newPassword != null && repeatPassword != null){
+		if (!((oldPassword == null  || oldPassword.equals("")) && (newPassword == null || newPassword.equals("")) && (repeatPassword == null || repeatPassword.equals("")))){
 			if (oldPassword.equals(user.getPassword())){
 				if (newPassword.equals(repeatPassword)){
 					user.setPassword(newPassword);
@@ -119,8 +134,21 @@ public class UserBean {
 			user.setStreet(street);
 			user.setHouseNo(houseNo);
 			user.setApartmentNo(apartmentNo);
-			if (!service.editUser(loginBean.getLogin(), loginBean.getSessionId(), user)){
+			boolean editUser = false;
+			try{
+				editUser = service.editUser(loginBean.getLogin(), loginBean.getSessionId(), user);
+			}
+			catch(Exception e){
+				FacesMessage facesMessage = new FacesMessage("Błąd");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				System.out.println("UserBean save: Błąd podczas edytowania użytkownika " + e.getMessage());
+			}
+			if (!editUser){
 				user = copyUser;
+				FacesMessage facesMessage = new FacesMessage("Nie można edytować użytkownika");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			}
 			else{
 				copyUser = null;

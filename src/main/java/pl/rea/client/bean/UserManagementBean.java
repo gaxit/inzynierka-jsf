@@ -25,7 +25,17 @@ public class UserManagementBean {
 	
 	public void checkIfLogged(){
 		UserServices userService = new UserServices();
-		if (userService.isAdminLogged(loginBean.getLogin(), loginBean.getSessionId())){
+		boolean logged = false;
+		try{
+			logged = userService.isAdminLogged(loginBean.getLogin(), loginBean.getSessionId());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("UserManagementBean save: Błąd podczas sprawdzania zalogowania użytkownika " + e.getMessage());
+		}
+		if (logged){
 			
 		}
 		else{
@@ -39,7 +49,17 @@ public class UserManagementBean {
 	
 	public List<UserCanonical> getUserList(){
 		UserServices service = new UserServices();
-		return service.getUserList(loginBean.getLogin(), loginBean.getSessionId());
+		List<UserCanonical> userList = null;
+		try{
+			userList = service.getUserList(loginBean.getLogin(), loginBean.getSessionId());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("UserManagementBean getUserList: Błąd podczas pobierania listy użytkowników " + e.getMessage());
+		}
+		return userList;
 	}
 	
 	public void deleteUser(){
@@ -52,7 +72,16 @@ public class UserManagementBean {
 		}
 		else{
 			UserServices service = new UserServices();
-			service.deleteUser(loginBean.getLogin(), loginBean.getSessionId(), login);
+			boolean delete = false;
+			try{
+				delete = service.deleteUser(loginBean.getLogin(), loginBean.getSessionId(), login);
+			}
+			catch(Exception e){
+				FacesMessage facesMessage = new FacesMessage("Nie można usunąć użytkownika");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				System.out.println("UserManagementBean deleteUser: Błąd podczas usuwania użytkownika " + e.getMessage());
+			}
 		}
 	}
 	

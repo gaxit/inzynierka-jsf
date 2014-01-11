@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -45,7 +46,17 @@ public class NewOfferBean {
 	
 	public void checkIfLogged(){
 		UserServices userService = new UserServices();
-		if (userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId())){
+		boolean logged = false;
+		try{
+			logged = userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("NewOfferBean ckeckIfLogged: Błąd podczas sprawdzania zalogowania " + e.getMessage());
+		}
+		if (logged){
 			
 		}
 		else{
@@ -84,7 +95,21 @@ public class NewOfferBean {
 		offer.setTransactionType(transactionType);
 		
 		OfferServices service = new OfferServices();
-		System.out.println("Oferte dodano?: " + service.addOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, loginBean.getLogin(), imagesList));
+		boolean ok = false;
+		try{
+			ok = service.addOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, loginBean.getLogin(), imagesList);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("NewOfferBean addOffer: Błąd podczas dodawania oferty " + e.getMessage());
+		}
+		if (!ok){
+			FacesMessage facesMessage = new FacesMessage("Nie można dodać oferty");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		}
 		
 		offerName = null;
 		area = null;

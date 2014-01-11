@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -28,9 +29,27 @@ public class FavouritesBean {
 	
 	public void loadFavourites(){
 		UserServices userService = new UserServices();
-		if (userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId())){
+		boolean logged = false;
+		try{
+			logged = userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("FavouritesBean loadFavourites: Błąd podczas sprawdzania zalogowania " + e.getMessage());
+		}
+		if (logged){
 			OfferServices service = new OfferServices();
-			offerList = service.getUserFavouritesOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
+			try{
+				offerList = service.getUserFavouritesOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
+			}
+			catch(Exception e){
+				FacesMessage facesMessage = new FacesMessage("Błąd");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				System.out.println("FavouritesBean loadFavourites: Błąd podczas wczytywania ulubionych ofert " + e.getMessage());
+			}
 			if (offerList==null){
 				offerList = new LinkedList<OfferCanonical>();
 			}
@@ -46,8 +65,21 @@ public class FavouritesBean {
 	
 	public void deleteOffer(){
 		OfferServices service = new OfferServices();
-		if (service.deleteOfferFromUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offerId, loginBean.getLogin())){
-			offerList = service.getUserFavouritesOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
+		try{
+			if (service.deleteOfferFromUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offerId, loginBean.getLogin())){
+				offerList = service.getUserFavouritesOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
+			}
+			else{
+				FacesMessage facesMessage = new FacesMessage("Nie można usunąć oferty z ulubionych");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			}
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("FavouritesBean deleteOffer: Błąd podczas usuwania oferty z ulubionych " + e.getMessage());
 		}
 	}
 	

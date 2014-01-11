@@ -43,7 +43,17 @@ public class ViewUserBean {
 	
 	public void checkIfLogged(){
 		UserServices userService = new UserServices();
-		if (userService.isAdminLogged(loginBean.getLogin(), loginBean.getSessionId())){
+		boolean logged = false;
+		try{
+			logged = userService.isAdminLogged(loginBean.getLogin(), loginBean.getSessionId());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("ViewUserBean checiIfLogged: Błąd podczas sprawdzania zalogowania użytkownika " + e.getMessage());
+		}
+		if (logged){
 			
 		}
 		else{
@@ -58,8 +68,28 @@ public class ViewUserBean {
 	public List<OfferCanonical> getOfferList(){
 		OfferServices service = new OfferServices();
 		UserServices userService = new UserServices();
-		if (userService.isAdminLogged(loginBean.getLogin(), loginBean.getSessionId())){
-			return service.getUserOffers(loginBean.getLogin(), loginBean.getSessionId(), user.getLogin());
+		boolean adminLogged = false;
+		try{
+			adminLogged = userService.isAdminLogged(loginBean.getLogin(), loginBean.getSessionId());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("ViewUserBean checiIfLogged: Błąd podczas sprawdzania zalogowania użytkownika " + e.getMessage());
+		}
+		if (adminLogged){
+			List<OfferCanonical> offerList = null;
+			try{
+				offerList = service.getUserOffers(loginBean.getLogin(), loginBean.getSessionId(), user.getLogin());
+			}
+			catch(Exception e){
+				FacesMessage facesMessage = new FacesMessage("Błąd");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				System.out.println("ViewUserBean getOfferList: Błąd podczas pobierania ofert użytkownika " + e.getMessage());
+			}
+			return offerList;
 		}
 		return null;
 	}
@@ -69,7 +99,21 @@ public class ViewUserBean {
 		int offerId = Integer.parseInt(context.getExternalContext().getRequestParameterMap().get("offerToDelete"));
 		String owner = context.getExternalContext().getRequestParameterMap().get("offerOwner");
 		OfferServices service = new OfferServices();
-		service.deleteOffer(loginBean.getLogin(), loginBean.getSessionId(), (long)offerId, owner);
+		boolean ok = false;
+		try{
+			ok = service.deleteOffer(loginBean.getLogin(), loginBean.getSessionId(), (long)offerId, owner);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("ViewUserBean deleteOffer: Błąd podczas usuwania oferty " + e.getMessage());
+		}
+		if (!ok){
+			FacesMessage facesMessage = new FacesMessage("Nie można usunąć oferty");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		}
 	}
 	
 	public void edit(){
@@ -104,7 +148,7 @@ public class ViewUserBean {
 	public void save(){
 		boolean ok = true;
 		
-		if (oldPassword != null && newPassword != null && repeatPassword != null){
+		if (!((oldPassword == null  || oldPassword.equals("")) && (newPassword == null || newPassword.equals("")) && (repeatPassword == null || repeatPassword.equals("")))){
 			if (oldPassword.equals(user.getPassword())){
 				if (newPassword.equals(repeatPassword)){
 					user.setPassword(newPassword);
@@ -135,8 +179,13 @@ public class ViewUserBean {
 			user.setStreet(street);
 			user.setHouseNo(houseNo);
 			user.setApartmentNo(apartmentNo);
-			if (!service.editUser(loginBean.getLogin(), loginBean.getSessionId(), user)){
+			boolean canEdit = false;
+			canEdit = service.editUser(loginBean.getLogin(), loginBean.getSessionId(), user);
+			if (!canEdit){
 				user = copyUser;
+				FacesMessage facesMessage = new FacesMessage("Nie można edytować użytkownika");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			}
 			else{
 				copyUser = null;

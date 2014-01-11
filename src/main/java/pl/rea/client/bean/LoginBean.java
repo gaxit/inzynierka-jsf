@@ -25,7 +25,15 @@ public class LoginBean {
 	
 	public void logIn(){
 		UserServices service = new UserServices();
-		sessionId = service.logIn(login, password);
+		try{
+			sessionId = service.logIn(login, password);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("LoginBean logIn: Błąd podczas logowania");
+		}
 		if (sessionId != null){
 			logged = true;
 			adminLogged = service.isAdminLogged(login, sessionId);
@@ -44,7 +52,17 @@ public class LoginBean {
 	
 	public void logout(){
 		UserServices service = new UserServices();
-		if (service.logOut(login, sessionId)){
+		boolean ok = false;
+		try{
+			ok = service.logOut(login, sessionId);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("LoginBean logout: Błąd podczas wylogowania");
+		}
+		if (ok){
 			login = null;
 			password = null;
 			sessionId = null;
@@ -56,6 +74,11 @@ public class LoginBean {
 			} catch (IOException e) {
 				System.out.println("LoginBean logIn exception: " + e.getMessage());
 			}
+		}
+		else{
+			FacesMessage facesMessage = new FacesMessage("Wylogowanie nie było możliwe");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
 	}
 	

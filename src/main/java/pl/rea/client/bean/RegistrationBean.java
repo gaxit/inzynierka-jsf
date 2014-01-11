@@ -52,7 +52,17 @@ public class RegistrationBean {
 		}
 		
 		UserServices service = new UserServices();
-		if (service.userExists(login)){
+		boolean exist = false;
+		try{
+			exist = service.userExists(login);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("RegistrationBean register: Błąd podczas sprawdzania, czy użytkownik o podanym loginie istnieje " + e.getMessage());
+		}
+		if (exist){
 			FacesMessage facesMessage = new FacesMessage("Użytkownik o podanym loginie istnieje");
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 	        FacesContext.getCurrentInstance().addMessage("registration", facesMessage);
@@ -73,7 +83,17 @@ public class RegistrationBean {
 			user.setStreet(street);
 			user.setTown(town);
 			
-			if (service.createUser(user)){
+			boolean create = false;
+			try{
+				create = service.createUser(user);
+			}
+			catch(Exception e){
+				FacesMessage facesMessage = new FacesMessage("Błąd");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				System.out.println("RegistrationBean register: Błąd podczas dodawania użytkownika " + e.getMessage());
+			}
+			if (create){
 				try {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 				} catch (IOException e) {

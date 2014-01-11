@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -100,7 +101,15 @@ public class OfferBean {
 		apartmentNo = offer.getApartmentNo();
 		
 		OfferServices service = new OfferServices();
-		imageList = service.getOfferImages(offer.getId());
+		try{
+			imageList = service.getOfferImages(offer.getId());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("OfferBean edit: Błąd podczas pobierania zdjęć oferty " + e.getMessage());
+		}
 		
 		if (imageList==null){
 			imageList = new LinkedList<ImageCanonical>();
@@ -124,7 +133,17 @@ public class OfferBean {
 		System.out.println("Imagelist size: " + imageList.size());
 		
 		OfferServices service = new OfferServices();
-		if (!service.updateOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, offer.getOwner(), imageList)){
+		boolean ok = false;
+		try{
+			ok = service.updateOffer(loginBean.getLogin(), loginBean.getSessionId(), offer, offer.getOwner(), imageList);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("OfferBean update: Błąd podczas aktualizowania oferty " + e.getMessage());
+		}
+		if (!ok){
 			offer = copyOffer;
 		}
 		else{
@@ -162,12 +181,31 @@ public class OfferBean {
 	
 	public boolean getFavouriteRender(){
 		OfferServices service = new OfferServices();
-		return service.isOfferInUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offer.getId(), loginBean.getLogin());
+		boolean ok = false;
+		try{
+			ok = service.isOfferInUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offer.getId(), loginBean.getLogin());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("OfferBean getFavouriteRender: Błąd podczas sprawdzania, czy oferta jest w ulubionych użytkownika " + e.getMessage());
+		}		
+		return ok;
 	}
 	
 	public void addToFavourites(){
 		OfferServices service = new OfferServices();
-		service.addOfferToUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offer.getId(), loginBean.getLogin());
+		boolean ok = false;
+		try{
+			ok = service.addOfferToUserFavourites(loginBean.getLogin(), loginBean.getSessionId(), offer.getId(), loginBean.getLogin());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("OfferBean edit: Błąd podczas dodawania oferty do ulubionych " + e.getMessage());
+		}
 	}
 	
 	public boolean getRenderEdit(){
@@ -184,7 +222,15 @@ public class OfferBean {
 		this.offer = offer;
 		editingMode = false;
 		OfferServices service = new OfferServices();
-		imageList = service.getOfferImages(offer.getId());
+		try{
+			imageList = service.getOfferImages(offer.getId());
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("OfferBean setOffer: Błąd podczas pobierania zdjęć oferty " + e.getMessage());
+		}
 	}
 	
 	//----- settery i gettery -----

@@ -2,6 +2,7 @@ package pl.rea.client.bean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -16,8 +17,6 @@ public class AllOffersBean {
 	
 	@ManagedProperty(value="#{loginBean}")
 	private LoginBean loginBean;
-	
-	private boolean find = false;
 	
 	private List<OfferCanonical> offerList;
 	
@@ -36,7 +35,15 @@ public class AllOffersBean {
 	//----- metody wykonujace akcje -----
 	public void loadOffers(){
 		OfferServices service = new OfferServices();
-		offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+		try{
+			offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+	        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+	        System.out.println("AllOfferBean loadOffers: Błąd podczas wczytywania ofert " + e.getMessage());
+		}
 		
 		town = null;
 		areaMin = null;
@@ -52,7 +59,15 @@ public class AllOffersBean {
 	
 	public void searchOffers(){		
 		OfferServices service = new OfferServices();
-		offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+		try{
+			offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("AllOfferBean searchOffers: Błąd podczas wyszukiwania ofert " + e.getMessage());
+		}
 	}
 	
 	public void deleteOffer(){
@@ -60,14 +75,36 @@ public class AllOffersBean {
 		int offerId = Integer.parseInt(context.getExternalContext().getRequestParameterMap().get("offerToDelete"));
 		String owner = context.getExternalContext().getRequestParameterMap().get("offerOwner");
 		OfferServices service = new OfferServices();
-		service.deleteOffer(loginBean.getLogin(), loginBean.getSessionId(), (long)offerId, owner);
+		boolean ok = false;
+		try{
+			ok = service.deleteOffer(loginBean.getLogin(), loginBean.getSessionId(), (long)offerId, owner);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("AllOfferBean deleteOffer: Błąd podczas usuwania oferty " + e.getMessage());
+		}
+		if (!ok){
+			FacesMessage facesMessage = new FacesMessage("Nie można usunąć oferty");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		}
 	}
 	
 	//----- settery i gettery -----
 
 	public List<OfferCanonical> getOfferList() {
 		OfferServices service = new OfferServices();
-		offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+		try{
+			offerList = service.findOffersByCriteria(priceMin, priceMax, areaMin, areaMax, minFloor, maxFloor, isGarage, town, estateType, transactionType);
+		}
+		catch(Exception e){
+			FacesMessage facesMessage = new FacesMessage("Błąd");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			System.out.println("AllOffersBean getOfferList: Błąd podczas pobierania listy ofert " + e.getMessage());
+		}
 		return offerList;
 	}
 
