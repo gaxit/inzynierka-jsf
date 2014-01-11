@@ -1,5 +1,6 @@
 package pl.rea.client.bean;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 
 import pl.rea.client.service.OfferServices;
+import pl.rea.client.service.UserServices;
 import pl.rea.client.webmethods.offers.ImageCanonical;
 import pl.rea.client.webmethods.offers.OfferCanonical;
 
@@ -40,6 +42,20 @@ public class NewOfferBean {
 	private List<ImageCanonical> imagesList = new LinkedList<ImageCanonical>();
 	
 	//----- metody wykonujące akcje -----
+	
+	public void checkIfLogged(){
+		UserServices userService = new UserServices();
+		if (userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId())){
+			
+		}
+		else{
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+			} catch (IOException e) {
+				System.out.println("Błąd podczas przekierowywania do strony logowania " + e.getMessage());
+			}
+		}
+	}
 	
 	public void uploadFile(FileUploadEvent event){
 		ImageCanonical img = new ImageCanonical();

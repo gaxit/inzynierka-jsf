@@ -1,5 +1,7 @@
 package pl.rea.client.bean;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -39,10 +41,20 @@ public class UserBean {
 	
 	//----- metody wykonujace akcje -----
 	public void loadUser(){
-		login = loginBean.getLogin();
-		UserServices service = new UserServices();
-		user = service.getUser(loginBean.getLogin(), loginBean.getSessionId(), login);
-		editingMode = false;
+		UserServices userService = new UserServices();
+		if (userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId())){
+			login = loginBean.getLogin();
+			user = userService.getUser(loginBean.getLogin(), loginBean.getSessionId(), login);
+			editingMode = false;
+		}
+		else{
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+			} catch (IOException e) {
+				System.out.println("Błąd podczas przekierowywania do strony logowania " + e.getMessage());
+			}
+		}
+		
 	}
 	
 	public void edit(){

@@ -1,5 +1,6 @@
 package pl.rea.client.bean;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -40,9 +41,27 @@ public class ViewUserBean {
 	
 	//----- metody wykonujace akcje -----
 	
+	public void checkIfLogged(){
+		UserServices userService = new UserServices();
+		if (userService.isAdminLogged(loginBean.getLogin(), loginBean.getSessionId())){
+			
+		}
+		else{
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+			} catch (IOException e) {
+				System.out.println("Błąd podczas przekierowywania do strony logowania " + e.getMessage());
+			}
+		}
+	}
+	
 	public List<OfferCanonical> getOfferList(){
 		OfferServices service = new OfferServices();
-		return service.getUserOffers(loginBean.getLogin(), loginBean.getSessionId(), user.getLogin());
+		UserServices userService = new UserServices();
+		if (userService.isAdminLogged(loginBean.getLogin(), loginBean.getSessionId())){
+			return service.getUserOffers(loginBean.getLogin(), loginBean.getSessionId(), user.getLogin());
+		}
+		return null;
 	}
 	
 	public void deleteOffer(){

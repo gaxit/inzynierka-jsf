@@ -1,5 +1,6 @@
 package pl.rea.client.bean;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -21,6 +22,20 @@ public class UserManagementBean {
 	private LoginBean loginBean;
 	
 	//----- metody wykonujace akcje -----
+	
+	public void checkIfLogged(){
+		UserServices userService = new UserServices();
+		if (userService.isAdminLogged(loginBean.getLogin(), loginBean.getSessionId())){
+			
+		}
+		else{
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+			} catch (IOException e) {
+				System.out.println("Błąd podczas przekierowywania do strony logowania " + e.getMessage());
+			}
+		}
+	}
 	
 	public List<UserCanonical> getUserList(){
 		UserServices service = new UserServices();

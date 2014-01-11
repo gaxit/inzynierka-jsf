@@ -1,5 +1,6 @@
 package pl.rea.client.bean;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -7,6 +8,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import pl.rea.client.service.OfferServices;
+import pl.rea.client.service.UserServices;
 import pl.rea.client.webmethods.offers.OfferCanonical;
 
 @ManagedBean(name="myOffersBean")
@@ -19,9 +21,17 @@ public class MyOffersBean {
 	
 	//----- metody wykonujace akcje -----
 	
-	public void loadOffers(){
-		OfferServices service = new OfferServices();
-		myOfferList = service.getUserOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
+	public void checkIfLogged(){
+		UserServices userService = new UserServices();
+		if (userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId())){
+		}
+		else{
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+			} catch (IOException e) {
+				System.out.println("Błąd podczas przekierowywania do strony logowania " + e.getMessage());
+			}
+		}
 	}
 	
 	public void deleteOffer(){

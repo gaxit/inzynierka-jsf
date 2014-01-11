@@ -11,6 +11,9 @@
 		<h:form>
 			<ui:include src="menu.xhtml"></ui:include>
 		</h:form>
+		<h:form>
+			<p:remoteCommand name="ckeckIfLogged" autoRun="true" action="#{newOfferBean.checkIfLogged}"/>
+		</h:form>
 		
 		<h1>Nowa oferta</h1>
 	<h:form id="newOfferForm">

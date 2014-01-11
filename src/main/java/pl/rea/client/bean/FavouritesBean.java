@@ -1,13 +1,16 @@
 package pl.rea.client.bean;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import pl.rea.client.service.OfferServices;
+import pl.rea.client.service.UserServices;
 import pl.rea.client.webmethods.offers.OfferCanonical;
 
 @SessionScoped
@@ -24,11 +27,21 @@ public class FavouritesBean {
 	//----- metody wykonujace akcje -----
 	
 	public void loadFavourites(){
-		OfferServices service = new OfferServices();
-		offerList = service.getUserFavouritesOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
-		if (offerList==null){
-			offerList = new LinkedList<OfferCanonical>();
+		UserServices userService = new UserServices();
+		if (userService.isAnybodyLogged(loginBean.getLogin(), loginBean.getSessionId())){
+			OfferServices service = new OfferServices();
+			offerList = service.getUserFavouritesOffers(loginBean.getLogin(), loginBean.getSessionId(), loginBean.getLogin());
+			if (offerList==null){
+				offerList = new LinkedList<OfferCanonical>();
+			}
 		}
+		else{
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+			} catch (IOException e) {
+				System.out.println("Błąd podczas przekierowywania do strony logowania " + e.getMessage());
+			}
+		}		
 	}
 	
 	public void deleteOffer(){
