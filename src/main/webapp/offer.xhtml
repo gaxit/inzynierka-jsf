@@ -16,8 +16,8 @@
 		</h:form>
 		
 		<h:form id="favForm">
-			<p:commandButton value="Dodaj do ulubionych" rendered="#{!offerBean.favouriteRender}" action="#{offerBean.addToFavourites}" update="favForm"/>
-			<p:outputLabel value="Jest w ulubionych" rendered="#{offerBean.favouriteRender}"/>
+			<p:commandButton value="Dodaj do ulubionych" rendered="#{(!offerBean.favouriteRender) and (offerBean.anyoneLogged)}" action="#{offerBean.addToFavourites}" update="favForm"/>
+			<p:outputLabel value="Jest w ulubionych" rendered="#{(offerBean.favouriteRender) and (offerBean.anyoneLogged)}"/>
 		</h:form>
 		
 		<h:form id="offerForm">

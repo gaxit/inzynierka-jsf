@@ -179,6 +179,13 @@ public class OfferBean {
         }
     }
 	
+	public boolean getAnyoneLogged(){
+		if (loginBean.getLogin()==null || loginBean.getLogin().equals("")){
+			return false;
+		}
+		return true;
+	}
+	
 	public boolean getFavouriteRender(){
 		OfferServices service = new OfferServices();
 		boolean ok = false;
@@ -206,10 +213,15 @@ public class OfferBean {
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			System.out.println("OfferBean edit: Błąd podczas dodawania oferty do ulubionych " + e.getMessage());
 		}
+		if (!ok){
+			FacesMessage facesMessage = new FacesMessage("Nie można dodać oferty do ulubionych");
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		}
 	}
 	
 	public boolean getRenderEdit(){
-		if (loginBean.getLogin()==null){
+		if (loginBean.getLogin()==null || loginBean.getLogin().equals("")){
 			return false;
 		}
 		if (loginBean.getLogin().equals(offer.getOwner()) || loginBean.getAdminLogged()){

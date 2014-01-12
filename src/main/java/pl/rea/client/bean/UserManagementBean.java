@@ -9,8 +9,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.model.DefaultStreamedContent;
-
 import pl.rea.client.service.UserServices;
 import pl.rea.client.webmethods.users.UserCanonical;
 
@@ -77,10 +75,15 @@ public class UserManagementBean {
 				delete = service.deleteUser(loginBean.getLogin(), loginBean.getSessionId(), login);
 			}
 			catch(Exception e){
+				FacesMessage facesMessage = new FacesMessage("Błąd");
+				facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				System.out.println("UserManagementBean deleteUser: Błąd podczas usuwania użytkownika " + e.getMessage());
+			}
+			if (!delete){
 				FacesMessage facesMessage = new FacesMessage("Nie można usunąć użytkownika");
 				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-				System.out.println("UserManagementBean deleteUser: Błąd podczas usuwania użytkownika " + e.getMessage());
 			}
 		}
 	}
